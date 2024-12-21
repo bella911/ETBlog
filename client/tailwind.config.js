@@ -1,3 +1,5 @@
+// import flowbite from "flowbite-react/tailwind";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: 'selector',
@@ -14,7 +16,7 @@ export default {
     },
   },
   plugins: [
-    require('flowbite/plugin')
+    import('flowbite/plugin')
   ],
 }
 
