@@ -26,7 +26,7 @@ app.listen(PORT, () => {
 });
 // allow the to access each other eg..when logout from client permit to access from the server
 // app.use(cors());
-app.use(cors({ origin: "https://etblog.onrender.com", credentials: true }));
+app.use(cors({ origin: "http://localhost:5173", credentials: true }));
 
 app.use(express.json()); // allows us to parse incoming requests:req.body
 app.use(cookieParser()); // allows us to parse incoming cookies
