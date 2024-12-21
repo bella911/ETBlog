@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./db/connectDB.js";
+import path from 'path';
 
 // route
 import postRoute from "./routes/post.route.js";
@@ -14,6 +15,7 @@ import subscriber from "./routes/subscribe.route.js";
 
 dotenv.config();
 
+const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT; // choose the env port. if that port not work use the 3000 as alternative
 
@@ -32,8 +34,17 @@ app.use("/api", subscriber);
 
 // app.use("/api/notifications", notificationRoutes);
 
+
 // assign port and call db function
 app.listen(PORT, () => {
   connectDB();
   console.log("Server is running on port:", PORT);
+});
+
+// call client side dist
+app.use(express.static(path.join(__dirname, '/client/dist')));
+
+// assign all client side location on back end for render deployment 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });

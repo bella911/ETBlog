@@ -28,5 +28,4 @@ dist-ssr
 .contentlayer
 
 .env
-node_modules
 
