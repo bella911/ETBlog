@@ -13,14 +13,14 @@ export default function SlidePosts() {
         }}
         parallax={true}
         autoplay={{
-          delay: 50000,
+          delay: 5000,
           disableOnInteraction: false,
         }}
         spaceBetween={30}
         modules={[Pagination, Autoplay, Parallax]}
         slidesPerView={1}
         loop={true}
-        onSlideChange={() => console.log("slide change")}
+        // onSlideChange={() => console.log("slide change")}
         style={{
           paddingTop: "20px"
         }}
