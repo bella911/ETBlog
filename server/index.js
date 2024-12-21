@@ -19,6 +19,11 @@ const __dirname = path.resolve();
 const app = express();
 const PORT = process.env.PORT; // choose the env port. if that port not work use the 3000 as alternative
 
+// assign port and call db function
+app.listen(PORT, () => {
+  connectDB();
+  console.log("Server is running on port:", PORT);
+});
 // allow the to access each other eg..when logout from client permit to access from the server
 // app.use(cors());
 app.use(cors({ origin: "http://localhost:5173", credentials: true }));
@@ -35,11 +40,7 @@ app.use("/api", subscriber);
 // app.use("/api/notifications", notificationRoutes);
 
 
-// assign port and call db function
-app.listen(PORT, () => {
-  connectDB();
-  console.log("Server is running on port:", PORT);
-});
+
 
 // call client side dist
 app.use(express.static(path.join(__dirname, '/client/dist')));
