@@ -15,7 +15,7 @@ import subscriber from "./routes/subscribe.route.js";
 
 dotenv.config();
 
-const __dirname = path.resolve("/client"); // locate current location
+const __dirname = path.resolve(); // locate current location
 const app = express();
 const PORT = process.env.PORT; // choose the env port. if that port not work use the 3000 as alternative
 
