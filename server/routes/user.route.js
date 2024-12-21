@@ -1,0 +1,15 @@
+import express from "express";
+import { protectPath } from "../utils/protectPath.js";
+import { verifyToken } from '../utils/verifyUser.js';
+
+import { followUnfollowUser, getSuggestedUsers, getUserProfile, updateUser, getAllUsers } from "../controllers/user.controller.js";
+
+const router = express.Router();
+
+router.get("/profile/:username", verifyToken, getUserProfile);
+router.get("/suggested", verifyToken, getSuggestedUsers);
+router.put("/follow/:id", verifyToken, followUnfollowUser);
+router.post("/update", verifyToken, updateUser);
+router.get("/users",verifyToken, getAllUsers);
+
+export default router;

@@ -1,0 +1,89 @@
+:root{
+      /* abel customization */
+    --swiper-theme-color: rgb(103, 223, 103);
+    --swiper-navigation-size: 25px;
+}
+
+#app {
+    height: 100%;
+  }
+  html,
+  body {
+    position: relative;
+    height: 100%;
+  }
+  
+  body {
+    /* background: #eee; */
+    font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #000;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .swiper {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    border-radius: 5px;
+    
+  }
+  
+  .swiper-slide {
+    /* text-align: center; */
+    font-size: 18px;
+    background: transparent;
+    height: 300px;
+    /* Center slide text vertically */
+    display: flex;
+    justify-content: start;
+    align-items: baseline;
+    /* abel customization */
+    padding: 10px;
+    min-height: 450px;
+    max-height: 650px;
+  }
+  
+  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
+          /* abel customization */
+    /* padding: 70px; */
+  }
+  .parallax-bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 130%;
+    height: 100%;
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .swiper-slide .title {
+    font-size: 41px;
+    font-weight: 300;
+  }
+  
+  .swiper-slide .subtitle {
+    font-size: 21px;
+  }
+  
+  .swiper-slide .text {
+    font-size: 14px;
+    max-width: 400px;
+    line-height: 1.3;
+    /* text-align: left; */
+  }
+
+      /* abel customization */
+  .swiper-button-prev:after, .swiper-button-next:after{
+    /* background-color: rgb(168, 243, 168); */
+    padding: 10px;
+    border-radius: 10px;
+  }

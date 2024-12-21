@@ -1,0 +1,166 @@
+import React, { useState } from "react";
+import person from "../icons/person.png";
+import lock from "../icons/lock.png";
+import PersonImage from "../images/PersonImage.png";
+// import axios from "axios";
+import axios from "../axios";
+import { useNavigate, Link } from "react-router-dom";
+import ClipLoader from "react-spinners/ClipLoader";
+import { useDispatch } from "react-redux";
+import { signIn } from "../redux/authSlice";
+import { FcGoogle } from "react-icons/fc";
+import OAuth from "../components/OAuth";
+
+function Login() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [formData, setFormData] = useState({});
+  const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const [isGoogleOAuth, setIsGoogleOAuth] = useState(false);
+  function handlChange(e) {
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // execute only if user not use google auth
+    if (!isGoogleOAuth) {
+      setErrors({}); // Clear previous errors
+      if (!username && !password) {
+        return setErrors({
+          username: "username is required",
+          password: "Password is required",
+        });
+      } else if (!username) {
+        return setErrors({ username: "username is required" });
+      } else if (!/^[0-9A-Za-z]{4,16}$/.test(username)) {
+        return setErrors({ username: "Invalid username" });
+      } else if (!password) {
+        return setErrors({ password: "Password is required" });
+      } else if (password.length <= 3) {
+        return setErrors({
+          password: "Password must be at least 4 characters long",
+        });
+      }
+      setLoading(true);
+    }
+
+    axios
+      .post("/auth/login", { username, password }, { withCredentials: true }) // {withCredentials: true}
+      .then((res) => {
+        // const token = response.data.token;
+        // localStorage.setItem("token", token);
+
+        // console.log(res.data);
+        // console.log(res.data.username);
+        // console.log(!res.data.username);
+        dispatch(signIn(res.data));
+        setLoading(false);
+        navigate(`/`);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        setLoading(false);
+        return setErrors({ message: "username or password incorrect" });
+      });
+  };
+
+  return (
+    <div className="bg-[#eee] min-w-96 dark:bg-gray-800 ">
+      <form
+        className="flex justify-center text-center py-20 font-sans"
+        onSubmit={handleSubmit}
+      >
+        <div className="p-10 shadow-lg bg-gray-300 dark:bg-gray-700 rounded-md lg:flex sm:flex-row ">
+          <img
+            className="flex justify-center items-center w-[300px] "
+            src={PersonImage}
+            alt=""
+          />
+          <div className=" p-6 shadow-lg bg-gray-100 dark:bg-gray-600  rounded-md font-bold sm:text-3xl">
+          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+                Sign in to your account
+              </h1>
+
+            <div className="mb-2 pt-9">
+                  <label
+                    htmlFor="username"
+                    className="block mb-1  text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Username
+                  </label>
+                  <input
+                    type="text"
+                    name="username"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
+                    placeholder="username"
+                    required=""
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value.trim())}
+                />
+                {errors.username && (
+                  <p className="text-red-500 text-sm">{errors.username}</p>
+                )}
+                </div>
+
+            <div className="mb-6">
+                  <label
+                    htmlFor="password"
+                    className="block mb-1  text-sm font-medium text-gray-900 dark:text-white"
+                  >
+                    Password
+                  </label>
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="••••••••"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
+                    required=""
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value.trim())}
+                  />
+                  {errors.password && (
+                  <p className="text-red-500 text-sm">{errors.password}</p>
+                )}
+                </div>
+            <button
+              type="submit"
+              // className="w-full flex justify-center  py-2 px-4 rounded-md text-sm font-medium bg-green-300 dark:text-gray-700"
+              className="w-full mb-3 dark:text-white  bg-green-500  focus:ring-4 focus:outline-none hover:opacity-75 font-medium rounded-lg text-sm px-5 py-2 text-center "
+              disabled={loading}
+            >
+              {loading ? (
+                <ClipLoader speedMultiplier="0.5" size="20px" />
+              ) : (
+                "Login"
+              )}
+            </button>
+            {/* login with google account */}
+            <button className="w-full" onClick={() => setIsGoogleOAuth(true)}>
+              <OAuth />
+            </button>
+            <p className="text-center text-sm  dark:text-white text-gray-800 mt-2 font-normal">
+              Don’t have an account yet?{" "}
+              <Link
+                to="/signup"
+                className=" hover:underline hover:text-cyan-400 hover:opacity-50"
+              >
+                Sign up
+              </Link>
+            </p>
+            {!isGoogleOAuth && errors.message && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
+          </div>
+        </div>
+      </form>
+    </div>
+  );
+}
+
+export default Login;
+
