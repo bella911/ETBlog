@@ -96,7 +96,7 @@ function CreatePost() {
   return (
     // <div className="mt-32 mb-32 w-1/2 mx-auto">
     <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
-      <div className="max-w-screen-xl mx-auto pt-8 pb-64 px-6 lg:px-32 ">
+      <div className="max-w-screen-xl mx-auto pt-8 pb-64 px-2 lg:px-32 ">
         <form onSubmit={handlePost}>
           <input
             className="w-full my-4 py-2 px-3 border-[1px] outline-none  rounded-md bg-transparent"
@@ -115,15 +115,15 @@ function CreatePost() {
             // onChange={(e) => setAuthor(e.target.value)}
             placeholder="Author"
           />
-          <div className="flex gap-5 justify-between my-4 rounded-md dark:border-gray-600">
+          <div className="flex sm:flex-row flex-col gap-5 justify-between  items-center my-4 rounded-md dark:border-gray-600">
             <input
               type="file"
               accept="image/*"
               onChange={(e) => setFile(e.target.files[0])}
-              className="flex-1 border-[2px] outline-none rounded-md"
+              className="w-full border-[2px] outline-none rounded-md"
             />
             <button
-              className="px-4 rounded-md  bg-green-300 dark:bg-green-500 dark:text-gray-800 w-20 font-semibold"
+              className="px-4 rounded-lg py-2 bg-green-300 dark:bg-green-500 dark:text-gray-800 w-20 font-semibold"
               type="button"
               onClick={uploadImage}
               disabled={loading}
