@@ -81,9 +81,10 @@ export default function HeaderFB() {
     <div className="bg-[#eee] dark:bg-gray-800 ">
       {/* <div className="w-screen fixed"> */}
       <Navbar
-        className={`max-w-screen-xl mx-auto  min-w-96 border-b  bg-[#eee] dark:bg-gray-800 ${
-          !currentUser && "dark:border-transparent"
-        }`}
+        // className={`max-w-screen-xl mx-auto  min-w-96 border-b  bg-[#eee] dark:bg-gray-800 ${
+        //   !currentUser && "dark:border-transparent"
+        // }`}
+        className="max-w-screen-xl mx-auto  border-b dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "
       >
         <div className="flex">
           {/* <Navbar.Toggle /> */}
@@ -97,7 +98,7 @@ export default function HeaderFB() {
               // width="264.6"
               // height="25"
               viewBox="0 0 300 97.72330871596895"
-              className="w-auto h-10 "
+              className="md:w-auto w-24 h-10 "
             >
               <g
                 featurekey="nameFeature-0"
@@ -154,6 +155,7 @@ export default function HeaderFB() {
                   alt="User settings"
                   img={currentUser.profilePicture}
                   rounded
+                  size="sm"
                 />
               }
               arrowIcon={false}
@@ -208,26 +210,25 @@ export default function HeaderFB() {
           {currentUser && <Navbar.Toggle />}
         </div>
         {currentUser ? (
-          <Navbar.Collapse>
+          <Navbar.Collapse 
+          >
             {/* <Navbar.Link active={path === "/"} as={"div"}>
               <Link to="/">Home</Link>
             </Navbar.Link> */}
-            <Navbar.Link active={path === "/"} as={"div"}>
-              <Link to="/">News</Link>
+            <Navbar.Link active={path === "/"} as={"div"}  className="text-base">
+              <Link to="/" >News</Link>
             </Navbar.Link>
-            {/* <Navbar.Link active={path === "/dashboard"} as={"div"}>
-              <Link to={`/dashboard/${currentUser.username}`}>Dashboard</Link>
-              </Navbar.Link> */}
             <Navbar.Link
               active={path === `/user/${currentUser.username}`}
               as={"div"}
+              className="text-base"
             >
               <Link to={`/user/${currentUser.username}`}>My Posts</Link>
             </Navbar.Link>
             {/* <Navbar.Link active={path === `/chat/${currentUser.username}`} as={"div"}>
               <Link to={`/chat/${currentUser.username}`}>Chat</Link>
             </Navbar.Link> */}
-            <Navbar.Link active={path === "/createpost"} as={"div"}>
+            <Navbar.Link active={path === "/createpost"} as={"div"} className="text-base">
               <Link to="/createpost">Create Post</Link>
             </Navbar.Link>
           </Navbar.Collapse>

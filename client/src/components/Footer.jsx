@@ -11,15 +11,15 @@ import { MdEmail } from "react-icons/md";
 function Footer() {
   return (
     // new etmovies style footer it's so light weight
-    <div className="pb-3 bg-[#eee] dark:bg-gray-800 min-w-96">
+    <div className="pb-3 bg-[#eee] dark:bg-gray-800  min-h-48">
       <div className="max-w-screen-xl mx-auto">
-        <div className="flex items-end justify-between flex-col sm:flex-row ">
+        <div className="flex items-end justify-between flex-col sm:flex-row px-2">
           <div className="mx-auto md:mx-0">
             <div>
               {/* <img src={logo} className="w-auto h-6 sm:h-9 mx-auto md:mx-0" alt="logo" /> */}
               <svg
 
-                className="w-auto sm:h-9 mx-auto md:mx-0"
+                className="md:w-auto w-24  h-9 mx-auto md:mx-0"
                 viewBox="0 0 300 77.8785824180256"
               >
                 <g

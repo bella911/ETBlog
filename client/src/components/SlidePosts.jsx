@@ -3,7 +3,25 @@ import { Autoplay, Pagination, Parallax } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 import "../css/swiperStyle.css";
+import axios from "../axios";
+import React, { useEffect, useState } from "react";
+import { Link} from "react-router-dom";
+
 export default function SlidePosts() {
+  const [posts, setPosts] = useState([]);
+  // get all posts
+  useEffect(() => {
+
+    axios
+      .get("/post/getAllPosts")
+      .then((res) => {
+        // setForYouPosts(res.data.data);
+        setPosts(res.data.data);
+        // console.log(res.data.data);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+
   return (
     <div className="pt-4">
       <Swiper
@@ -21,9 +39,9 @@ export default function SlidePosts() {
         slidesPerView={1}
         loop={true}
         // onSlideChange={() => console.log("slide change")}
-        style={{
-          paddingTop: "20px"
-        }}
+        // style={{
+        //   paddingTop: "20px",
+        // }}
       >
         <div
           slot="container-start"
@@ -35,41 +53,25 @@ export default function SlidePosts() {
           }}
           data-swiper-parallax="-23%"
         ></div>
-        <SwiperSlide className="flex-col justify-start">
-          <div>
-            <span className="md:w-[50%] w-100% ">
-              <a href="/hell">
-                <img src={""} alt="" className="w-12 h-2" />
-              </a>
-            </span>
-            <span className="flex-1">
-              <a href="https://www.google.com/">Google</a>
-            </span>
-          </div>
-        </SwiperSlide>
-        <SwiperSlide >
-          <div className="flex-col justify-center text-start items-end px-4 text-gray-300  ">
-            <div className="title" data-swiper-parallax="-300">
-              Slide 1
-            </div>
-            <div className="subtitle" data-swiper-parallax="-200">
-              Subtitle
-            </div>
-            <div className="text " data-swiper-parallax="-100">
-              <p className="leading-5 ">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Aliquam dictum mattis velit, sit amet faucibus felis iaculis
-                nec. Nulla laoreet justo vitae porttitor porttitor.
-                Suspendisse in sem justo. Integer laoreet magna nec elit
-                suscipit, ac laoreet nibh euismod. Aliquam hendrerit lorem at
-                elit facilisis rutrum. Ut at ullamcorper velit. Nulla ligula
-                nisi, imperdiet ut lacinia nec, tincidunt ut libero. Aenean
-                feugiat non eros quis feugiat.
-              </p>
-            </div>
-          </div>
-        </SwiperSlide>
+          {posts.map(
+            ({ _id, title, description, createdAt, image, author }, index) => (
+              index < 3 &&  // news length not greater than 3
+              <SwiperSlide key={_id} className="backdrop-blur-sm">
+               <div className="flex-col justify-center text-start items-end px-4 text-gray-200  ">
+                <div className="title" data-swiper-parallax="-300">
+                 <Link to={`/posts/${_id}`} className="hover:underline">{title?.toUpperCase()}</Link>
+                </div>
+                {/* <div className="author" data-swiper-parallax="-200">
+                  {author}
+                </div> */}
+                <div className="" data-swiper-parallax="-100">
+                  <p className="leading-8 line-clamp-5 text-start w-[80%] " dangerouslySetInnerHTML={{ __html: description }}/>
+                </div>
+               </div>
+              </SwiperSlide>
+            )
+          )}
       </Swiper>
     </div>
-  )
+  );
 }

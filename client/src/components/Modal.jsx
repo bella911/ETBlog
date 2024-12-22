@@ -17,7 +17,7 @@ export function FollowModal() {
 
   return (
     <>
-      <Button gradientDuoTone="greenToBlue" outline color="transparent" onClick={() => setOpenModal(true)} >Follow</Button>
+      <Button gradientDuoTone="greenToBlue" outline size="sm" color="transparent" onClick={() => setOpenModal(true)} >Follow</Button>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>

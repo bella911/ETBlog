@@ -51,7 +51,7 @@ function Subscribe() {
 
   return (
     <form
-      className="py-12 my-16 border-t-2 border-green-200 px-2"
+      className="py-12 my-16 border-t-2 border-green-200"
       onSubmit={addSubscriber}
     >
       <div className="font-semibold border-b-2 border-green-400">

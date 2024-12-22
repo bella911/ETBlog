@@ -102,7 +102,7 @@ function EditPost() {
 
   return (
     // <div className="mt-32 mb-32 w-1/2 mx-auto">
-    <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 min-w-96">
+    <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
       <div className="max-w-screen-xl mx-auto pt-24 pb-64 px-6 lg:px-32">
         <form onSubmit={handlePost}>
           <input

@@ -92,8 +92,8 @@ function Posts() {
   })
 
   return (
-    <div className="bg-[#eee] min-w-96 dark:bg-gray-800 pb-10">
-      <div className="mx-auto max-w-screen-xl px-6 lg:px-8">
+    <div className="bg-[#eee]  dark:bg-gray-800 pb-10">
+      <div className="mx-auto max-w-screen-xl px-2 lg:px-8">
         {/* new news slider */}
         <SlidePosts />
 
@@ -116,7 +116,7 @@ function Posts() {
             <ClipLoader speedMultiplier="0.5" size="40px" />
           </div>
         ) : activeTab ? (
-          <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16  border-gray-200  md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16   md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {paginatePosts.map(
               ({ _id, title, description, createdAt, image, author }) => (
                 <PostItem
@@ -133,7 +133,7 @@ function Posts() {
           </div>
         ): (
           // display following posts
-          <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16  border-gray-200  md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+          <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16    md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {followingPosts.map(
               ({ _id, title, description, createdAt, image, author }) => (
                 <PostItem

@@ -130,7 +130,7 @@ function Comments({ postId }) {
 
 
     const addCommentUI = (
-        <form className="mb-2 flex" onSubmit={handleSubmit(onSubmit)}  >
+        <form className="mb-6 flex" onSubmit={handleSubmit(onSubmit)}  >
             {/* for commenter image */}
             <div className='w-12 flex justify-center pt-1'>
                 <img className="h-10 w-10 rounded-full bg-gray-50 object-cover"
@@ -142,7 +142,7 @@ function Comments({ postId }) {
                 {currentUser?
                 <textarea
                     rows="1"
-                    className={` px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0 focus:ring-0 focus:border-b-gray-200 resize-none border-b-[2px] border-gray-600 overflow-visible `}
+                    className={` px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0  resize-none border-b-[2px] border-gray-600 overflow-visible `}
                     placeholder="Add a comment..."
                     {...register("text", { required: true })}
                     required
@@ -151,7 +151,7 @@ function Comments({ postId }) {
                 />:
                 <textarea
                     rows="1"
-                    className={`px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0 focus:ring-0 focus:border-b-gray-200 resize-none border-b-[2px] border-gray-600 overflow-visible`}
+                    className={`px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0  resize-none border-b-[2px] border-gray-600 overflow-visible`}
                     placeholder="Add a comment..."
                     required
                     disabled
@@ -161,12 +161,12 @@ function Comments({ postId }) {
                 {currentUser &&
                 <>
                 {errors.text && <p className='text-sm text-red-600'>Comment is required</p>}
-                <div className='flex justify-between items-center '>
-                    <div className='py-2 px-3 rounded-full hover:bg-gray-200'>😊</div>
-                    <div className='flex gap-8'>
-                        <button className='py-2 px-4  border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600  rounded-full text-sm' type="button"
+                <div className='flex justify-between items-center'>
+                    <div className='py-1 px-2 sm:py-2 sm:px-3 rounded-full hover:bg-gray-200'>😊</div>
+                     <div className='flex gap-8'>
+                        <button className='py-1 px-2 sm:py-2 sm:px-4  border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600  rounded-full text-sm' type="button"
                             onClick={() => reset()}>Cancel</button>
-                        <button className='py-2 px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm' type="submit">Comment</button>
+                        <button className='py-1 px-2 sm:py-2 sm:px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm' type="submit">Comment</button>
                     </div>
                 </div> </>}
             </div>
@@ -175,7 +175,7 @@ function Comments({ postId }) {
 
     return (
         // <section className="bg-white dark:bg-gray-900 py-8 lg:py-16 antialiased">
-        <section className="bg-[#eee] dark:bg-gray-800 py-1 antialiased p-2 rounded-md">
+        <section className="bg-[#eee] dark:bg-gray-800 py-1 antialiased sm:p-2 rounded-md">
             <div className="max-w-3xl mx-auto ">
                 <div className="flex justify-between items-center mb-6 p-1">
                     <h2 className="text-lg lg:text-2xl font-bold dark:text-gray-400 text-gray-800">{comments?.length} Comments</h2>
@@ -186,7 +186,7 @@ function Comments({ postId }) {
                 {/* for user first post */}
                 {comments.map((comment) => (
                     <div key={comment._id}>
-                        <div className='flex mb-2'>
+                        <div className='flex mb-4'>
                             {/* for image */}
                             <div className='w-12 flex justify-center py-3'>
                                 <img className="h-10 w-10 rounded-full bg-gray-50 object-cover"
@@ -219,13 +219,13 @@ function Comments({ postId }) {
                                 instruments for the UX designers. The knowledge of the design tools are as important as the
                                 creation of the design strategy.</p> */}
                                 <p className="dark:text-gray-400 text-gray-800">{comment.text}</p>
-                                <div className="flex items-center mt-4 space-x-4">
+                                <div className="flex items-center mt-2 space-x-4 text-xs">
                                     <button className='flex items-center'><BiLike /><span className='dark:text-gray-400 text-gray-800'>&nbsp;1k</span>
                                     </button>
                                     <button><BiDislike /></button>
                                     <button type="button"
                                         onClick={replyToggleModal}
-                                        className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
+                                        className="flex items-center  text-gray-500 hover:underline dark:text-gray-400 font-medium">
                                         Reply
                                     </button>
                                 </div>

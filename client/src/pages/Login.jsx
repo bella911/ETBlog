@@ -70,63 +70,63 @@ function Login() {
   };
 
   return (
-    <div className="bg-[#eee] min-w-96 dark:bg-gray-800 ">
+    <div className="bg-[#eee]  dark:bg-gray-800 ">
       <form
         className="flex justify-center text-center py-20 font-sans"
         onSubmit={handleSubmit}
       >
-        <div className="p-10 shadow-lg bg-gray-300 dark:bg-gray-700 rounded-md lg:flex sm:flex-row ">
+        <div className="sm:p-10 mx-2 shadow-lg bg-gray-300 dark:bg-gray-700 rounded-md lg:flex sm:flex-row ">
           <img
-            className="flex justify-center items-center w-[300px] "
+            className="hidden sm:flex justify-center items-center w-[300px] "
             src={PersonImage}
             alt=""
           />
-          <div className=" p-6 shadow-lg bg-gray-100 dark:bg-gray-600  rounded-md font-bold sm:text-3xl">
-          <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
-                Sign in to your account
-              </h1>
+          <div className=" p-6 shadow-lg bg-gray-400 dark:bg-gray-900  rounded-md font-bold sm:text-3xl">
+            <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+              Sign in to your account
+            </h1>
 
             <div className="mb-2 pt-9">
-                  <label
-                    htmlFor="username"
-                    className="block mb-1  text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Username
-                  </label>
-                  <input
-                    type="text"
-                    name="username"
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
-                    placeholder="username"
-                    required=""
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value.trim())}
-                />
-                {errors.username && (
-                  <p className="text-red-500 text-sm">{errors.username}</p>
-                )}
-                </div>
+              <label
+                htmlFor="username"
+                className="block mb-1  text-base font-medium text-gray-900 dark:text-white"
+              >
+                Username
+              </label>
+              <input
+                type="text"
+                name="username"
+                className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
+                placeholder="username"
+                required=""
+                value={username}
+                onChange={(e) => setUsername(e.target.value.trim())}
+              />
+              {errors.username && (
+                <p className="text-red-500 text-sm">{errors.username}</p>
+              )}
+            </div>
 
             <div className="mb-6">
-                  <label
-                    htmlFor="password"
-                    className="block mb-1  text-sm font-medium text-gray-900 dark:text-white"
-                  >
-                    Password
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    placeholder="••••••••"
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
-                    required=""
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value.trim())}
-                  />
-                  {errors.password && (
-                  <p className="text-red-500 text-sm">{errors.password}</p>
-                )}
-                </div>
+              <label
+                htmlFor="password"
+                className="block mb-1  text-base font-medium text-gray-900 dark:text-white"
+              >
+                Password
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="••••••••"
+                className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
+                required=""
+                value={password}
+                onChange={(e) => setPassword(e.target.value.trim())}
+              />
+              {errors.password && (
+                <p className="text-red-500 text-sm">{errors.password}</p>
+              )}
+            </div>
             <button
               type="submit"
               // className="w-full flex justify-center  py-2 px-4 rounded-md text-sm font-medium bg-green-300 dark:text-gray-700"
@@ -143,7 +143,7 @@ function Login() {
             <button className="w-full" onClick={() => setIsGoogleOAuth(true)}>
               <OAuth />
             </button>
-            <p className="text-center text-sm  dark:text-white text-gray-800 mt-2 font-normal">
+            <p className="text-center text-base  dark:text-white text-gray-800 mt-2 font-normal">
               Don’t have an account yet?{" "}
               <Link
                 to="/signup"
@@ -163,4 +163,3 @@ function Login() {
 }
 
 export default Login;
-

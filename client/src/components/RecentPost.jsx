@@ -3,7 +3,7 @@ function RecentPost({ id, title, image, date, author }) {
     <div>
       <div
         key={id}
-        className="mb-4 border-2 border-gray-300 rounded-lg hover:opacity-90 hover:border-green-400"
+        className="mb-4 border-2 border-gray-300 dark:border-gray-700 rounded-lg hover:opacity-90 hover:border-green-400"
       >
         <a href={`/posts/${id}`}>
           <img

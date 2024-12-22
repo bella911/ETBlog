@@ -38,7 +38,7 @@ function Dashboard() {
   };
 
   return (
-    <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 min-w-96">
+    <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
       <div className="flex max-w-screen-xl mx-auto pt-8 pb-64 px-6 gap-2 flex-col md:flex-row ">
         <div>
           <DashboardSidebar />

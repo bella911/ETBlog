@@ -23,6 +23,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Error from "./Error";
 import { FollowModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
+import SuggestedUser from "../components/userpage/SuggestedUser";
 
 function UserPage() {
   // const path = useLocation().pathname; // change current clicked tabs
@@ -53,12 +54,9 @@ function UserPage() {
   const location = useLocation();
 
   let suggestedUserIndex = 2;
-  // console.log(username);
-  // console.log(isNotFound);
 
   // display user detail info by getting username from author page
   useEffect(() => {
-    // setLoading(true);
     axios
       .get(`/user/profile/${username}`, { withCredentials: true }) ///{ withCredentials: true }
       .then((res) => {
@@ -68,56 +66,35 @@ function UserPage() {
           following: res.data.following.length,
           likedPosts: res.data.likedPosts.length,
         });
-        // setLoading(false);
         likesPost(res.data._id)
-        // console.log("user value",res.data._id)
         setCheckFollowers(res.data.followers);
-        // console.log("this is for profile filteration", res.data);
         // authorPage();
         setIsNotFound(false);
       })
       .catch((error) => {
         console.log(error.message);
         setIsNotFound(true);
-        // setLoading(false);
       });
   }, [counter, username]);
 
   // display author page
   useEffect(() => {
-    // setLoading(true);
     axios
       .get(`/post/user/${username}`, { withCredentials: true }) // { withCredentials: true }
       .then((res) => {
         setPosts(res.data.data); // fetch user posts
-        // console.log(res.data.data);
-        // setLoading(false);
-        // setIsNotFound(false)
       })
       .catch((error) => {
-        // setIsNotFound(true);
-        // setLoading(false);
         console.log(error.message);
       });
   }, [counter, username]);
 
   // like and unlike post
   const likeUnlikePost = (id) => {
-    // console.log(id);
-    // setRefreshChange(true);
     axios
       .put(`/post/like/${id}`, {}, { withCredentials: true })
       .then((res) => {
-        // console.log("this value comes from backend", res.data);
-        // console.log(
-        //   "this value comes from backend",
-        //   res.data.updatedLikes.length
-        // );
         setCounter(res.data.updatedLikes.length);
-
-        // setUser(res.data);
-        // count post as view when click like unlike
-        // countView(id); // fix navigate to post detail
       })
       .catch((error) => {
         console.log(error.message);
@@ -126,14 +103,11 @@ function UserPage() {
 
   // get Likes posts ???
   const likesPost = (authorId) => {
-    // console.log(likePost);
     setRefreshChange(true);
     axios
       .get(`/post/likes/${authorId}`, {}, { withCredentials: true })
       .then((res) => {
         setLikedPosts(res.data)
-        // console.log("this liked posts comes from backend", res.data);
-        // setUser(res.data);
         
       })
       .catch((error) => {
@@ -143,39 +117,25 @@ function UserPage() {
 
   // follow, following and unfollow user
   const followUnfollowUser = (followUserId) => {
-    // console.log(followUser);
-    // setLoading(true);
-    // .post(`/user/follow/${followUser}`,{data: "abel"}, {withCredentials: true}) // { withCredentials: true }
-    // .post("/post/create", data, {withCredentials: true})
     axios
       .put(`/user/follow/${followUserId}`, {}, { withCredentials: true })
       .then((res) => {
-        // console.log(res.data);
         setCounter(res.data.updatedFollows.length);
-        // setLoading(false);
       })
       .catch((error) => {
         console.log(error.message, "Something is happening abel");
-        // setLoading(false);
       });
   };
 
   // suggested user follow unfollow
   const suggestedUserFollowUnFollow = (suggestedFollow) => {
-    // console.log("suggested follower id",suggestedFollow);
-    // setLoading(true);
-    // .post(`/user/follow/${followUser}`,{data: "abel"}, {withCredentials: true}) // { withCredentials: true }
-    // .post("/post/create", data, {withCredentials: true})
     axios
       .put(`/user/follow/${suggestedFollow}`, {}, { withCredentials: true })
       .then((res) => {
-        // console.log(res.data);
         setCounter(res.data.updatedFollows.length);
-        // setLoading(false);
       })
       .catch((error) => {
         console.log(error.message, "Something is happening abel");
-        // setLoading(false);
       });
   };
 
@@ -185,7 +145,6 @@ function UserPage() {
       .get(`/user/users`, { withCredentials: true }) // { withCredentials: true }
       .then((res) => {
         setAllUsers(res.data); // fetch user posts
-        // console.log(res.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -198,22 +157,17 @@ function UserPage() {
     axios
      .get(`/post/count/${id}`)
      .then((res) => {
-      //  console.log("post views", res.data);
        navigate(`/posts/${id}`)
      })
      .catch((error) => console.log(error));
    }
 
   return (
-    <div className="bg-[#eee] dark:bg-gray-800 min-w-96">
+    <div className="bg-[#eee] dark:bg-gray-800">
       {!isNotFound ? ( // for catching not exist page throw not found error
-        // <div className="flex justify-around mx-auto max-w-screen-2xl  py-16  lg:max-w-[80%] ">
-        //   <div className="max-w-2xl mx-4 min-h-screen  sm:max-w-sm md:max-w-3xl md:min-w-[65%] xl:max-w-sm  shadow-xl rounded-lg  text-gray-900 dark:text-gray-200 ">
-        <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row ">
+         <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row ">
           <div className="flex-1 px-4 w-full lg:px-0 mt-12 mb-4 text-gray-700 dark:text-gray-200 max-w-screen-md mx-auto text-lg leading-relaxed">
             {/* cover picture */}
-            {/* {users.map(
-          ({ _id, followers, following, likedPosts, profilePicture, coverImg }) => ( */}
             <div>
               <div className="rounded-t-lg h-32 overflow-hidden">
                 <img
@@ -225,9 +179,9 @@ function UserPage() {
               </div>
               {/* main profile picture */}
               <div className="flex justify-between">
-                <div className="md:ml-8 ml-4 w-32 h-32 relative -mt-16 border-4 dark:border-gray-800 rounded-full overflow-hidden">
+                <div className="md:ml-8 ml-4 lg:w-32 w-20 lg:h-32 h-20 relative lg:-mt-16 -mt-8 border-4 dark:border-gray-800 rounded-full overflow-hidden">
                   <img
-                    className="object-cover object-center h-32"
+                    className="object-cover object-center"
                     src={`${loading? avatar : user.user.profilePicture}`}
                     // src={user.user.profilePicture}
                     alt="Woman looking front"
@@ -260,6 +214,7 @@ function UserPage() {
                       gradientDuoTone="greenToBlue"
                       outline
                       className="mt-2 mr-1"
+                      size="sm"
                     >
                       <Link to={"/user/editprofile"}>Edit Profile</Link>
                     </Button>
@@ -267,13 +222,13 @@ function UserPage() {
                 </div>
               </div>
               {/* name and work */}
-              <div className="text-left mt-2 md:ml-8 ml-4">
-                <h2 className="font-semibold mb-3 ">{user.user.username}</h2>
+              <div className="text-left mt-2 md:ml-8 ml-4 text-base">
+                <h2 className="font-semibold mb-3 ">{user.user.username?.toUpperCase()}</h2>
                 <p>Freelance Web Designer</p>
               </div>
 
               {/* real time list followers and followings */}
-              <div className="text-left mt-2 md:ml-8 ml-4">
+              <div className="text-left mt-2 md:ml-8 ml-4 text-base">
                 <span className="mr-1">
                   {user.following} <span>Following</span>{" "}
                 </span>
@@ -282,8 +237,6 @@ function UserPage() {
                 </span>
               </div>
             </div>
-            {/* )
-        )} */}
             {/* select tabs */}
             <div className="my-16">
               <Tabs
@@ -311,7 +264,7 @@ function UserPage() {
                     }) => (
                       <article
                         key={_id}
-                        className="flex font-medium text-gray-800 dark:text-gray-200 px-4 mb-3 border-b-[1px] dark:border-gray-700 bg-[#eee] dark:bg-gray-800"
+                        className="flex font-medium text-gray-800 dark:text-gray-200 md:px-4 mb-3 border-b-[1px] dark:border-gray-700 bg-[#eee] dark:bg-gray-800"
                        >
                         <div className="flex">
                           <img
@@ -339,12 +292,7 @@ function UserPage() {
                               </p>
                             </div>
                             <h3 className="mt-3 text-lg font-semibold leading-6  group-hover:text-gray-600 ">
-                              {/* <Link
-                              to={`/posts/${_id}`}
-                              className="hover:underline"
-                            > */}
                               {title}
-                              {/* </Link> */}
                             </h3>
                             <div className="group relative">
                               <p className="mt-2 line-clamp-3 text-sm leading-6 ">
@@ -374,10 +322,6 @@ function UserPage() {
                             <ReplyCommentOnUserPage key={_id} postId={_id} commentsLength={comments.length} author={author}/>
                               {/* <span className="text-sm">&nbsp; {comments.length}</span> */}
                             </button>
-                            {/* <button className="flex items-center hover:text-green-400">
-                              <BiRepost className="text-3xl" />
-                              <span className="text-sm">&nbsp;1</span>
-                            </button> */}
                             <button
                               onClick={() => {
                                 // dispatch(postId(_id));
@@ -474,14 +418,6 @@ function UserPage() {
                                 {/* {description} */}
                               </p>
                               <button className="text-green-400 hover:underline block mb-3 text-sm" onClick={()=> countView(_id)}>See more</button>
-
-                              {/* <Link
-                                to={`/posts/${_id}`}
-                                className="text-green-400 hover:underline block mb-3 text-sm" 
-                              >
-                                See more
-                              </Link> */}
-                              {/* <Link to={`/posts/${_id}`}> */}
                               <img
                                 className="h-56  w-full object-cover rounded"
                                 src={image}
@@ -518,10 +454,6 @@ function UserPage() {
                                 <span>&nbsp; {likes?.length}</span>
                               </button>
                             )}
-                            {/* <button type="button" className="flex items-center hover:text-red-400">
-                              <FaRegHeart className="w-4 h-4 " />
-                              <span>&nbsp; {likes?.length}</span>
-                            </button> */}
 
                             <button className="flex items-center hover:text-blue-400">
                               <FiBarChart2 className="w-4 h-4" />
@@ -544,18 +476,13 @@ function UserPage() {
           {/* side bar of the body */}
           {/* display suggested user only when user authenticate */}
           {currentUser && (
-            <div className="pt-12 px-4 mb-4 mt-12  text-gray-700 dark:text-gray-200 w-full md:max-w-[350px] lg:w-[600px]  mx-auto text-lg md:ml-4 leading-relaxed">
+            <div className="sm:pt-12 px-4 mb-4 sm:mt-12  text-gray-700 dark:text-gray-200 w-full md:max-w-[350px] lg:w-[600px]  mx-auto text-lg md:ml-4 leading-relaxed">
+              {/* <SuggestedUser suggestedUserIndex = {allUsers?.length} /> */}
               {/* <div className="w-full max-w-md mx-auto p-4 h-[50%] hidden lg:inline  bg-white border   rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700"> */}
               <div className="flex items-center justify-between mb-4">
                 <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-gray-200 ">
                   You Might LIke
                 </h5>
-                {/* <a
-            href="#"
-            className="text-md font-medium text-green-600 hover:underline dark:text-green-500"
-          >
-            View all
-          </a> */}
                 <Button
                   gradientDuoTone="greenToBlue"
                   size="xs"
@@ -582,7 +509,6 @@ function UserPage() {
                             currentUser?._id === user._id && "hidden"
                           }`}
                         >
-                          {" "}
                           {/* jump authenticate user from suggestion friend */}
                           <ul
                             role="list"
@@ -605,13 +531,6 @@ function UserPage() {
                                     {user.email}
                                   </p>
                                 </div>
-                                {/* <Button
-                                  gradientDuoTone="greenToBlue"
-                                  outline
-                                  size="xs"
-                                >
-                                  Follow
-                                </Button> */}
                               <div>
                                 {/* check the user id and author page is same or current user logged in the apply dynamic following */}
                                 {

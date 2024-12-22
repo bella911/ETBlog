@@ -24,7 +24,7 @@ import EditProfile from "./pages/EditProfile";
 
 function App() {
   return (
-    <>
+    <div className="bg-gray-800">
       <BrowserRouter>
         <Headroom>
           <HeaderFB />
@@ -65,7 +65,7 @@ function App() {
         </Routes>
         <Footer />
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 

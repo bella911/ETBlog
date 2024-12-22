@@ -52,7 +52,7 @@ function SearchQuery() {
   //   console.log(query);
 
   return (
-    <div className="bg-[#eee] min-w-96 dark:bg-gray-800">
+    <div className="bg-[#eee]  dark:bg-gray-800">
       <div className="pb-16 relative min-h-[70vh] ">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           {loading ? (
