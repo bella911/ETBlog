@@ -15,7 +15,7 @@ function SearchQuery() {
   // fetch query from the Url
   const fetchUrlParams = () => {
     const urlP = new URLSearchParams(location.search);
-    const queryUrl = urlP.get("query");
+    const queryUrl = urlP.get("query").toLowerCase();
     if (queryUrl) {
       setQuery(queryUrl);
     }

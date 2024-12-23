@@ -23,7 +23,7 @@ export default function SlidePosts() {
   }, []);
 
   return (
-    <div className="pt-4">
+    <div className="pt-4 px-2 md:h-full h-[300px]">
       <Swiper
         className="mySwiper"
         pagination={{
@@ -31,17 +31,13 @@ export default function SlidePosts() {
         }}
         parallax={true}
         autoplay={{
-          delay: 5000,
+          delay: 3000,
           disableOnInteraction: false,
         }}
         spaceBetween={30}
         modules={[Pagination, Autoplay, Parallax]}
         slidesPerView={1}
         loop={true}
-        // onSlideChange={() => console.log("slide change")}
-        // style={{
-        //   paddingTop: "20px",
-        // }}
       >
         <div
           slot="container-start"
@@ -57,15 +53,15 @@ export default function SlidePosts() {
             ({ _id, title, description, createdAt, image, author }, index) => (
               index < 3 &&  // news length not greater than 3
               <SwiperSlide key={_id} className="backdrop-blur-sm">
-               <div className="flex-col justify-center text-start items-end px-4 text-gray-200  ">
+               <div className="flex-col justify-center text-start items-end sm:px-4 px-2  ">
                 <div className="title" data-swiper-parallax="-300">
-                 <Link to={`/posts/${_id}`} className="hover:underline">{title?.toUpperCase()}</Link>
+                 <Link to={`/posts/${_id}`} className="hover:underline text-4xl md:8xl text-gray-300 sm:leading-5 leading-none ">{title?.toUpperCase()}</Link>
                 </div>
                 {/* <div className="author" data-swiper-parallax="-200">
                   {author}
                 </div> */}
                 <div className="" data-swiper-parallax="-100">
-                  <p className="leading-8 line-clamp-5 text-start w-[80%] " dangerouslySetInnerHTML={{ __html: description }}/>
+                  <p className="sm:leading-8 md:line-clamp-5 line-clamp-3 text-start md:w-[80%]  sm:text-xl text-base text-gray-200" dangerouslySetInnerHTML={{ __html: description }}/>
                 </div>
                </div>
               </SwiperSlide>

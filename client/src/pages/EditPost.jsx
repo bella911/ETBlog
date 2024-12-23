@@ -92,7 +92,7 @@ function EditPost() {
     axios
       .put(`/post/updatepost/${id}`, data, { withCredentials: true })
       .then((res) => {
-        navigate("/posts");
+        navigate("/");
         // console.log(res);
       })
       .catch((error) => {
