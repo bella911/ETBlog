@@ -14,6 +14,7 @@ import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FollowModal } from "../components/Modal";
 import { BiSolidLike } from "react-icons/bi";
+import ScrollToTop from "../components/ScrollToTop";
 
 function PostDetail() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -119,6 +120,7 @@ function PostDetail() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
+      <ScrollToTop/>
       {!isNotFound ? (
         <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row md:px-2">
           <div className="flex-1 px-4 w-full lg:px-0 mt-12 mb-4 text-gray-700 dark:text-gray-200 max-w-screen-md mx-auto text-lg leading-relaxed">

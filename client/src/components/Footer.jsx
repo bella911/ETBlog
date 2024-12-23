@@ -50,7 +50,7 @@ function Footer() {
                 Authors
               </Link>
               <Link
-                to="#"
+                to=""
                 className="hover:text-green-400  font-[15px] ml-[20px] "
               >
                 Recently Posted

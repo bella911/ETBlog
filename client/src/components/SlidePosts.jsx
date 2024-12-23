@@ -55,13 +55,13 @@ export default function SlidePosts() {
               <SwiperSlide key={_id} className="backdrop-blur-sm">
                <div className="flex-col justify-center text-start items-end sm:px-4 px-2  ">
                 <div className="title" data-swiper-parallax="-300">
-                 <Link to={`/posts/${_id}`} className="hover:underline text-4xl md:8xl text-gray-300 sm:leading-5 leading-none ">{title?.toUpperCase()}</Link>
+                 <Link to={`/posts/${_id}`} className="hover:underline text-4xl md:8xl text-gray-300 line-clamp-1 ">{title?.toUpperCase()}</Link>
                 </div>
                 {/* <div className="author" data-swiper-parallax="-200">
                   {author}
                 </div> */}
                 <div className="" data-swiper-parallax="-100">
-                  <p className="sm:leading-8 md:line-clamp-5 line-clamp-3 text-start md:w-[80%]  sm:text-xl text-base text-gray-200" dangerouslySetInnerHTML={{ __html: description }}/>
+                  <p className="sm:leading-8 line-clamp-5  text-start md:w-[80%]  sm:text-xl text-base text-gray-200" dangerouslySetInnerHTML={{ __html: description }}/>
                 </div>
                </div>
               </SwiperSlide>

@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 import {FollowingModal, FollowModal} from "../components/Modal.jsx"
+import ScrollToTop from "../components/ScrollToTop.jsx";
 // list all news posts
 function Posts() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -110,7 +111,8 @@ function Posts() {
             </Button>
         </div>
      
-
+        {/* all post view start from bottom off follow and for you */}
+        {/* <ScrollToTop/> */}
         { loading ? (
           <div className="flex justify-center items-center mt-64 mb-52">
             <ClipLoader speedMultiplier="0.5" size="40px" />
