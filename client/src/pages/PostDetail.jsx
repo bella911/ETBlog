@@ -179,22 +179,22 @@ function PostDetail() {
               {currentUser ? (
                 <button
                   onClick={() => likeUnlikePost(id)}
-                  className="flex items-center py-1 px-4 bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 border-r-2 rounded-r-none rounded-full"
+                  className="flex items-center py-1 px-4 bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 border-r-2 rounded-r-none rounded-full"
                 >
                   {react.likes?.includes(currentUser?._id) ? (
-                    <BiSolidLike className="text-gray-200" />
+                    <BiSolidLike className="text-xl text-gray-500 dark:text-gray-200" />
                   ) : (
-                    <BiLike />
+                    <BiLike className="text-xl"/>
                   )}
                   <span className="">&nbsp;{react.likesLength}</span>
                 </button>
               ) : (
                 <button className="flex items-center py-1 px-4 bg-gray-200 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 border-r-2 rounded-r-none rounded-full">
-                  <BiLike /> <span className="">&nbsp;{react.likesLength}</span>
+                  <BiLike className="text-xl "/> <span className="">&nbsp;{react.likesLength}</span>
                 </button>
               )}
-              <button className="flex items-center py-[10px] px-6 bg-gray-200  dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 rounded-l-none rounded-full">
-                <BiDislike />
+              <button className="flex items-center py-1 px-4 bg-gray-300  dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 rounded-l-none rounded-full">
+                <BiDislike className="text-xl"/><span >&nbsp;</span>
               </button>
             </div>
             <Comments postId={id} />

@@ -9,6 +9,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import avatar from "../images/avatar.png"
 import { FaRegComment } from "react-icons/fa";
 import { useForm } from "react-hook-form";
+import { FaSearch } from "react-icons/fa";
 
 
 
@@ -124,15 +125,22 @@ export function SearchModal() {
         <Modal.Header />
         <Modal.Body >
           <div className="text-center text-gray-600 dark:text-gray-300">
-            <form onSubmit={handleSearch}>
+            <form className="flex w-full" onSubmit={handleSearch}>
               <TextInput
                 type="text"
                 placeholder="Search..."
                 rightIcon={AiOutlineSearch}
-                className=" focus:ring-0 outline-none"
+                className=" focus:ring-0 outline-none flex-1"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
               />
+              <Button
+                  type="submit"
+                  color="transparent"
+                  className="rounded-l-none -ml-12 border-l dark:border-gray-600 focus:ring-0"
+                >
+                  <FaSearch className="dark:text-gray-300" />
+                </Button>
             </form>
           </div>
         </Modal.Body>

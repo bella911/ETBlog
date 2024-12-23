@@ -181,7 +181,7 @@ function UserPage() {
               <div className="flex justify-between">
                 <div className="md:ml-8 ml-4 lg:w-32 w-20 lg:h-32 h-20 relative lg:-mt-16 -mt-8 border-4 dark:border-gray-800 rounded-full overflow-hidden">
                   <img
-                    className="object-cover object-center"
+                    className="object-cover object-center w-full"
                     src={`${loading? avatar : user.user.profilePicture}`}
                     // src={user.user.profilePicture}
                     alt="Woman looking front"
@@ -229,7 +229,7 @@ function UserPage() {
 
               {/* real time list followers and followings */}
               <div className="text-left mt-2 md:ml-8 ml-4 text-base">
-                <span className="mr-1">
+                <span className="mr-1 ">
                   {user.following} <span>Following</span>{" "}
                 </span>
                 <span className="mr-1">
@@ -427,14 +427,10 @@ function UserPage() {
                             </div>
                           </div>
                           {/* reaction of posts like comment, re post, like, view */}
-                          <div className="flex justify-between py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
+                          <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
                             <button className="flex items-center hover:text-blue-400">
                               <ReplyCommentOnUserPage key={_id} postId={_id} commentsLength={comments.length}/>
                               {/* <span>&nbsp; {comments.length}</span> */}
-                            </button>
-                            <button className="flex items-center hover:text-green-400">
-                              <BiRepost className="w-6 h-6 " />
-                              <span>&nbsp;1</span>
                             </button>
 
                             {/* like button not worked if user not logged in */}
@@ -447,17 +443,17 @@ function UserPage() {
                                 className="flex items-center hover:text-red-400"
                               >
                                 {likes?.includes(currentUser?._id) ? (
-                                  <FaHeart className="w-4 h-4 text-red-600" />
+                                  <FaHeart className="text-xl text-red-600" />
                                 ) : (
-                                  <FaRegHeart className="w-4 h-4 " />
+                                  <FaRegHeart className="text-xl " />
                                 )}
-                                <span>&nbsp; {likes?.length}</span>
+                                <span  className="text-sm">&nbsp; {likes?.length}</span>
                               </button>
                             )}
 
                             <button className="flex items-center hover:text-blue-400">
-                              <FiBarChart2 className="w-4 h-4" />
-                              <span>&nbsp;{views}</span>
+                              <FiBarChart2 className="text-xl" />
+                              <span  className="text-sm">&nbsp;{views}</span>
                             </button>
                           </div>
                         </div>

@@ -54,7 +54,7 @@ function SearchQuery() {
   return (
     <div className="bg-[#eee]  dark:bg-gray-800">
       <div className="pb-16 relative min-h-[70vh] ">
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl sm:px-6 px-2 lg:px-8">
           {loading ? (
             <div className="flex justify-center items-center pt-64 pb-52">
               <ClipLoader speedMultiplier="0.5" size="50px" />

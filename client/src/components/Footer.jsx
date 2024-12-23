@@ -7,6 +7,7 @@ import logo from "../images/logo.png";
 import { Link } from "react-router-dom";
 import { FaTelegram, FaFacebook } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
+import { IoCall } from "react-icons/io5";
 
 function Footer() {
   return (
@@ -73,9 +74,12 @@ function Footer() {
           <Link to="https://t.me/BellaVoss" target="_blank">
             <FaTelegram className="text-green-500 w-6 h-6 hover:opacity-50" />
           </Link>
-          <Link to="https://facebook.com/abel.gezahegn.756" target="_blank">
-            <FaFacebook className="text-green-500 w-6 h-6 hover:opacity-50" />
+          <Link to="tel:+251912227599" target="_blank">
+            <IoCall className="text-green-500 w-6 h-6 hover:opacity-50" />
           </Link>
+          {/* <Link to="https://facebook.com/abel.gezahegn.756" target="_blank">
+            <FaFacebook className="text-green-500 w-6 h-6 hover:opacity-50" />
+          </Link> */}
         </div>
         <div>
           <p className="text-center font-[13px]  mb-0 dark:text-gray-400 text-gray-800">
@@ -84,87 +88,6 @@ function Footer() {
         </div>
       </div>
     </div>
-
-    // old Footer
-    // <footer className="bg-[#37383d] text-gray-300 mx-auto  dark:bg-gray-800">
-    //   <hr className='max-w-screen-xl mx-auto dark:border-gray-700 ' />
-
-    //   <div className="max-w-screen-xl px-4 pt-6 pb-4  mx-auto sm:px-6 lg:px-8 mt-auto">
-
-    //     <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-    //       <div>
-    //         <img src={logo} className="mr-5 h-6 sm:h-9" alt="logo" />
-    //         <p className="max-w-xs mt-1 text-sm text-gray-300">Making better future </p>
-    //         <div className="flex mt-6 space-x-4 text-gray-600">
-    //           <a className="hover:opacity-75" href="https://facebook.com/abel.gezahegn.756" target="_blank" rel="noreferrer">
-    //             <span className="sr-only"> Facebook </span>
-    //             <img src={Facebook} className="w-6 h-6" alt="" />
-    //             {/* <FaFacebook className="w-6 h-6" /> */}
-    //           </a>
-    //           <a className="hover:opacity-75" href="" target="_blank" rel="noreferrer">
-    //             <span className="sr-only"> Instagram </span>
-    //             <img src={Instagram} alt="" />
-    //             {/* <FaInstagram className="w-6 h-6" /> */}
-    //           </a>
-    //           <a className="hover:opacity-75" href="https://t.me/BellaPG" target="_blank" rel="noreferrer">
-    //             <span className="sr-only"> Telegram </span>
-    //             <img src={Telegram} alt="" />
-    //             {/* <FaTelegram className="w-6 h-6" /> */}
-    //           </a>
-    //           <a className="hover:opacity-75" href="https://github.com/bella911" target="_blank" rel="noreferrer">
-    //             <span className="sr-only"> GitHub </span>
-    //             <img src={Github} alt="" />
-    //             {/* <FaGithub className="w-6 h-6" /> */}
-    //           </a>
-    //         </div>
-    //       </div>
-    //       <div className="grid grid-cols-1 gap-8 lg:col-span-2 sm:grid-cols-2 lg:grid-cols-4">
-    //         <div>
-    //           <p className="font-medium">
-    //             Company
-    //           </p>
-    //           <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-300">
-    //             <a className="hover:opacity-75" href="#"> About </a>
-    //             <a className="hover:opacity-75" href="#"> Meet the Team </a>
-    //           </nav>
-    //         </div>
-    //         <div>
-    //           <p className="font-medium">
-    //             Services
-    //           </p>
-    //           <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-300">
-    //             <a className="hover:opacity-75" href="#"> Custom software development </a>
-    //             <a className="hover:opacity-75" href="#"> Web development </a>
-    //             {/* <a className="hover:opacity-75" href="#"> Mobile app development </a> */}
-    //             <a className="hover:opacity-75" href="#"> Software consultancy </a>
-    //             {/* <a className="hover:opacity-75" href="#"> UX and UI design </a> */}
-    //           </nav>
-    //         </div>
-    //         <div>
-    //           <p className="font-medium">
-    //             Helpful Links
-    //           </p>
-    //           <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-300">
-    //             <a className="hover:opacity-75" href="#"> Contact </a>
-    //             <a className="hover:opacity-75" href="#"> FAQs </a>
-    //           </nav>
-    //         </div>
-    //         <div>
-    //           <p className="font-medium">
-    //             Legal
-    //           </p>
-    //           <nav className="flex flex-col mt-4 space-y-2 text-sm text-gray-300">
-    //             <a className="hover:opacity-75" href="#"> Privacy Policy </a>
-    //             <a className="hover:opacity-75" href="#"> Terms &amp; Conditions </a>
-
-    //           </nav>
-    //         </div>
-    //       </div>
-    //     </div>
-    //     <img src={logo} className="h-6 w-6 mx-auto mt-10 " alt="logo-hawi" />
-    //     <div className="mt-2 text-md text-gray-300 text-center">&copy; {new Date().getFullYear()} All rights reserved.</div>
-    //   </div>
-    // </footer>
   );
 }
 

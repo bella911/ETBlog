@@ -220,7 +220,7 @@ function Comments({ postId }) {
                                 creation of the design strategy.</p> */}
                                 <p className="dark:text-gray-400 text-gray-800">{comment.text}</p>
                                 <div className="flex items-center mt-2 space-x-4 text-xs">
-                                    <button className='flex items-center'><BiLike /><span className='dark:text-gray-400 text-gray-800'>&nbsp;1k</span>
+                                    <button className='flex items-center'><BiLike /><span className='dark:text-gray-400 text-gray-800'>&nbsp;</span>
                                     </button>
                                     <button><BiDislike /></button>
                                     <button type="button"

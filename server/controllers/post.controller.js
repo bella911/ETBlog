@@ -139,8 +139,7 @@ export const commentOnPost = async (req, res) => {
 
     post.comments.push(comment);
     await post.save();
-
-    const user = await User.findById(userId)
+    const user = await User.findById(userId);
 
     res.status(200).json({ post, likedUser: user }); // send comments and commented user info
   } catch (error) {

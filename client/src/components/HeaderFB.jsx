@@ -79,11 +79,7 @@ export default function HeaderFB() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
-      {/* <div className="w-screen fixed"> */}
       <Navbar
-        // className={`max-w-screen-xl mx-auto  min-w-96 border-b  bg-[#eee] dark:bg-gray-800 ${
-        //   !currentUser && "dark:border-transparent"
-        // }`}
         className="max-w-screen-xl mx-auto  border-b dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "
       >
         <div className="flex">
@@ -93,10 +89,7 @@ export default function HeaderFB() {
             className="self-center whitespace-nowrap text-sm sm:text-xl font-semibold dark:text-white"
           >
             {/* header logo */}
-            {/* <img src={logoMain} className="w-auto h-10" alt="company logo" /> */}
             <svg
-              // width="264.6"
-              // height="25"
               viewBox="0 0 300 97.72330871596895"
               className="md:w-auto w-24 h-10 "
             >
@@ -121,16 +114,6 @@ export default function HeaderFB() {
         </div>
         <div className="flex gap-2 md:order-2">
           {/* search bar */}
-          {/* <form onSubmit={handleSearch}>
-            <TextInput
-              type="text"
-              placeholder="Search..."
-              rightIcon={AiOutlineSearch}
-              className="hidden lg:inline focus:ring-0"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-          </form> */}
 
           {/* search icon with modal and with logged in user conditions*/}
           {currentUser ? (
@@ -239,7 +222,7 @@ export default function HeaderFB() {
               <form className="flex" onSubmit={handleSearch}>
                 <TextInput
                   type="text"
-                  className="hidden sm:block  lg:w-[500px] md:w-[350px] sm:w-[200px]   focus:ring-0 dark:bg-gray-900"
+                  className="hidden sm:block  lg:w-[500px] md:w-[350px] sm:w-[200px] focus:ring-0 dark:bg-gray-900"
                   placeholder="Search..."
                   // icon={AiOutlineSearch}
                   value={query}

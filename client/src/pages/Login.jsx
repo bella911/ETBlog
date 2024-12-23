@@ -143,6 +143,9 @@ function Login() {
             <button className="w-full" onClick={() => setIsGoogleOAuth(true)}>
               <OAuth />
             </button>
+            {!isGoogleOAuth && errors.message && (
+              <p className="text-red-500 text-sm">{errors.message}</p>
+            )}
             <p className="text-center text-base  dark:text-white text-gray-800 mt-2 font-normal">
               Don’t have an account yet?{" "}
               <Link
@@ -152,9 +155,7 @@ function Login() {
                 Sign up
               </Link>
             </p>
-            {!isGoogleOAuth && errors.message && (
-              <p className="text-red-500 text-sm">{errors.message}</p>
-            )}
+           
           </div>
         </div>
       </form>

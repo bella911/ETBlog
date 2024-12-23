@@ -9,7 +9,7 @@ function EditProfile() {
   return (
     <div className="block mx-auto bg-[#eee] dark:bg-gray-800 ">
       <div className="py-8 max-w-5xl mx-auto lg:py-20 px-1">
-        <form className="px-2 ">
+        <form className="p-2 ">
           <div className="mb-8">
             <div>
               <div className="rounded-t-lg h-40 overflow-hidden">
@@ -56,7 +56,7 @@ function EditProfile() {
               Name
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5   dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start  rounded-md text-sm px-5 py-2.5   dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="name"
               name="name"
               type="text"
@@ -75,7 +75,7 @@ function EditProfile() {
               Email
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5   dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start  rounded-md text-sm px-5 py-2.5   dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="email"
               name="email"
               type="email"
@@ -94,7 +94,7 @@ function EditProfile() {
               Username
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5  dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start  rounded-md text-sm px-5 py-2.5  dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="username"
               name="username"
               type="text"
@@ -114,7 +114,7 @@ function EditProfile() {
               About
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5   dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start  rounded-md text-sm px-5 py-2.5   dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="about"
               name="about"
               defaultValue={currentUser.bio}
@@ -135,7 +135,7 @@ function EditProfile() {
               Current password
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5   dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start rounded-md text-sm px-5 py-2.5   dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="password"
               name="password"
               type="password"
@@ -151,7 +151,7 @@ function EditProfile() {
               New password
             </label>
             <input
-              className="block w-full text-start border-gray-200 rounded-md text-sm px-5 py-2.5  dark:bg-gray-800 dark:border-gray-900 dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
+              className="block w-full text-start rounded-md text-sm px-5 py-2.5  dark:bg-gray-700  dark:text-gray-400 placeholder-gray-400/70 shadow-sm  mt-1 "
               id="new_password"
               name="new_password"
               type="password"

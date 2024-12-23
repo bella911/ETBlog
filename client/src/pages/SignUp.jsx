@@ -32,7 +32,7 @@ function SignUp() {
     axios
       .post("/auth/signup", data)
       .then(() => {
-        // alert("register successful");
+        alert("register successful");
         
         setLoading(false);
         navigate("/login");
@@ -46,16 +46,10 @@ function SignUp() {
   return (
     <div>
       <section className="bg-[#eee] dark:bg-gray-800 ">
-        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          {/* <Link
-            to="/"
-            className="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white"
-          >
-            <img className="w-[150px] h-8 mr-2" src={logo} alt="logo" />
-          </Link> */}
-          <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-              <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">
+        <div className="flex flex-col items-center justify-center sm:px-6 px-2 py-8 mx-auto md:h-screen lg:py-0">
+          <div className="w-full  rounded-lg shadow-lg  md:mt-0 sm:max-w-md xl:p-0 bg-gray-400 dark:bg-gray-900 ">
+            <div className="py-6 px-2 space-y-4 md:space-y-6 sm:p-8">
+              <h1 className="text-xl font-bold leading-tight tracking-tight  text-gray-900 md:text-2xl dark:text-white text-center">
                 Create an Account
               </h1>
               <form
@@ -65,7 +59,7 @@ function SignUp() {
                 <div className="mb-2">
                   <label
                     htmlFor="name"
-                    className="block mb-1  text-sm font-medium text-gray-900 dark:text-white"
+                    className="block mb-1  text-sm font-medium  text-gray-900 dark:text-white"
                   >
                     Name
                   </label>
@@ -73,13 +67,13 @@ function SignUp() {
                     type="text"
                     name="fullname"
                     {...register("fullname", { required: true })}
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name"
                     required=""
                   />
                 </div>
                 {errors.fullname && (
-                  <p className="text-red-500 text-xs mb-2">full name required</p>
+                  <p className="text-red-500 text-sm mb-2">full name required</p>
                 )}
                 <div className="mb-2">
                   <label
@@ -91,14 +85,14 @@ function SignUp() {
                   <input
                     type="text"
                     name="username"
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="username"
                     required=""
                     {...register("username", { required: true })}
                   />
                 </div>
                 {errors.username && (
-                  <p className="text-red-500 text-xs mb-2"> username required</p>
+                  <p className="text-red-500 text-sm mb-2"> username required</p>
                 )}
 
                 <div className="mb-2">
@@ -111,14 +105,14 @@ function SignUp() {
                   <input
                     type="email"
                     name="email"
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name@gmail.com"
                     required=""
                     {...register("email", { required: true })}
                   />
                 </div>
                 {errors.email && (
-                  <p className="text-red-500 text-xs mb-2">email required</p>
+                  <p className="text-red-500 text-sm mb-2">email required</p>
                 )}
                 <div className="mb-6">
                   <label
@@ -131,14 +125,15 @@ function SignUp() {
                     type="password"
                     name="password"
                     placeholder="••••••••"
-                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
-                    {...register("password", { required: true })}
+                    {...register("password", { required: true, minLength: 6})}
                   />
                 </div>
-                {errors.password && (
-                  <p className="text-red-500 text-xs -mt-4 mb-2">password required</p>
+                {errors.password &&   (
+                  <p className="text-red-500 text-sm -mt-4 mb-2">password required</p>
                 )}
+                {/* {errors.password && errors.password.type === "minLength" && <p className="text-red-500 text-sm -mt-4 mb-2">Password must be at least 4 characters long </p> } */}
                 <button
                   type="submit"
                   className="w-full mb-3 text-white bg-green-500  focus:ring-4 focus:outline-none hover:opacity-75 font-medium rounded-lg text-sm px-5 py-2.5 text-center "

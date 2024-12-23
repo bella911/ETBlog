@@ -25,6 +25,7 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			// required: true,
 			enum: ["male", "female"],
+			default:"male"
 		}, 
 		isAdmin: {
 			type: Boolean,
