@@ -21,6 +21,7 @@ import Demo from "./components/Demo";
 import RealTimeSocket from "./components/RealTimeSocket";
 import Sidebar from "./pages/Sidebar";
 import EditProfile from "./pages/EditProfile";
+import Authors from "./pages/Authors";
 
 function App() {
   return (
@@ -42,23 +43,22 @@ function App() {
           <Route path="/" element={<Posts />} />   
           <Route path="/search" element={<SearchQuery/>}/>
           <Route path="/user/editprofile" element={<EditProfile/>}/>
-
+          <Route path="/authors" element={<Authors/>}/>
+          <Route path="/user/:username" element={<UserPage/>}/>
           <Route path="*" element={<Error />} />
 
           {/* test comment is worked properly */}
-          <Route path="/comments" element={<Comments/>}/>
-          <Route path="/user/:username" element={<UserPage/>}/>
-          <Route path="/demo" element={<Demo/>}/>
-          <Route path="/sidebar" element={<Sidebar/>}/>
-
+          {/* <Route path="/comments" element={<Comments/>}/> */}
+          {/* <Route path="/demo" element={<Demo/>}/> */}
+          {/* <Route path="/sidebar" element={<Sidebar/>}/> */}
 
 
           {/* dashboard sidebar */}
-          <Route path="/sidebar" element={<DashboardSidebar/>}/>
+          {/* <Route path="/sidebar" element={<DashboardSidebar/>}/> */}
 
           {/* test socket io */}
           {/* <Route path="/realtime" element={<LikeFollowDemo/>}/> */}
-          <Route path="/realtime" element={<RealTimeSocket/>}/>
+          {/* <Route path="/realtime" element={<RealTimeSocket/>}/> */}
 
         
 

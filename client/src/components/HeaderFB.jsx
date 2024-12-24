@@ -38,10 +38,9 @@ export default function HeaderFB() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
 
-  console.log(currentUser);
-  // console.log(localStorage.getItem('token'));
+  // console.log(currentUser);
 
- 
+
   function logout() {
     axios
       .post("/auth/logout")
@@ -194,17 +193,17 @@ export default function HeaderFB() {
         {currentUser ? (
           <Navbar.Collapse 
           >
-            <Navbar.Link active={path === "/"} as={"div"}  className="text-base">
+            <Navbar.Link active={path === "/"} as={"div"}  >
               <Link to="/" >News</Link>
             </Navbar.Link>
-            <Navbar.Link
-              active={path === `/user/${currentUser.username}`}
-              as={"div"}
-              className="text-base"
-            >
+            {/* change user endpoint user based on database list name */}
+            <Navbar.Link active={path === `/user/${currentUser.username}`}  as={"div"}  >
               <Link to={`/user/${currentUser.username}`}>My Posts</Link>
             </Navbar.Link>
-            <Navbar.Link active={path === "/createpost"} as={"div"} className="text-base">
+            <Navbar.Link active={path === "/authors"} as={"div"} >
+              <Link to="/authors">Authors</Link>
+            </Navbar.Link>
+            <Navbar.Link active={path === "/createpost"} as={"div"} >
               <Link to="/createpost">Create Post</Link>
             </Navbar.Link>
           </Navbar.Collapse>

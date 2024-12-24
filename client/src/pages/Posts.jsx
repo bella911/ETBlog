@@ -41,7 +41,7 @@ function Posts() {
         .then((res) => {
           setFollowingPosts(res.data)
           // setPosts(res.data);
-          console.log("this one is the following post",res.data);
+          // console.log("this one is the following post",res.data);
           setLoading(false);
         })
         .catch((error) => console.log(error));
@@ -62,7 +62,7 @@ function Posts() {
 
   // Simulate fetching items from another resources.
   const endOffset = itemOffset + itemsPerPage;
-  console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 

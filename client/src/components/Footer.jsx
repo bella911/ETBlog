@@ -44,7 +44,7 @@ function Footer() {
               </Link>
               {/* <Link to="#" className="hover:text-green-400  font-[15px] ml-[20px] ">Videos</Link> */}
               <Link
-                to={""}
+                to={"/authors"}
                 className="hover:text-green-400  font-[15px] ml-[20px] "
               >
                 Authors
