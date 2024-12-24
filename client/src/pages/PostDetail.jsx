@@ -121,7 +121,13 @@ function PostDetail() {
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
       <ScrollToTop/>
+      {/* unauthorize user can not see self or other posts */}
       {!isNotFound ? (
+        loading ? (
+          <div className="flex justify-center items-center mt-64 mb-52">
+            <ClipLoader speedMultiplier="0.5" size="40px" />
+          </div>
+          ) : (
         <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row md:px-2">
           <div className="flex-1 px-4 w-full lg:px-0 mt-12 mb-4 text-gray-700 dark:text-gray-200 max-w-screen-md mx-auto text-lg leading-relaxed">
             <h1 className="sm:text-5xl text-3xl font-bold pb-4 mb-6 border-b-2 border-gray-300 dark:border-gray-700">
@@ -232,7 +238,7 @@ function PostDetail() {
 
             <Subscribe />
           </div>
-        </div>
+        </div>)
       ) : (
         <Error />
       )}

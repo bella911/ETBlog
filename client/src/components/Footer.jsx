@@ -12,7 +12,7 @@ import { IoCall } from "react-icons/io5";
 function Footer() {
   return (
     // new etmovies style footer it's so light weight
-    <div className="pb-3 bg-[#eee] dark:bg-gray-800  min-h-48">
+    <div className="pb-3 bg-[#eee] dark:bg-gray-800 ">
       <div className="max-w-screen-xl  mx-auto">
         <div className="flex items-end justify-between flex-col sm:flex-row px-2">
           <div className="mx-auto md:mx-0">
