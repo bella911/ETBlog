@@ -7,6 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import DeleteModal from "../components/DeleteModal";
 import { useSelector } from "react-redux";
 import DashboardSidebar from "../components/DashboardSidebar";
+import ScrollToTop from "../components/ScrollToTop";
 
 function Dashboard() {
   const [posts, setPosts] = useState([]);
@@ -39,6 +40,7 @@ function Dashboard() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
+      <ScrollToTop/>
       <div className="flex max-w-screen-xl mx-auto pt-8 pb-64 px-6 gap-2 flex-col md:flex-row ">
         <div>
           <DashboardSidebar />

@@ -24,6 +24,7 @@ import Error from "./Error";
 import { FollowModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
 import SuggestedUser from "../components/userpage/SuggestedUser";
+import ScrollToTop from "../components/ScrollToTop";
 
 function UserPage() {
   // const path = useLocation().pathname; // change current clicked tabs
@@ -164,6 +165,7 @@ function UserPage() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800">
+      <ScrollToTop/>
       {!isNotFound ? ( // for catching not exist page throw not found error
          <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row ">
           <div className="flex-1 px-4 w-full lg:px-0 mt-12 mb-4 text-gray-700 dark:text-gray-200 max-w-screen-md mx-auto text-lg leading-relaxed">

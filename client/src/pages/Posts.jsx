@@ -73,6 +73,13 @@ function Posts() {
       `User requested page number ${event.selected}, which is offset ${newOffset}`
     );
     setItemOffset(newOffset);
+    
+    // scroll to top of the list when click pages
+    window.scrollTo({
+      top: 500,
+      left: 0,
+      // behavior: "smooth",
+    });
   };
 
   const paginatePosts = []; // store ranged posts based on filter page
@@ -94,6 +101,7 @@ function Posts() {
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 pb-10">
+      <ScrollToTop/>
       <div className="mx-auto max-w-screen-xl px-2 lg:px-8">
         {/* new news slider */}
         <SlidePosts />
