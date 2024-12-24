@@ -38,11 +38,10 @@ export default function HeaderFB() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const navigate = useNavigate();
 
-  // console.log(currentUser);
+  console.log(currentUser);
   // console.log(localStorage.getItem('token'));
 
-  // const token = Cookies.get();
-  // console.log(`Token: ${token}`)
+ 
   function logout() {
     axios
       .post("/auth/logout")
@@ -155,7 +154,7 @@ export default function HeaderFB() {
               </Dropdown.Item>
               <Dropdown.Item as={"div"}>
                 <svg
-                  class="w-4 h-4 me-2.5 "
+                  className="w-4 h-4 me-2.5 "
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
@@ -195,9 +194,6 @@ export default function HeaderFB() {
         {currentUser ? (
           <Navbar.Collapse 
           >
-            {/* <Navbar.Link active={path === "/"} as={"div"}>
-              <Link to="/">Home</Link>
-            </Navbar.Link> */}
             <Navbar.Link active={path === "/"} as={"div"}  className="text-base">
               <Link to="/" >News</Link>
             </Navbar.Link>
@@ -208,9 +204,6 @@ export default function HeaderFB() {
             >
               <Link to={`/user/${currentUser.username}`}>My Posts</Link>
             </Navbar.Link>
-            {/* <Navbar.Link active={path === `/chat/${currentUser.username}`} as={"div"}>
-              <Link to={`/chat/${currentUser.username}`}>Chat</Link>
-            </Navbar.Link> */}
             <Navbar.Link active={path === "/createpost"} as={"div"} className="text-base">
               <Link to="/createpost">Create Post</Link>
             </Navbar.Link>
@@ -237,22 +230,9 @@ export default function HeaderFB() {
                 </Button>
               </form>
             )}
-            {/* <Navbar.Link active={path === "/"} as={"div"}>
-              <Link to="/">Home</Link>
-            </Navbar.Link> */}
-            {/* <Navbar.Link active={path === "/posts"} as={"div"} className="sm:hidden block">
-              <Link to="/posts">News</Link>
-            </Navbar.Link>
-            <Navbar.Link active={path === "/projects"} as={"div"} className="sm:hidden block">
-              <Link to="/projects">Projects</Link>
-            </Navbar.Link>
-            <Navbar.Link active={path === "/about"} as={"div"} className="sm:hidden block">
-              <Link to="/about">About</Link>
-            </Navbar.Link> */}
           </Navbar.Collapse>
         )}
       </Navbar>
-      {/* <hr className="bg-gray-400"/> */}
     </div>
   );
 }

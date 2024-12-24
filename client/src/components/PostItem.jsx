@@ -26,9 +26,9 @@ function PostItem({ id, title, description, date, author, image }) {
       className="flex  flex-col items-center justify-between "
     >
       <div className=" bg-white dark:bg-gray-900  h-full w-full object-cover object-center lg:h-full lg:w-full rounded-lg  shadow-md max-w-xs md:max-w-none sm:max-w-none  overflow-hidden">
-        {/* <Link to={`/posts/${id}`}> */}
+        <Link to={`/posts/${id}`}>
           <img className="h-56  w-full object-cover" src={image} alt=" cover page of posts" />
-        {/* </Link> */}
+        </Link>
 
         <div className="border-x-[1px] dark:border-x-gray-900  rounded-md rounded-t-none  p-2">
           <div className="flex items-center gap-x-4 text-xs">

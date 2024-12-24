@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema(
 		fullName: {
 			type: String,
 			// required: true,
+			default: ""
 		},
 		password: {
 			type: String,
@@ -25,7 +26,7 @@ const userSchema = new mongoose.Schema(
 			type: String,
 			// required: true,
 			enum: ["male", "female"],
-			default:"male"
+			// default:"male"
 		}, 
 		isAdmin: {
 			type: Boolean,

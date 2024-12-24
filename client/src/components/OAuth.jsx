@@ -18,25 +18,6 @@ export default function OAuth() {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({ prompt: "select_account" });
     const resultsFromGoogle = await signInWithPopup(auth, provider);
-    // try {
-    //     const res = await fetch('http://localhost:5000/blog/google', {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify({
-    //             name: resultsFromGoogle.user.displayName,
-    //             email: resultsFromGoogle.user.email,
-    //             googlePhotoUrl: resultsFromGoogle.user.photoURL,
-    //         }),
-    //         })
-    //     const data = await res.json()
-    //     if (res.ok){
-    //         dispatch(signIn(res.data));
-    //         console.log(res.data)
-    //         navigate('/')
-    //     }
-    // } catch (error) {
-    //     console.log(error);
-    // }
 
     axios
       .post("/auth/google", {

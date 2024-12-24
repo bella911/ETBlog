@@ -515,16 +515,18 @@ function UserPage() {
                             <li className="py-3 sm:py-4">
                               <div className="flex items-center">
                                 <div className="flex-shrink-0">
-                                  <img
-                                    className="w-8 h-8 rounded-full"
-                                    src={user.profilePicture}
-                                    alt="Neil image"
-                                  />
+                                  <Link to={`/user/${user.username}`}>
+                                    <img
+                                      className="w-8 h-8 rounded-full"
+                                      src={user.profilePicture}
+                                      alt="Neil image"
+                                    />
+                                  </Link>
                                 </div>
                                 <div className="flex-1 min-w-0 ms-4">
-                                  <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-200 ">
+                                  <Link to={`/user/${user.username}`} className="text-sm font-medium text-gray-900 truncate dark:text-gray-200 ">
                                     {user.username}
-                                  </p>
+                                  </Link>
                                   <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                     {user.email}
                                   </p>

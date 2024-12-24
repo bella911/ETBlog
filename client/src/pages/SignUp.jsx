@@ -66,13 +66,13 @@ function SignUp() {
                   <input
                     type="text"
                     name="fullname"
-                    {...register("fullname", { required: true })}
+                    {...register("fullName", { required: true })}
                     className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="name"
                     required=""
                   />
                 </div>
-                {errors.fullname && (
+                {errors.fullName && (
                   <p className="text-red-500 text-sm mb-2">full name required</p>
                 )}
                 <div className="mb-2">
@@ -88,12 +88,12 @@ function SignUp() {
                     className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="username"
                     required=""
-                    {...register("username", { required: true })}
+                    {...register("username", { required: true, minLength: 4 })}
                   />
                 </div>
-                {errors.username && (
-                  <p className="text-red-500 text-sm mb-2"> username required</p>
-                )}
+                {errors.username && errors.username.type === "required" &&  <p className="text-red-500 text-sm mb-2"> username required</p>}
+                {errors.username && errors.username.type === "minLength" && <p className="text-red-500 text-sm mb-2">username must be minimum 4 character</p> }
+
 
                 <div className="mb-2">
                   <label
@@ -130,10 +130,8 @@ function SignUp() {
                     {...register("password", { required: true, minLength: 6})}
                   />
                 </div>
-                {errors.password &&   (
-                  <p className="text-red-500 text-sm -mt-4 mb-2">password required</p>
-                )}
-                {/* {errors.password && errors.password.type === "minLength" && <p className="text-red-500 text-sm -mt-4 mb-2">Password must be at least 4 characters long </p> } */}
+                {errors.password && errors.password.type === "required" && <p className="text-red-500 text-sm -mt-4 mb-2">password required</p>}
+                {errors.password && errors.password.type === "minLength" && <p className="text-red-500 text-sm -mt-4 mb-2">password must be at least 4 characters long </p> }
                 <button
                   type="submit"
                   className="w-full mb-3 text-white bg-green-500  focus:ring-4 focus:outline-none hover:opacity-75 font-medium rounded-lg text-sm px-5 py-2.5 text-center "
