@@ -58,7 +58,7 @@ function PostDetail() {
           likesLength: res.data.likes?.length,
         });
         // console.log("post author id", res.data.author)
-        console.log(res.data.likes);
+        // console.log(res.data.likes);
         postAuthor(res.data.author); // execute value
       })
       .catch((error) => {

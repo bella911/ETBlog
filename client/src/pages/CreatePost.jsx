@@ -38,16 +38,8 @@ function CreatePost() {
 
   
   const uploadImage = () => {
-    // const allowedTypes = ["image/jpeg", "image/png", "image/gif"];
     try {
       if(!file) return;
-      // if (file && allowedTypes.includes(selectedFile.type)) {
-      //   setFile(file);
-      //   setError(""); // Clear previous errors
-      // } else {
-      //   setFile(null);
-      //   setCustomErrors("Please upload a valid image file (JPEG, PNG, or GIF).");
-      // }
       setUploadLoading(true);
 
       const storage = getStorage(app);
@@ -60,14 +52,14 @@ function CreatePost() {
         (snapshot) => {
           const progress =
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          console.log("Upload is " + progress + "% done");
+          // console.log("Upload is " + progress + "% done");
         },
         (error) => {
           console.log(error);
         },
         () => {
           getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            console.log("File available at", downloadURL);
+            // console.log("File available at", downloadURL);
             setImage(downloadURL);
             setUploadLoading(false);
           });
