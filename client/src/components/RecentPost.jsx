@@ -7,7 +7,7 @@ function RecentPost({ id, title, image, date, author }) {
       >
         <a href={`/posts/${id}`}>
           <img
-            className=" w-full h-[150px] border-b-[1px] object-cover rounded-lg"
+            className=" w-full h-[150px] border-b-[1px] object-fill rounded-lg"
             src={image}
             alt=""
           />

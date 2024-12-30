@@ -43,7 +43,7 @@ export default function HeaderFB() {
 
   function logout() {
     axios
-      .post("/auth/logout")
+      .post("/auth/logout", { withCredentials: true })
       .then((res) => {
         dispatch(signOut());
         navigate("/login");
@@ -191,7 +191,7 @@ export default function HeaderFB() {
           {currentUser && <Navbar.Toggle />}
         </div>
         {currentUser ? (
-          <Navbar.Collapse 
+          <Navbar.Collapse
           >
             <Navbar.Link active={path === "/"} as={"div"}  >
               <Link to="/" >News</Link>

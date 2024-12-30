@@ -25,9 +25,9 @@ function PostItem({ id, title, description, date, author, image }) {
       // key={id}
       className="flex  flex-col items-center justify-between "
     >
-      <div className=" bg-white dark:bg-gray-900  h-full w-full object-cover object-center lg:h-full lg:w-full rounded-lg  shadow-md max-w-xs md:max-w-none sm:max-w-none  overflow-hidden">
+      <div className=" bg-white dark:bg-gray-900  h-full w-full object-fill object-center lg:h-full lg:w-full rounded-lg  shadow-md max-w-xs md:max-w-none sm:max-w-none  overflow-hidden">
         <Link to={`/posts/${id}`}>
-          <img className="h-56  w-full object-cover" src={image} alt=" cover page of posts" />
+          <img className="h-56  w-full " src={image} alt=" cover page of posts" />
         </Link>
 
         <div className="border-x-[1px] dark:border-x-gray-900  rounded-md rounded-t-none  p-2">
@@ -36,7 +36,7 @@ function PostItem({ id, title, description, date, author, image }) {
               {new Date(date).toDateString()}
             </time>
           </div>
-            <h3 className="mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-gray-200   group-hover:text-gray-600 ">
+            <h3 className="line-clamp-1 mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-gray-200   group-hover:text-gray-600 ">
               <Link to={`/posts/${id}`} className="hover:underline">
                 {title}
               </Link>
@@ -57,7 +57,7 @@ function PostItem({ id, title, description, date, author, image }) {
             />
             <div className="text-sm leading-6">
               <p className="font-semibold text-gray-900 dark:text-gray-200 hover:underline">
-                <Link to={`/user/${author.toLowerCase()}`}>
+                <Link to={`/user/${author?.toLowerCase()}`}>
                   {author}
                 </Link>
               </p>

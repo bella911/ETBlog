@@ -5,7 +5,6 @@ import axios from "../axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-
 function SignUp() {
   const {
     register,
@@ -15,33 +14,36 @@ function SignUp() {
   const checkBoxRef = useRef(null);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  // const [form, setForm] = useState({
-  //   name: "",
-  //   username: "",
-  //   email: "",
-  //   password: "",
-  //   profilePicture: "",
-  //   coverImage: "",
-  //   bio: "",
-  // });
+  const [customErrors, setCustomErrors] = useState({existUsername: "", existEmail: ""});
 
-  const onSubmit = (data) => {
+  const onSubmit =  (data) => {
+    setCustomErrors({});
     // console.log(data);
     setLoading(true);
 
-    axios
+     axios
       .post("/auth/signup", data)
       .then(() => {
         alert("register successful");
-        
         setLoading(false);
         navigate("/login");
+         
       })
       .catch((error) => {
+        // console.log(error)
         console.log(error.message);
         setLoading(false);
+
+        // check the email already exist
+        if(error.response?.status === 400){
+            return setCustomErrors({
+            existUsername: error.response.data?.existUsername,
+            existEmail: error.response.data?.existEmail
+          });
+          // console.log(customErrors)
+        }
       });
-  };
+    };
 
   return (
     <div>
@@ -53,9 +55,9 @@ function SignUp() {
                 Create an Account
               </h1>
               <form
-                className="block bg-transparent"
+                className="block bg-transparent px-4 sm:px-0"
                 onSubmit={handleSubmit(onSubmit)}
-              >
+               >
                 <div className="mb-2">
                   <label
                     htmlFor="name"
@@ -92,8 +94,8 @@ function SignUp() {
                   />
                 </div>
                 {errors.username && errors.username.type === "required" &&  <p className="text-red-500 text-sm mb-2"> username required</p>}
-                {errors.username && errors.username.type === "minLength" && <p className="text-red-500 text-sm mb-2">username must be minimum 4 character</p> }
-
+                {errors.username && errors.username.type === "minLength" && <p className="text-red-500 text-sm mb-2">username must be at least 4 characters long</p> }
+                {customErrors.existUsername && (<p className="text-red-500 text-sm mb-2">{customErrors.existUsername}</p>)}
 
                 <div className="mb-2">
                   <label
@@ -111,9 +113,8 @@ function SignUp() {
                     {...register("email", { required: true })}
                   />
                 </div>
-                {errors.email && (
-                  <p className="text-red-500 text-sm mb-2">email required</p>
-                )}
+                {errors.email && (<p className="text-red-500 text-sm mb-2">email required</p>)}
+                {customErrors.existEmail && (<p className="text-red-500 text-sm mb-2">{customErrors.existEmail}</p>)}
                 <div className="mb-6">
                   <label
                     htmlFor="password"
@@ -127,7 +128,7 @@ function SignUp() {
                     placeholder="••••••••"
                     className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     required=""
-                    {...register("password", { required: true, minLength: 6})}
+                    {...register("password", { required: true, minLength: 4})}
                   />
                 </div>
                 {errors.password && errors.password.type === "required" && <p className="text-red-500 text-sm -mt-4 mb-2">password required</p>}
@@ -143,11 +144,11 @@ function SignUp() {
                     "Sign up"
                   )}
                 </button>
-                <p className="text-sm text-center font-light text-gray-500 dark:text-gray-400">
+                <p className="text-base text-center font-light text-gray-500 dark:text-gray-400">
                   Already have an account?{" "}
                   <Link
                     to="/login"
-                    className="font-medium  hover:underline hover:text-cyan-400 hover:opacity-50 "
+                    className="font-medium  text-cyan-400 hover:opacity-50 "
                   >
                     Sign in
                   </Link>

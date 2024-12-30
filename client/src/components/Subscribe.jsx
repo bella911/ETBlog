@@ -55,7 +55,7 @@ function Subscribe() {
       onSubmit={addSubscriber}
     >
       <div className="font-semibold border-b-2 border-green-400">
-        Subscribe To <span className="text-green-300">Hawi News</span> Via Email
+        Subscribe To <span className="text-green-300">ET Blogs</span> Via Email
       </div>
       <div className="py-4">
         <input

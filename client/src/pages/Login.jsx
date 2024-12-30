@@ -24,7 +24,7 @@ function Login() {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // execute only if user not use google auth
@@ -49,25 +49,24 @@ function Login() {
       setLoading(true);
     }
 
-    axios
-      .post("/auth/login", { username, password }, { withCredentials: true }) // {withCredentials: true}
-      .then((res) => {
-        // const token = response.data.token;
-        // localStorage.setItem("token", token);
+    try {
+      const res = await axios.post("/auth/login", { username, password }, { withCredentials: true }) // {withCredentials: true}
+      dispatch(signIn(res.data));
+      setLoading(false);
+      navigate(`/`);
 
-        // console.log(res.data);
-        // console.log(res.data.username);
-        // console.log(!res.data.username);
-        dispatch(signIn(res.data));
-        setLoading(false);
-        navigate(`/`);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setLoading(false);
-        return setErrors({ message: "username or password incorrect" });
-      });
-  };
+    } catch (error) {
+      // console.log('Error:', error); // list all error properties
+      setLoading(false);
+      if (error.response.status === 400) {
+        setErrors({ message: "username or password incorrect" });
+      }
+      else if (error.response.status === 404)
+        console.log("Resource not found")
+      else (error.response.status === 500)
+      console.log('Internal server error');
+    }
+  }
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 ">
@@ -89,14 +88,14 @@ function Login() {
             <div className="mb-2 pt-9">
               <label
                 htmlFor="username"
-                className="block mb-1  text-base font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-start  text-base font-medium text-gray-900 dark:text-white"
               >
                 Username
               </label>
               <input
                 type="text"
                 name="username"
-                className="text-start bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
+                className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg  block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 focus:ring-green-500 dark:focus:border-green-500 focus:border-green-500"
                 placeholder="username"
                 required=""
                 value={username}
@@ -110,7 +109,7 @@ function Login() {
             <div className="mb-6">
               <label
                 htmlFor="password"
-                className="block mb-1  text-base font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-start text-base font-medium text-gray-900 dark:text-white"
               >
                 Password
               </label>
@@ -150,12 +149,12 @@ function Login() {
               Don’t have an account yet?{" "}
               <Link
                 to="/signup"
-                className=" hover:underline hover:text-cyan-400 hover:opacity-50"
+                className="text-cyan-400 hover:opacity-50"
               >
                 Sign up
               </Link>
             </p>
-           
+
           </div>
         </div>
       </form>

@@ -11,23 +11,23 @@ export const signup = async (req, res) => {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: "Invalid email format" });
+       res.status(400).json({ error: "Invalid email format" });
     }
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
-      return res.status(400).json({ error: "Username is already taken" });
+      return res.status(400).json({ existUsername: "Username is already exist" });
     }
 
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
-      return res.status(400).json({ error: "Email is already taken" });
+      return res.status(400).json({ existEmail: "Email is already exist" });
     }
 
-    if (password.length < 6) {
-      return res
+    if (password.length < 4) {
+       res
         .status(400)
-        .json({ error: "Password must be at least 6 characters long" });
+        .json({ error: "Password must be at least 4 characters long" });
     }
 
     const salt = await bcrypt.genSalt(10);
@@ -81,14 +81,32 @@ export const login = async (req, res) => {
     );
 
     if (!user || !isPasswordCorrect) {
-      return res.status(400).json({ error: "Invalid username or password" });
+      return res.status(400).json({ invalidUserOrPass: "Invalid username or password" });
     }
 
       const { password: pass, ...rest } = user._doc;
       
-      generateTokenAndSetCookie(user._id, res);
+      // generateTokenAndSetCookie(user._id, res);
 
-      res.status(200).json(rest)
+      // other cookie
+      const token = jwt.sign(
+        { userId: user._id },
+        process.env.JWT_SECRET_KEY
+      );
+  
+  
+      res
+        .status(200)
+        .cookie('token', token,  {
+          httpOnly: true,
+          // secure: true,   // Only send the cookie over HTTPS
+          sameSite: 'strict', // Prevent cross-site access
+        })
+        .json(rest);
+
+      // .......................
+
+      // res.status(200).json(rest)
   
     } catch (error) {
     console.log("Error in login controller", error.message);
@@ -159,9 +177,6 @@ export const google = async (req, res) => {
 
 export const getMe = async (req, res) => {
   try {
-    // res.status(200).json(req.user._id);
-    // const user = await User.findById(req.user._id).select("-password"); // req.user._id value if sign in first
-    // res.status(200).json(req.user)
     const user = await User.findById(req.user.userId)
     res.status(200).json(user);
   } catch (error) {
@@ -171,7 +186,12 @@ export const getMe = async (req, res) => {
 };
 
 export const logout = async (req, res) => {
-  res.clearCookie("token");
+  res.clearCookie(("token"), {
+    httpOnly: true, // Ensure the cookie is not accessible via client-side JavaScript
+    // secure: true,   // Only send the cookie over HTTPS
+    sameSite: 'strict', // Prevent cross-site access
+    path: "/",
+  })
   res.status(200).json({ success: true, message: "Logged out successfully" });
 };
 
