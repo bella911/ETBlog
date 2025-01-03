@@ -266,7 +266,7 @@ function UserPage() {
                     }) => (
                       <article
                         key={_id}
-                        className="flex font-medium text-gray-800 dark:text-gray-200 md:px-4 mb-3 border-b-[1px] dark:border-gray-700 bg-[#eee] dark:bg-gray-800"
+                        className="flex font-medium text-gray-800 dark:text-gray-200 md:px-4 mb-3  bg-[#eee] dark:bg-gray-800"
                        >
                         <div className="flex">
                           <img
@@ -285,9 +285,6 @@ function UserPage() {
                                     <MdVerified />
                                   </span>
                                 </Link>
-                                <span className="font-normal text-sm flex items-center">
-                                  &nbsp;@Bella
-                                </span>
                                 <span className="font-normal text-sm flex items-center">
                                   &nbsp; Oct 7
                                 </span>
@@ -375,7 +372,7 @@ function UserPage() {
                     }) => (
                       <article
                         key={_id}
-                        className="flex font-medium text-gray-800 dark:text-gray-200 px-4 mb-3 border-b-[1px] dark:border-gray-700 bg-[#eee] dark:bg-gray-800"
+                        className="flex font-medium text-gray-800 dark:text-gray-200 px-4 mb-3  bg-[#eee] dark:bg-gray-800"
                       >
                         <div className="flex">
                           <img
@@ -394,9 +391,6 @@ function UserPage() {
                                     <MdVerified />
                                   </span>
                                 </Link>
-                                <span className="font-normal text-sm flex items-center">
-                                  &nbsp;@Bella
-                                </span>
                                 <span className="font-normal text-sm flex items-center">
                                   &nbsp; Oct 7
                                 </span>

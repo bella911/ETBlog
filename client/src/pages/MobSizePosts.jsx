@@ -1,17 +1,28 @@
 import React, { useEffect, useState } from "react";
 import axios from "../axios";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FollowModal, ReplyCommentOnUserPage } from "../components/Modal";
 import { FiBarChart2 } from "react-icons/fi";
 
-function MobSizePosts({ forYouPosts }) {
+function MobSizePosts({ posts }) {
+  const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser);
+  // count post viewers
+  const countView = async (id) =>{
+    axios
+     .get(`/post/count/${id}`)
+     .then((res) => {
+       // console.log("post views", res.data);
+       navigate(`/posts/${id}`)
+     })
+     .catch((error) => console.log(error));
+   }
   return (
     <div className="py-3">
-      {forYouPosts.map(
+      {posts.map(
         ({
           _id,
           title,
@@ -45,9 +56,6 @@ function MobSizePosts({ forYouPosts }) {
                       </span>
                     </Link>
                     <span className="font-normal text-sm flex items-center">
-                      &nbsp;@Bella
-                    </span>
-                    <span className="font-normal text-sm flex items-center">
                       &nbsp; Oct 7
                     </span>
                   </p>
@@ -69,10 +77,10 @@ function MobSizePosts({ forYouPosts }) {
                     />
                     {/* {description} */}
                   </p>
-                  {/* <button className="text-green-400 hover:underline block mb-3 text-sm" onClick={()=> countView(_id)}>See more</button> */}
-                  <button className="text-green-400 hover:underline block mb-3 text-sm">
+                  <button className="text-green-400 hover:underline block mb-3 text-sm" onClick={()=> countView(_id)}>See more</button>
+                  {/* <button className="text-green-400 hover:underline block mb-3 text-sm">
                     See more
-                  </button>
+                  </button> */}
                   <img
                     className="h-56  w-full object-cover rounded"
                     src={image}
@@ -93,7 +101,7 @@ function MobSizePosts({ forYouPosts }) {
                 </button>
 
                 {/* like button not worked if user not logged in */}
-                {currentUser && (
+                {currentUser ? (
                   <button
                     onClick={() => {
                       //   dispatch(postId(_id));
@@ -101,12 +109,18 @@ function MobSizePosts({ forYouPosts }) {
                     }}
                     className="flex items-center hover:text-red-400"
                   >
-                    {/* <FaRegHeart className="text-xl " />e */}
                     {likes?.includes(currentUser?._id) ? (
                       <FaHeart className="text-xl text-red-600" />
                     ) : (
                       <FaRegHeart className="text-xl " />
                     )}
+                    <span className="text-sm">&nbsp; {likes?.length}</span>
+                  </button>
+                ):(
+                   <button
+                    className="flex items-center hover:text-red-400"
+                  >
+                    <FaRegHeart className="text-xl " />
                     <span className="text-sm">&nbsp; {likes?.length}</span>
                   </button>
                 )}
