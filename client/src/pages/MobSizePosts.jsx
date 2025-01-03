@@ -10,7 +10,7 @@ import { FiBarChart2 } from "react-icons/fi";
 function MobSizePosts({ forYouPosts }) {
   const currentUser = useSelector((state) => state.user.currentUser);
   return (
-    <div>
+    <div className="py-3">
       {forYouPosts.map(
         ({
           _id,
@@ -25,7 +25,7 @@ function MobSizePosts({ forYouPosts }) {
         }) => (
           <article
             key={_id}
-            className="flex font-medium text-gray-800 dark:text-gray-200 sm:px-4  py-4  border-b-[1px] dark:border-gray-700 bg-[#eee] dark:bg-gray-800"
+            className="flex font-medium text-gray-800 dark:text-gray-200 sm:px-4  py-2   bg-[#eee] dark:bg-gray-800"
           >
             <div className="flex">
               <img
