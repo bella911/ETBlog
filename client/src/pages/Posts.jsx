@@ -11,11 +11,12 @@ import { useSelector, useDispatch } from "react-redux";
 import {FollowingModal, FollowModal} from "../components/Modal.jsx"
 import ScrollToTop from "../components/ScrollToTop.jsx";
 // list all news posts
+import MobSizePosts from "./mobSizePosts.jsx";
 function Posts() {
   const currentUser = useSelector((state) => state.user.currentUser);
 
   const [posts, setPosts] = useState([]);
-  const [forYouPosts, setForYouPosts] = useState([]);
+  // const [forYouPosts, setForYouPosts] = useState([]);
   const [followingPosts, setFollowingPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState(true);
@@ -69,34 +70,34 @@ function Posts() {
   // Invoke when user click to request another page.
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % items.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
     
     // scroll to top of the list when click pages
     window.scrollTo({
-      top: 500,
+      top: 350,
       left: 0,
       // behavior: "smooth",
     });
   };
 
-  const paginatePosts = []; // store ranged posts based on filter page
+  const forYouPosts = []; // store ranged posts based on filter page
 
   activeTab? posts.map((value, index) => { // if active tab is press show only posts pagination
     if (
       index >= currentItems[0] &&
       index <= currentItems[currentItems.length - 1]
     )
-      paginatePosts.push(value);
+      forYouPosts.push(value);
   })
   :followingPosts.map((value, index) => {
     if (
       index >= currentItems[0] &&
       index <= currentItems[currentItems.length - 1]
     )
-      paginatePosts.push(value);
+      forYouPosts.push(value);
   })
 
   return (
@@ -107,7 +108,7 @@ function Posts() {
         <SlidePosts />
 
         {/* for you and following */}
-        {/* <ForYouFollowing /> */}
+        {/* <forYouFollowing /> */}
 
         <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-400 text-gray-800 flex justify-center gap-10  p-2 mx-auto max-w-[1210px]  mt-6 ">
             <Button color="transparent"  outline size="xs" onClick={() => setActiveTab(true) } className={`${activeTab && "border-b-2 border-b-green-500"} focus:ring-0`}>
@@ -126,8 +127,9 @@ function Posts() {
             <ClipLoader speedMultiplier="0.5" size="40px" />
           </div>
         ) : activeTab ? (
-          <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16   md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-            {paginatePosts.map(
+          <>
+          <div className="hidden mx-auto mt-4 py-4 sm:grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16   md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+            {forYouPosts.map(
               ({ _id, title, description, createdAt, image, author }) => (
                 <PostItem
                   key={_id}
@@ -141,6 +143,10 @@ function Posts() {
               )
             )}
           </div>
+          {/* display only on mobile mode */}
+          <div className="inline sm:hidden"> <MobSizePosts forYouPosts={forYouPosts}/></div>
+          
+          </>
         ): (
           // display following posts
           <div className="mx-auto mt-4 py-4 grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16    md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">

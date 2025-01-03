@@ -39,7 +39,7 @@ export default function HeaderFB() {
   const navigate = useNavigate();
 
   // console.log(currentUser);
-
+  
 
   function logout() {
     axios

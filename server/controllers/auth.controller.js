@@ -99,10 +99,13 @@ export const login = async (req, res) => {
         .status(200)
         .cookie('token', token,  {
           httpOnly: true,
-          // secure: true,   // Only send the cookie over HTTPS
-          sameSite: 'strict', // Prevent cross-site access
+          secure: true,   // Only send the cookie over HTTPS
+          // sameSite: 'strict', // Prevent cross-site access
+          sameSite: 'none', // Allow cross-origin cookies
+          // domain: 'localhost', // Set the domain explicitly
         })
         .json(rest);
+        
 
       // .......................
 
@@ -188,9 +191,8 @@ export const getMe = async (req, res) => {
 export const logout = async (req, res) => {
   res.clearCookie(("token"), {
     httpOnly: true, // Ensure the cookie is not accessible via client-side JavaScript
-    // secure: true,   // Only send the cookie over HTTPS
-    sameSite: 'strict', // Prevent cross-site access
-    path: "/",
+    secure: true,   // Only send the cookie over HTTPS
+    sameSite: 'none', // Prevent cross-site access
   })
   res.status(200).json({ success: true, message: "Logged out successfully" });
 };
