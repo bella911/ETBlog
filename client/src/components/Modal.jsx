@@ -10,6 +10,7 @@ import avatar from "../images/avatar.png"
 import { FaRegComment } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 
 
 
@@ -151,22 +152,58 @@ export function SearchModal() {
 
 
 // sign in for comment
-export function CommentModal() {
+export function CommentModal({commentsLength}) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-      <button className='py-2 px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm'
-        onClick={() => setOpenModal(true)} >Comment</button>
+    <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
+        <FaRegComment className="text-xl" />
+        <span className="text-sm">&nbsp; {commentsLength}</span> 
+        </Button>
+      {/* <button className='py-2 px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm'
+        onClick={() => setOpenModal(true)} >Comment</button> */}
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
           <div className="text-center text-gray-600 dark:text-gray-300">
             <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-500 dark:text-gray-400" />
             <h3 className="mb-5 text-lg font-normal ">
-              Want to follow to this channel?
+              Want to comment on this post?
             </h3>
-            <p>Sign in to follow to this channel.
+            <p>Sign in to comment on this post.
+            </p>
+            <div className="flex justify-center gap-4 pt-3">
+              <Button className="bg-green-400 dark:bg-green-400" onClick={() => setOpenModal(false)}>
+                <Link to={`/login`} className=""> {"Sign in"}</Link>
+              </Button>
+
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
+  );
+}
+// sign in for like
+export function LikeModal({likesLength}) {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <>
+    <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
+    <FaRegHeart className="text-xl" />
+        <span className="text-sm">&nbsp; {likesLength}</span> 
+        </Button>
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center text-gray-600 dark:text-gray-300">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-500 dark:text-gray-400" />
+            <h3 className="mb-5 text-lg font-normal ">
+              Want to like this post?
+            </h3>
+            <p>Sign in to like this post.
             </p>
             <div className="flex justify-center gap-4 pt-3">
               <Button className="bg-green-400 dark:bg-green-400" onClick={() => setOpenModal(false)}>
@@ -223,9 +260,6 @@ export function ReplyCommentOnUserPage({postId, commentsLength, author}) {
 
 // react hook form on submit
 const onSubmit = (comment) => {
-  // console.log(comment, postId);
-  // setLoading(true)
-  // setRefreshComment(false)
 
   axios.post(`/post/comment/${postId}`, comment, { withCredentials: true })
       .then((res) => {
@@ -234,10 +268,7 @@ const onSubmit = (comment) => {
 
       })
       .catch((error) => {
-          // setRefreshComment(false)
           console.log(error.message);
-          // setLoading(false);
-
       });
 
 };

@@ -21,7 +21,7 @@ import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "./Error";
-import { FollowModal, ReplyCommentOnUserPage } from "../components/Modal";
+import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
 import SuggestedUser from "../components/userpage/SuggestedUser";
 import ScrollToTop from "../components/ScrollToTop";
@@ -59,7 +59,7 @@ function UserPage() {
   // display user detail info by getting username from author page
   useEffect(() => {
     axios
-      .get(`/user/profile/${username}`, { withCredentials: true }) ///{ withCredentials: true }
+      .get(`/user/profile/${username}`) ///{ withCredentials: true }
       .then((res) => {
         setUser({
           user: res.data,
@@ -81,7 +81,7 @@ function UserPage() {
   // display author page
   useEffect(() => {
     axios
-      .get(`/post/user/${username}`, { withCredentials: true }) // { withCredentials: true }
+      .get(`/post/user/${username}`) // { withCredentials: true }
       .then((res) => {
         setPosts(res.data.data); // fetch user posts
       })
@@ -317,10 +317,21 @@ function UserPage() {
                           </div>
                           {/* reaction of posts like comment, re post, like, view */}
                           <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
+                             {!currentUser? 
+                             <div className="mt-2">
+                                  <CommentModal commentsLength={comments?.length}/>
+                              </div>
+                              :
                             <button className="flex items-center hover:text-blue-400">
-                            <ReplyCommentOnUserPage key={_id} postId={_id} commentsLength={comments.length} author={author}/>
+                             <ReplyCommentOnUserPage key={_id} postId={_id} commentsLength={comments.length} author={author}/>
                               {/* <span className="text-sm">&nbsp; {comments.length}</span> */}
                             </button>
+                            }
+                            {!currentUser ?
+                            <div className="mt-2">
+                            <LikeModal likesLength={likes?.length}/>
+                           </div>
+                           :
                             <button
                               onClick={() => {
                                 // dispatch(postId(_id));
@@ -335,6 +346,7 @@ function UserPage() {
                               )}
                               <span className="text-sm">&nbsp; {likes?.length}</span>
                             </button>
+                            }
                             <button className="flex items-center hover:text-blue-400">
                               <FiBarChart2 className="text-xl" />
                               <span className="text-sm">&nbsp;{views}</span>
