@@ -192,7 +192,7 @@ function PostDetail() {
                 <BiDislike className="text-xl"/><span >&nbsp;</span>
               </button>
             </div>
-            <Comments postId={id} />
+            {/* <Comments postId={id} /> */}
             <CommentSection postId={id} />
             
           </div>
