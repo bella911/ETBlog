@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Navbar, Tabs } from "flowbite-react";
+import { Button, Navbar, Tabs, Dropdown } from "flowbite-react";
 import { Link, useLocation, useParams, useNavigate } from "react-router-dom";
 import {
   HiAdjustments,
@@ -12,6 +12,7 @@ import { MdVerified } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { FiBarChart2 } from "react-icons/fi";
 import { followId, postId } from "../redux/crudSlice"; // dispatch function
+import { FaEllipsisH } from "react-icons/fa";
 
 // post item imports
 import ClipLoader from "react-spinners/ClipLoader";
@@ -21,11 +22,14 @@ import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "./Error";
-import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import {FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
 import SuggestedUser from "../components/userpage/SuggestedUser";
 import ScrollToTop from "../components/ScrollToTop";
-
+import DeleteModal from "../components/DeleteModal"
+import Demo from "../components/Demo"
+import { TotalComments } from "../components/Utils";
+import moment from "moment"
 function UserPage() {
   // const path = useLocation().pathname; // change current clicked tabs
   const [posts, setPosts] = useState([]);
@@ -171,7 +175,7 @@ function UserPage() {
           <div className="flex-1 px-4 w-full lg:px-0 mt-12 mb-4 text-gray-700 dark:text-gray-200 max-w-screen-md mx-auto text-lg leading-relaxed">
             {/* cover picture */}
             <div>
-              <div className="rounded-t-lg h-32 overflow-hidden">
+              <div className="rounded-t-lg md:h-52 h-32 overflow-hidden">
                 <img
                   className="object-cover object-top w-full"
                   // src={user.coverImg}
@@ -262,7 +266,8 @@ function UserPage() {
                       author,
                       likes,
                       comments,
-                      views
+                      views,
+                      user
                     }) => (
                       <article
                         key={_id}
@@ -277,7 +282,7 @@ function UserPage() {
                         </div>
                         <div className=" h-full w-full object-cover object-center lg:h-full lg:w-full   md:max-w-none sm:max-w-none  overflow-hidden">
                           <div className="p-2">
-                            <div className="text-lg leading-6 -mt-1 ">
+                            <div className="text-lg leading-6 -mt-1 flex justify-between items-center">
                               <p className=" flex font-semibold ">
                                 <Link to={`/user/${author}`} className="flex items-center">
                                   {author}
@@ -286,9 +291,20 @@ function UserPage() {
                                   </span>
                                 </Link>
                                 <span className="font-normal text-sm flex items-center">
-                                  &nbsp; Oct 7
+                                  &nbsp; {moment(createdAt).fromNow()}
                                 </span>
                               </p>
+                              {/* edit and delete post icon */}
+                              {currentUser?._id === user?._id &&
+                              <Dropdown label={<FaEllipsisH />} dismissOnClick={false} arrowIcon="" className='text-red-900  ' color='transparent' size="xs" >
+                                <Dropdown.Item>
+                                <Button size="xs" color="transparent" className="text-center"> <Link to={`/posts/editpost/${_id}`}> Edit post </Link>
+                                </Button>
+                                  </Dropdown.Item>
+                                <Dropdown.Item as={"div"}>
+                                  <Demo postId={_id} />
+                                </Dropdown.Item>
+                              </Dropdown>}
                             </div>
                             <h3 className="mt-3 text-lg font-semibold leading-6  group-hover:text-gray-600 ">
                               {title}
@@ -318,20 +334,16 @@ function UserPage() {
                           {/* reaction of posts like comment, re post, like, view */}
                           <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
                              {!currentUser? 
-                             <div className="mt-2">
-                                  <CommentModal commentsLength={comments?.length}/>
-                              </div>
+                               <TotalComments postId={_id}/>
                               :
                             <button className="flex items-center hover:text-blue-400">
-                             <ReplyCommentOnUserPage key={_id} postId={_id} commentsLength={comments.length} author={author}/>
+                             <ReplyCommentOnUserPage key={_id} postId={_id}  author={author}/>
                               {/* <span className="text-sm">&nbsp; {comments.length}</span> */}
                             </button>
                             }
                             {!currentUser ?
-                            <div className="mt-2">
                             <LikeModal likesLength={likes?.length}/>
-                           </div>
-                           :
+                            :
                             <button
                               onClick={() => {
                                 // dispatch(postId(_id));
@@ -347,7 +359,7 @@ function UserPage() {
                               <span className="text-sm">&nbsp; {likes?.length}</span>
                             </button>
                             }
-                            <button className="flex items-center hover:text-blue-400">
+                            <button className="flex items-center hover:text-blue-400 mt-[1px]">
                               <FiBarChart2 className="text-xl" />
                               <span className="text-sm">&nbsp;{views}</span>
                             </button>
@@ -570,16 +582,18 @@ function UserPage() {
                             <li className="py-3 sm:py-4">
                               <div className="flex items-center">
                                 <div className="flex-shrink-0">
+                                <Link to={`/user/${user.username}`}>
                                   <img
                                     className="w-8 h-8 rounded-full"
                                     src={user.profilePicture}
                                     alt="Neil image"
                                   />
+                                  </Link>
                                 </div>
                                 <div className="flex-1 min-w-0 ms-4">
-                                  <p className="text-sm font-medium text-gray-900 truncate dark:text-gray-200 ">
-                                    {user.username}
-                                  </p>
+                                <Link to={`/user/${user.username}`} className="text-sm font-medium text-gray-900 truncate dark:text-gray-200 ">
+                                {user.username}
+                                  </Link>
                                   <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                                     {user.email}
                                   </p>

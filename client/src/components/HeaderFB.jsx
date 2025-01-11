@@ -148,9 +148,10 @@ export default function HeaderFB() {
                   {currentUser.email}
                 </span>
               </Dropdown.Header>
+              {currentUser.isAdmin &&
               <Dropdown.Item icon={HiViewGrid} as={"div"}>
                 <Link to={`/dashboard/${currentUser.username}`}>Dashboard</Link>
-              </Dropdown.Item>
+              </Dropdown.Item>}
               <Dropdown.Item as={"div"}>
                 <svg
                   className="w-4 h-4 me-2.5 "

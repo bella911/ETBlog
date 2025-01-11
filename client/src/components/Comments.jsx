@@ -49,47 +49,6 @@ function Comments({ postId }) {
             .catch((error) => console.log(error.message))
     }, [refreshComment])
 
-
-    // fetch commented user
-    // const commenterInfo = (cId) =>{
-    //     axios
-    //     .get(`/auth/getme`, { withCredentials: true })
-    //     .then((res) => {
-    //         console.log("commented user", res.data)
-    //     })
-    //     .catch((error) => console.log(error.message))
-    // }
-
-    // handle change
-    // const  handleChange = (event) => {
-    //     setInputValue(event.target.value);
-    // };
-
-
-    // add new comment on post and fetch descending
-
-    // const handleComment = (event) => {
-    //     event.preventDefault();
-    //     alert(`Name: ${addComment}`);
-    //     console.log("add comment reach post: ", addComment)
-
-    //     setLoading(true);
-
-    //     useEffect(() => {
-    //         axios
-    //             .post(`/post/comment/${postId}`, addComment, { withCredentials: true })
-    //             .then((res) => {
-    //                 console.log(res.data);
-    //                 setLoading(true);
-
-    //             })
-    //             .catch((error) => {
-    //                 console.log(error.message)
-    //                 setLoading(true);
-    //             })
-    //     }, [])
-    // }
-
     // react hook form on submit
     const onSubmit = (comment) => {
         // console.log(comment, postId);
@@ -146,8 +105,7 @@ function Comments({ postId }) {
                     placeholder="Add a comment..."
                     {...register("text", { required: true })}
                     required
-                // value={addComment}
-                // onChange={(e) => setAddComment(e.target.value)}
+
                 />:
                 <textarea
                     rows="1"
@@ -186,7 +144,7 @@ function Comments({ postId }) {
                 {/* for user first post */}
                 {comments.map((comment) => (
                     <div key={comment._id}>
-                        <div className='flex mb-4'>
+                        <div className='flex mb-4 '>
                             {/* for image */}
                             <div className='w-12 flex justify-center py-3'>
                                 <img className="h-10 w-10 rounded-full bg-gray-50 object-cover"
@@ -218,7 +176,7 @@ function Comments({ postId }) {
                                 {/* <p className="text-gray-500 dark:text-gray-400">Very straight-to-point article. Really worth time reading. Thank you! But tools are just the
                                 instruments for the UX designers. The knowledge of the design tools are as important as the
                                 creation of the design strategy.</p> */}
-                                <p className="dark:text-gray-400 text-gray-800">{comment.text}</p>
+                                <p className="dark:text-gray-400 text-gray-800 overflow-hidden lg:max-w-2xl sm:max-w-xs max-w-52">{comment.text}</p>
                                 <div className="flex items-center mt-2 space-x-4 text-xs">
                                     <button className='flex items-center'><BiLike /><span className='dark:text-gray-400 text-gray-800'>&nbsp;</span>
                                     </button>
@@ -232,55 +190,6 @@ function Comments({ postId }) {
                                 {replyModal && addCommentUI}  {/* reply post forms*/}
                             </article>
                         </div>
-
-
-
-
-                        {/* for replies post */}
-                        {/* <Accordion className='border-none' collapseAll>
-                            <Accordion.Panel >
-                                <Accordion.Title color='transparent' className='text-blue-600 dark:text-blue-600 hover:bg-transparent w-32 flex  flex-row-reverse py-0 ml-6   text-sm focus:ring-0 -mt-2 mb-3'>1k replies</Accordion.Title>
-                                <Accordion.Content color='transparent' className='dark:bg-transparent border-none py-0' >
-                                    <div className=' ml-14 lg:ml-12' >
-                                        <div className='flex mb-3 ml-6 lg:ml-12'>
-                                            {/* for image */}
-                                            {/* <div className='w-12 flex justify-center py-3'>
-                                                <img className="h-10 w-10 rounded-full bg-gray-50 object-cover"
-                                                    src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                                    alt="Comments image" />
-                                            </div> */}
-                                            {/* article */}
-                                            {/* <article className="flex-1 p-3 text-base bg-[#eee] rounded-lg dark:bg-gray-800">
-                                                <footer className="flex justify-between items-center mb-2">
-                                                    <div className="flex items-center">
-                                                        <p className="inline-flex items-center mr-3 text-sm dark:text-gray-400 text-gray-800 font-semibold">
-                                                            Jese Leos</p>
-                                                        <p className="text-sm text-gray-600 dark:text-gray-400"><time dateTime="2022-02-12"
-                                                            title="February 12th, 2022">Feb. 12, 2022</time></p>
-                                                    </div> */}
-                                                    {/* reply Comment settings */}
-                                                    {/* <Dropdown label={<FaEllipsisH />} dismissOnClick={false} arrowIcon="" size="sm" color='transparent'>
-                                                        <Dropdown.Item>Edit</Dropdown.Item>
-                                                        <Dropdown.Item>Delete</Dropdown.Item>
-                                                    </Dropdown>
-
-                                                </footer>
-                                                <p className="dark:text-gray-400 text-gray-800">Much appreciated! Glad you liked it ☺️. </p>
-                                                <div className="flex items-center mt-4 space-x-4">
-                                                    <button className='flex items-center'><BiLike /><span>&nbsp;1k</span>
-                                                    </button>
-                                                    <button><BiDislike /></button>
-                                                    <button type="button"
-                                                        className="flex items-center text-sm text-gray-500 hover:underline dark:text-gray-400 font-medium">
-                                                        Reply
-                                                    </button>
-                                                </div>
-                                            </article>
-                                        </div>
-                                    </div> */}
-                                {/* </Accordion.Content>
-                            </Accordion.Panel>
-                        </Accordion > */} 
                     </div>
                 ))}
             </div>

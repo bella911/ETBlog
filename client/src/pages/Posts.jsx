@@ -136,7 +136,7 @@ function Posts() {
                   id={_id}
                   title={title}
                   description={description}
-                  date={createdAt}
+                  createdAt={createdAt}
                   author={author}
                   image={image}
                 />
@@ -158,7 +158,7 @@ function Posts() {
                   id={_id}
                   title={title}
                   description={description}
-                  date={createdAt}
+                  createdAt={createdAt}
                   author={author}
                   image={image}
                 />

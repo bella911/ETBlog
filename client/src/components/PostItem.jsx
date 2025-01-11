@@ -4,10 +4,10 @@ import React, { useEffect, useState } from "react";
 // import PostDetail from "../pages/PostDetail";
 import ClipLoader from "react-spinners/ClipLoader";
 import axios from "../axios";
-
+import moment from "moment"
  
 
-function PostItem({ id, title, description, date, author, image }) {
+function PostItem({ id, title, description, createdAt, author, image }) {
   const navigate = useNavigate()
   // console.log(id)
   // count post viewers
@@ -32,8 +32,8 @@ function PostItem({ id, title, description, date, author, image }) {
 
         <div className="border-x-[1px] dark:border-x-gray-900  rounded-md rounded-t-none  p-2">
           <div className="flex items-center gap-x-4 text-xs">
-            <time dateTime={date} className="text-gray-500 dark:text-gray-200  ">
-              {new Date(date).toDateString()}
+            <time className="text-gray-500 dark:text-gray-200  ">
+            {moment(createdAt).fromNow()}
             </time>
           </div>
             <h3 className="line-clamp-1 mt-3 text-lg font-semibold leading-6 text-gray-900 dark:text-gray-200   group-hover:text-gray-600 ">

@@ -15,7 +15,8 @@ import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { FollowModal } from "../components/Modal";
 import { BiSolidLike } from "react-icons/bi";
 import ScrollToTop from "../components/ScrollToTop";
-
+import CommentSection from "../components/CommentSection";
+import moment from "moment"
 function PostDetail() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [post, setPost] = useState({});
@@ -57,8 +58,7 @@ function PostDetail() {
           likes: res.data.likes,
           likesLength: res.data.likes?.length,
         });
-        // console.log("post author id", res.data.author)
-        // console.log(res.data.likes);
+
         postAuthor(res.data.author); // execute value
       })
       .catch((error) => {
@@ -98,20 +98,10 @@ function PostDetail() {
 
   // like and unlike post
   const likeUnlikePost = (id) => {
-    // pre increment like before check and save to database for increase like but not work cause check likes user take time
-    // setReact({
-    //   likesLength: react.likesLength + 1,
-    // });
-    // console.log(id);
-    // setRefreshChange(true);
     axios
       .put(`/post/like/${id}`, {}, { withCredentials: true })
       .then((res) => {
-        // console.log("this value comes from backend", res.data);
-        // console.log("this value comes from backend", res.data.updatedLikes.length);
         setCounter(res.data.updatedLikes.length);
-
-        // setUser(res.data);
       })
       .catch((error) => {
         console.log(error.message);
@@ -139,10 +129,10 @@ function PostDetail() {
                 <Link to={`/user/${post.author}`} >
                   Posted by{" "}
                   <span className="text-green-400 hover:underline text-base">
-                    {post.author}
+                  @{post.author}
                   </span>{" "}
                   <span className="text-sm inline-block">
-                  @{new Date(post.createdAt).toDateString().slice(3, 10)}
+                  {moment(post.createdAt).fromNow()}
                   </span>
                 </Link>
               </div>
@@ -150,10 +140,7 @@ function PostDetail() {
               {/* check the user is authenticate and permit to follow */}
               <div>
               {!currentUser ? (
-                <>
-                  {" "}
-                  <FollowModal />{" "}
-                </>
+                  <FollowModal />
               ) : (
                 currentUser._id !== post.user && (
                   <Button
@@ -174,12 +161,12 @@ function PostDetail() {
             </div>
             {/* <Post_Title_Comment author={post.author} postId={post._id} /> */}
             <img
-              className="h-56 lg:h-80 w-full  rounded-xl mb-6"
+              className="h-[40vh] lg:h-96 w-full  rounded-xl mb-6 object-fill"
               src={post.image}
               alt=""
             />
             <p className="pb-6">
-              <span dangerouslySetInnerHTML={{ __html: post.description }} />
+              <span dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').trimStart() }} />
             </p>
             {/* like the post */}
             <div className="flex items-center mb-8 -mt-4">
@@ -206,6 +193,8 @@ function PostDetail() {
               </button>
             </div>
             <Comments postId={id} />
+            <CommentSection postId={id} />
+            
           </div>
 
           <div className="pt-12 px-4 mb-4 mt-12  text-gray-700 dark:text-gray-200 w-full md:max-w-[350px] lg:w-[600px]  mx-auto text-lg md:ml-4 leading-relaxed">

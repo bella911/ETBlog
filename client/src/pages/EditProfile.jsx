@@ -14,7 +14,7 @@ function EditProfile() {
         <form className="p-2 ">
           <div className="mb-8">
             <div>
-              <div className="rounded-t-lg h-40 overflow-hidden">
+              <div className="rounded-t-lg md:h-52 h-32 overflow-hidden">
                 <img
                   className="object-cover object-top w-full"
                   // src={user.coverImg}

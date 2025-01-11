@@ -331,3 +331,9 @@ export const countViews = async (req, res) => {
   }
 
 }
+
+// refresh like, view, comments on 3s time interval
+
+
+
+// refresh follow on user page

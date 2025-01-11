@@ -4,8 +4,9 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import { FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import { FiBarChart2 } from "react-icons/fi";
+import { TotalComments } from "../components/Utils";
 
 function MobSizePosts({ posts }) {
   const navigate = useNavigate()
@@ -97,15 +98,12 @@ function MobSizePosts({ posts }) {
               {/* reaction of posts like comment, re post, like, view */}
               <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
                 {!currentUser ? (
-                  <div className="mt-2">
-                    <CommentModal commentsLength={comments?.length} />
-                  </div>
+                    <TotalComments postId={_id}/>
                 ) : (
                   <button className="flex items-center hover:text-blue-400">
                     <ReplyCommentOnUserPage
                       key={_id}
                       postId={_id}
-                      commentsLength={comments.length}
                     />
                     {/* <span>&nbsp; {comments.length}</span> */}
                   </button>
@@ -127,15 +125,7 @@ function MobSizePosts({ posts }) {
                     <span className="text-sm">&nbsp; {likes?.length}</span>
                   </button>
                 ) : (
-                  //  <button
-                  //   className="flex items-center hover:text-red-400"
-                  // >
-                  //   <FaRegHeart className="text-xl " />
-                  //   <span className="text-sm">&nbsp; {likes?.length}</span>
-                  // </button>
-                  <div className="mt-2">
                     <LikeModal likesLength={likes?.length} />
-                  </div>
                 )}
 
                 <button className="flex items-center hover:text-blue-400">

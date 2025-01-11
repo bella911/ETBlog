@@ -50,6 +50,8 @@ function Login() {
     }
 
     try {
+        // convert email and username to lower case
+
       const res = await axios.post("/auth/login", { username, password }, { withCredentials: true }) // {withCredentials: true}
       dispatch(signIn(res.data));
       setLoading(false);
@@ -99,7 +101,7 @@ function Login() {
                 placeholder="username"
                 required=""
                 value={username}
-                onChange={(e) => setUsername(e.target.value.trim())}
+                onChange={(e) => setUsername(e.target.value.trim().toLowerCase())}
               />
               {errors.username && (
                 <p className="text-red-500 text-sm">{errors.username}</p>
@@ -133,7 +135,7 @@ function Login() {
               disabled={loading}
             >
               {loading ? (
-                <ClipLoader speedMultiplier="0.5" size="20px" />
+                <ClipLoader speedMultiplier="0.5" size="25px" />
               ) : (
                 "Login"
               )}

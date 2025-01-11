@@ -26,8 +26,8 @@ router.put("/updatepost/:id", verifyToken, updatePost);
 router.put("/like/:id", verifyToken, likeUnlikePost); // liked post normal
 router.get("/user/:username", getUserPosts);
 router.post("/comment/:id", verifyToken, commentOnPost);
-router.delete("/:id", verifyToken, deletePost);
 router.delete("/:postId/comment/:commentId", deleteComment); // delete user comment
+router.delete("/:id", verifyToken, deletePost);
 router.get("/likes/:id", getLikedPosts);
 router.get("/commentedusers/:id",verifyToken, getCommentedUsers);
 router.get("/count/:id", countViews);

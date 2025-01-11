@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button, Modal, Textarea, TextInput } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -11,6 +11,7 @@ import { FaRegComment } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import { FaSearch } from "react-icons/fa";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
+import { useSelector } from 'react-redux';
 
 
 
@@ -136,12 +137,12 @@ export function SearchModal() {
                 onChange={(e) => setQuery(e.target.value)}
               />
               <Button
-                  type="submit"
-                  color="transparent"
-                  className="rounded-l-none -ml-12 border-l dark:border-gray-600 focus:ring-0"
-                >
-                  <FaSearch className="dark:text-gray-300" />
-                </Button>
+                type="submit"
+                color="transparent"
+                className="rounded-l-none -ml-12 border-l dark:border-gray-600 focus:ring-0"
+              >
+                <FaSearch className="dark:text-gray-300" />
+              </Button>
             </form>
           </div>
         </Modal.Body>
@@ -151,50 +152,16 @@ export function SearchModal() {
 }
 
 
-// sign in for comment
-export function CommentModal({commentsLength}) {
+// // sign in for like
+export function LikeModal({ likesLength }) {
   const [openModal, setOpenModal] = useState(false);
 
   return (
     <>
-    <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
-        <FaRegComment className="text-xl" />
-        <span className="text-sm">&nbsp; {commentsLength}</span> 
-        </Button>
-      {/* <button className='py-2 px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm'
-        onClick={() => setOpenModal(true)} >Comment</button> */}
-      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
-        <Modal.Header />
-        <Modal.Body>
-          <div className="text-center text-gray-600 dark:text-gray-300">
-            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-500 dark:text-gray-400" />
-            <h3 className="mb-5 text-lg font-normal ">
-              Want to comment on this post?
-            </h3>
-            <p>Sign in to comment on this post.
-            </p>
-            <div className="flex justify-center gap-4 pt-3">
-              <Button className="bg-green-400 dark:bg-green-400" onClick={() => setOpenModal(false)}>
-                <Link to={`/login`} className=""> {"Sign in"}</Link>
-              </Button>
-
-            </div>
-          </div>
-        </Modal.Body>
-      </Modal>
-    </>
-  );
-}
-// sign in for like
-export function LikeModal({likesLength}) {
-  const [openModal, setOpenModal] = useState(false);
-
-  return (
-    <>
-    <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
-    <FaRegHeart className="text-xl" />
-        <span className="text-sm">&nbsp; {likesLength}</span> 
-        </Button>
+      <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
+        <FaRegHeart className="text-xl" />
+        <span className="text-sm">&nbsp; {likesLength}</span>
+      </Button>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -252,32 +219,57 @@ export function FollowingModal() {
 
 
 // comment modal on user page
-export function ReplyCommentOnUserPage({postId, commentsLength, author}) {
+export function ReplyCommentOnUserPage({ postId, author }) {
   // console.log(postId)
   const [openModal, setOpenModal] = useState(false);
+  const [commentLength, setCommentLength] = useState("");
+  const { currentUser } = useSelector((state) => state.user);
   const { register, reset, handleSubmit, formState: { errors } } = useForm();
   const navigate = useNavigate();
 
-// react hook form on submit
-const onSubmit = (comment) => {
 
-  axios.post(`/post/comment/${postId}`, comment, { withCredentials: true })
+  // count total comment length
+  useEffect(() => {
+    axios
+      .get(`/comment/getcomments`)
       .then((res) => {
-      setOpenModal(false);
-      navigate(`/posts/${postId}`)
+        //  filters Comments By PostId
+        const filterComments = res.data.comments.filter((post) => post.postId === postId)
+        setCommentLength(filterComments.length);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
+
+  
+  // react hook form on submit
+  const onSubmit = (comment) => {
+
+    // axios.post(`/post/comment/${postId}`, comment, { withCredentials: true })
+    comment.postId = postId;
+    comment.userId = currentUser._id;
+    // console.log(comment)
+    axios.post(`/comment/create`, comment , { withCredentials: true })
+      .then((res) => {
+        setOpenModal(false);
+        navigate(`/posts/${postId}`)
 
       })
       .catch((error) => {
-          console.log(error.message);
+        console.log(error.message);
       });
 
-};
+  };
+
+
+  
   return (
     <>
       <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
         <FaRegComment className="text-xl" />
-        <span className="text-sm">&nbsp; {commentsLength}</span> 
-        </Button>
+        <span className="text-sm">&nbsp; {commentLength}</span>
+      </Button>
       <Modal show={openModal} sizes="md" onClose={() => setOpenModal(false)} popup style={{ height: "100vh", paddingTop: "64px" }} content="h-full">
         <Modal.Header className=" bg-[#eee] dark:bg-gray-800"><button type="submit" onClick={handleSubmit(onSubmit)} className="text-sm py-2 px-3 bg-green-500 rounded-full">Reply</button></Modal.Header>
         <Modal.Body className="p-0">
@@ -295,15 +287,15 @@ const onSubmit = (comment) => {
               <div className="p-2">
                 <div className="group relative">
                   <p className="pb-2">Replying to <span className="text-green-500">@{author}</span></p>
-                    <form>
-                      <Textarea
-                        rows="5"
-                        placeholder="Post your reply"
-                        className=" focus:ring-0 outline-none "
-                        {...register("text", { required: true })}
-                      />
-                    </form>
-                    
+                  <form>
+                    <Textarea
+                      rows="5"
+                      placeholder="Post your reply"
+                      className=" focus:ring-0 outline-none "
+                      {...register("content", { required: true })}
+                    />
+                  </form>
+
                 </div>
               </div>
 
