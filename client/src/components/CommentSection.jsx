@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import { useForm } from "react-hook-form";
+import axios from "../axios";
 
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 
@@ -23,80 +24,60 @@ export default function CommentSection({ postId }) {
         e.preventDefault();
 
         setCustomErrors({}); // Clear previous errors
-    
-         if(comment.trim().length == 0) return setCustomErrors({emptyComment: "Title cannot contain only spaces"})
+
+        if (comment.trim().length == 0) return setCustomErrors({ emptyComment: "Title cannot contain only spaces" })
 
         if (comment.length > 200) {
             return;
         }
-        try {
-            const res = await fetch('http://localhost:5000/api/comment/create', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    content: comment,
-                    postId,
-                    userId: currentUser._id,
-                }),
-            });
-            const data = await res.json();
-            if (res.ok) {
+
+        axios
+            .post("/comment/create", { content: comment, postId, userId: currentUser._id }, { withCredentials: true })
+            .then((res) => {
                 setComment('');
                 setCommentError(null);
-                setComments([data, ...comments]);
-            }
-        } catch (error) {
-            setCommentError(error.message);
-        }
-    };
+                setComments([res.data, ...comments]);
+            })
+            .catch((error) => {
+                setCommentError(error.message);
+            });
+    }
 
     useEffect(() => {
-        const getComments = async () => {
-            try {
-                const res = await fetch(`http://localhost:5000/api/comment/getPostComments/${postId}`, { credentials: 'include', });
-                if (res.ok) {
-                    const data = await res.json();
-                    setComments(data);
-                }
-            } catch (error) {
+        axios
+            .get(`/comment/getPostComments/${postId}`, { withCredentials: true })
+            .then((res) => {
+                setComments(res.data);
+            })
+            .catch((error) => {
                 console.log(error.message);
-            }
-        };
-        getComments();
+            });
     }, [postId]);
 
     const handleLike = async (commentId) => {
-        try {
-            if (!currentUser) {
-                navigate('/login');
-                return;
-            }
-            const res = await fetch(`http://localhost:5000/api/comment/likeComment/${commentId}`, {
-                method: 'PUT',
-                credentials: 'include',
-            });
-            if (res.ok) {
-                const data = await res.json();
+        if (!currentUser) {
+            navigate('/login');
+            return;
+        }
+        axios
+            .put(`/comment/likeComment/${commentId}`, { withCredentials: true })
+            .then((res) => {
                 setComments(
                     comments.map((comment) =>
                         comment._id === commentId
                             ? {
                                 ...comment,
-                                likes: data.likes,
-                                numberOfLikes: data.likes.length,
+                                likes: res.data.likes,
+                                numberOfLikes: res.data.likes.length,
                             }
                             : comment
                     )
                 );
-            }
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+    }
     const handleEdit = async (comment, editedContent) => {
         setComments(
             comments.map((c) =>
@@ -107,26 +88,24 @@ export default function CommentSection({ postId }) {
 
     const handleDelete = async (commentId) => {
         setShowModal(false);
-        try {
-            if (!currentUser) {
-                navigate('/login');
-                return;
-            }
-            const res = await fetch(`http://localhost:5000/api/comment/deleteComment/${commentId}`, {
-                method: 'DELETE',
-                credentials: 'include',
-            });
-            if (res.ok) {
-                const data = await res.json();
-                setComments(comments.filter((comment) => comment._id !== commentId));
-            }
-        } catch (error) {
-            console.log(error.message);
+
+        if (!currentUser) {
+            navigate('/login');
+            return;
         }
+
+        axios
+            .delete(`/comment/deleteComment/${commentId}`, { withCredentials: true })
+            .then((res) => {
+                setComments(comments.filter((comment) => comment._id !== commentId));
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
     };
 
     // clear all the character that writing comment 
-    const handleClear = () =>{
+    const handleClear = () => {
         setComment("");
     }
 
@@ -152,16 +131,16 @@ export default function CommentSection({ postId }) {
                     {currentUser &&
                         <div className='flex-1 px-2'>
                             <div className='flex gap-1'>
-                            <textarea
-                                rows="1"
-                                className={` px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0  resize-none border-b-[2px] border-gray-600 overflow-visible `}
-                                placeholder="Add a comment..."
-                                required
-                                maxLength='200'
-                                onChange={(e) => setComment(e.target.value)}
-                                value={comment}
-                            />
-                            <span className='text-gray-500 text-xs flex items-end'> {250 - comment.length}/250</span>
+                                <textarea
+                                    rows="1"
+                                    className={` px-1 w-full text-sm bg-[#eee] dark:text-gray-400 text-gray-800 dark:bg-gray-800  border-0  resize-none border-b-[2px] border-gray-600 overflow-visible `}
+                                    placeholder="Add a comment..."
+                                    required
+                                    maxLength='200'
+                                    onChange={(e) => setComment(e.target.value)}
+                                    value={comment}
+                                />
+                                <span className='text-gray-500 text-xs flex items-end'> {250 - comment.length}/250</span>
                             </div>
                             {customErrors.emptyComment && (<p className="text-red-500 text-sm ">{customErrors.emptyComment}</p>)}
                             <div className='flex justify-between items-center'>

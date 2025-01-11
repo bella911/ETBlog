@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { Button, Textarea, Dropdown } from 'flowbite-react';
 import { useForm } from "react-hook-form";
 import { FaEllipsisH } from "react-icons/fa";
+import axios from "../axios";
 
 
 // import { set } from 'mongoose';
@@ -15,19 +16,16 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContent, setEditedContent] = useState(comment.content);
     const { currentUser } = useSelector((state) => state.user);
+
     useEffect(() => {
-        const getUser = async () => {
-            try {
-                const res = await fetch(`http://localhost:5000/api/user/${comment.userId}`);
-                const data = await res.json();
-                if (res.ok) {
-                    setUser(data);
-                }
-            } catch (error) {
+        axios
+            .get(`/user/${comment.userId}`)
+            .then((res) => {
+                setUser(res.data);
+            })
+            .catch((error) => {
                 console.log(error.message);
-            }
-        };
-        getUser();
+            });
     }, [comment]);
 
     const handleEdit = () => {
@@ -35,27 +33,17 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
         setEditedContent(comment.content);
     };
 
-    const handleSave = async () => {
-        try {
-            const res = await fetch(`http://localhost:5000/api/comment/editComment/${comment._id}`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify({
-                    content: editedContent,
-                }),
-            });
-            if (res.ok) {
+    const handleSave = () => {
+        axios
+            .put(`/comment/editComment/${comment._id}`, { content: editedContent }, { withCredentials: true })
+            .then((res) => {
                 setIsEditing(false);
                 onEdit(comment, editedContent);
-            }
-        } catch (error) {
-            console.log(error.message);
-        }
-    };
-
+            })
+            .catch((error) => {
+                console.log(error.message);
+            });
+    }
 
 
     return (
@@ -93,7 +81,7 @@ export default function Comment({ comment, onLike, onEdit, onDelete }) {
                                     <div className='py-1 px-2 sm:py-2 sm:px-3 rounded-full hover:bg-gray-200'>😊</div>
                                     <div className='flex gap-8'>
                                         <button className='py-1 px-2 sm:py-2 sm:px-4  border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600  rounded-full text-sm' type="button"
-                                           onClick={() => setIsEditing(false)}>Cancel</button>
+                                            onClick={() => setIsEditing(false)}>Cancel</button>
                                         <button className='py-1 px-2 sm:py-2 sm:px-4 border border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 rounded-full text-sm' onClick={handleSave}>Save</button>
                                     </div>
                                 </div>
