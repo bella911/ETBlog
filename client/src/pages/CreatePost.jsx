@@ -38,8 +38,21 @@ function CreatePost() {
 
   
   const uploadImage = () => {
+
+    // Allowed image types
+  const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
     try {
       if(!file) return;
+      if (file) {
+        // Check if the selected file is an allowed type
+        if (allowedTypes.includes(file.type)) {
+          setFile(file);
+          setCustomErrors({});
+        } else {
+          setFile(null);
+          return setCustomErrors({fileType:'Please select a valid image file (JPEG, PNG, GIF, ...).'});
+        }
+      }
       setUploadLoading(true);
 
       const storage = getStorage(app);
@@ -147,12 +160,15 @@ function CreatePost() {
           <div className="flex sm:flex-row flex-col gap-5 justify-between  items-center my-4 rounded-md dark:border-gray-600">
             <input
               type="file"
+              // accept=".jpg,.jpeg,.png,.gif" // Restrict file types
               accept="image/*"
               onChange={(e) => setFile(e.target.files[0])}
               className="w-full border-[2px] outline-none rounded-md"
             />
-            {customErrors.selectImageRequire && (<p className="text-red-500 text-md sm:hidden">{customErrors.selectImageRequire}</p>)}
-          {customErrors.uploadRequire && (<p className="text-red-500 text-md sm:hidden">{customErrors.uploadRequire}</p>)}
+            {customErrors.selectImageRequire && (<p className="text-red-500 text-sm sm:hidden">{customErrors.selectImageRequire}</p>)}
+          {customErrors.uploadRequire && (<p className="text-red-500 text-sm sm:hidden">{customErrors.uploadRequire}</p>)}
+          {customErrors.fileType && (<p className="text-red-500 text-sm sm:hidden ">{customErrors.fileType}</p>)}
+
             <button
               className="px-4 rounded-lg py-2 bg-green-300 dark:bg-green-500 dark:text-gray-800 w-20 font-semibold"
               type="button"
@@ -171,6 +187,8 @@ function CreatePost() {
           </div>
           {customErrors.selectImageRequire && (<p className="text-red-500 text-md sm:block hidden">{customErrors.selectImageRequire}</p>)}
           {customErrors.uploadRequire && (<p className="text-red-500 text-md sm:block hidden">{customErrors.uploadRequire}</p>)}
+          {customErrors.fileType && (<p className="text-red-500 text-md sm:block hidden ">{customErrors.fileType}</p>)}
+
           {image && <img className="my-4 max-h-80" src={image} alt="image" /> }
 
           <ReactQuill
