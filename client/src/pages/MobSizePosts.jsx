@@ -4,10 +4,10 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import { FiBarChart2 } from "react-icons/fi";
 import { TotalComments } from "../components/Utils";
-
+import moment from "moment"
 function MobSizePosts({ posts }) {
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -57,7 +57,7 @@ function MobSizePosts({ posts }) {
                       </span>
                     </Link>
                     <span className="font-normal text-sm flex items-center">
-                      &nbsp; Oct 7
+                      &nbsp; {moment(createdAt).fromNow()}
                     </span>
                   </p>
                 </div>
@@ -98,7 +98,10 @@ function MobSizePosts({ posts }) {
               {/* reaction of posts like comment, re post, like, view */}
               <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
                 {!currentUser ? (
-                    <TotalComments postId={_id}/>
+                     <button className="flex items-center hover:text-blue-400">
+                     <CommentModal postId={_id}/>
+                     </button>
+                     
                 ) : (
                   <button className="flex items-center hover:text-blue-400">
                     <ReplyCommentOnUserPage

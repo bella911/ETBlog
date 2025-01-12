@@ -379,3 +379,54 @@ export function ReplyCommentOnUserPage({ postId, author }) {
     </>
   );
 }
+
+
+// commentModal
+export function CommentModal({ postId }) {
+  const [openModal, setOpenModal] = useState(false);
+  const [commentLength, setCommentLength] = useState("");
+
+  // count total comment length
+  useEffect(() => {
+    axios
+      .get(`/comment/getcomments`)
+      .then((res) => {
+        //  filters Comments By PostId
+        const filterComments = res.data.comments.filter((post) => post.postId === postId)
+        setCommentLength(filterComments.length);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  }, []);
+
+  return (
+    <>
+      <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
+        <FaRegComment className="text-xl" />
+        <span className="text-sm">&nbsp; {commentLength}</span>
+      </Button>
+      <div onClick={() => setOpenModal(false)}>
+        <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center text-gray-600 dark:text-gray-300">
+              <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-500 dark:text-gray-400" />
+              <h3 className="mb-5 text-lg font-normal ">
+                Want to comment to this post?
+              </h3>
+              <p>Sign in to comment to this post.
+              </p>
+              <div className="flex justify-center gap-4 pt-3">
+                <Button className="bg-green-400 dark:bg-green-400" onClick={() => setOpenModal(false)}>
+                  <Link to={`/login`} className=""> {"Sign in"}</Link>
+                </Button>
+
+              </div>
+            </div>
+          </Modal.Body>
+        </Modal>
+      </div>
+    </>
+  );
+}

@@ -22,7 +22,7 @@ import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "./Error";
-import {DeletePostModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import {CommentModal, DeletePostModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
 import SuggestedUser from "../components/userpage/SuggestedUser";
 import ScrollToTop from "../components/ScrollToTop";
@@ -332,7 +332,11 @@ function UserPage() {
                           {/* reaction of posts like comment, re post, like, view */}
                           <div className="flex justify-around py-2  font-medium text-gray-800 dark:text-gray-200  px-4 md:px-8">
                              {!currentUser? 
-                               <TotalComments postId={_id}/>
+                              <>
+                               <button className="flex items-center hover:text-blue-400">
+                               <CommentModal postId={_id}/>
+                               </button>
+                               </>
                               :
                             <button className="flex items-center hover:text-blue-400">
                              <ReplyCommentOnUserPage key={_id} postId={_id}  author={author}/>
