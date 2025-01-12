@@ -130,8 +130,8 @@ const handleDeletePost = async () => {
       <Button size="xs" color="transparent"  onClick={() => setModal(true)} >Delete post</Button>
       {modal &&
       // <div className="backdrop-blur-sm flex items-center justify-center w-full">
-      <div className=" fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
-        <div className=" mb-20  px-6  max-w-[500px] mr-[100%]   text-center border-2 rounded-lg pb-8 py-1 lg:px-10 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+      <div className=" fixed top-20 left-0 w-full h-full flex justify-center items-center z-50">
+        <div className=" mb-20  px-6  max-w-[500px] mr-[80%] text-center border-2 rounded-lg pb-8 py-1 lg:px-10 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
           <div className="text-end lg:-mr-10 mb-3 ">
             <button
               className="px-3 py-1  hover:bg-red-500 rounded-sm"
