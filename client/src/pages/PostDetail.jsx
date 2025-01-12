@@ -17,6 +17,8 @@ import { BiSolidLike } from "react-icons/bi";
 import ScrollToTop from "../components/ScrollToTop";
 import CommentSection from "../components/CommentSection";
 import moment from "moment"
+import { FaShare } from "react-icons/fa6";
+
 function PostDetail() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [post, setPost] = useState({});
@@ -168,8 +170,10 @@ function PostDetail() {
             <p className="pb-6">
               <span dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').trimStart() }} />
             </p>
+            {/* flex like and share */}
+            <div className="flex items-center gap-12  mb-8 -mt-4">
             {/* like the post */}
-            <div className="flex items-center mb-8 -mt-4">
+            <div className="flex items-center">
               {/* when user logged in */}
               {currentUser ? (
                 <button
@@ -191,6 +195,10 @@ function PostDetail() {
               <button className="flex items-center py-1 px-4 bg-gray-300  dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 rounded-l-none rounded-full">
                 <BiDislike className="text-xl"/><span >&nbsp;</span>
               </button>
+              
+            </div>
+            {/* share post link */}
+            {/* <button className="py-2 px-4 bg-gray-300 dark:bg-gray-600 dark:hover:bg-gray-500 hover:bg-gray-400 rounded-full"><FaShare className="text-xl"/></button> */}
             </div>
             {/* <Comments postId={id} /> */}
             <CommentSection postId={id} />

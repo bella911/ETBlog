@@ -22,12 +22,10 @@ import { FaRegComment } from "react-icons/fa";
 import { BiRepost } from "react-icons/bi";
 import { useSelector, useDispatch } from "react-redux";
 import Error from "./Error";
-import {FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import {DeletePostModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
 import avatar from "../images/avatar.png"
 import SuggestedUser from "../components/userpage/SuggestedUser";
 import ScrollToTop from "../components/ScrollToTop";
-import DeleteModal from "../components/DeleteModal"
-import Demo from "../components/Demo"
 import { TotalComments } from "../components/Utils";
 import moment from "moment"
 function UserPage() {
@@ -302,7 +300,7 @@ function UserPage() {
                                 </Button>
                                   </Dropdown.Item>
                                 <Dropdown.Item as={"div"}>
-                                  <Demo postId={_id} />
+                                  <DeletePostModal postId={_id} />
                                 </Dropdown.Item>
                               </Dropdown>}
                             </div>

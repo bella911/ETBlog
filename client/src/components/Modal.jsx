@@ -21,6 +21,7 @@ export function FollowModal() {
   return (
     <>
       <Button gradientDuoTone="greenToBlue" outline size="sm" color="transparent" onClick={() => setOpenModal(true)} >Follow</Button>
+      <div onClick={() => setOpenModal(false)}>
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -40,6 +41,7 @@ export function FollowModal() {
           </div>
         </Modal.Body>
       </Modal>
+      </div>
     </>
   );
 }
@@ -94,6 +96,75 @@ export function DeleteModal({ postId }) {
   );
 }
 
+//  delete post modal from mypost
+export function DeletePostModal({postId}) {
+  const navigate = useNavigate();
+  const id = useSelector((state) => state.post.selectedPost);
+  const pSize = useSelector((state) => state.post.postSize);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const [modal, setModal] = useState(false);
+  const toggleModal = () => {
+    // console.log(id);
+    setModal(!modal);
+  };
+
+
+// function refreshPage(){ 
+//   window.location.reload(); 
+// }
+const handleDeletePost = async () => {
+  axios
+    .delete(`/post/${postId}`, {withCredentials: true})
+    .then(() => {
+      toggleModal();
+      window.location.reload(); 
+    })
+    .catch((error) => {
+      toggleModal();
+      console.log(error);
+    });
+};
+
+  return (
+      <>
+      <Button size="xs" color="transparent"  onClick={() => setModal(true)} >Delete post</Button>
+      {modal &&
+      // <div className="backdrop-blur-sm flex items-center justify-center w-full">
+      <div className=" fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+        <div className=" mb-20  px-6  max-w-[500px] mr-[100%]   text-center border-2 rounded-lg pb-8 py-1 lg:px-10 bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+          <div className="text-end lg:-mr-10 mb-3 ">
+            <button
+              className="px-3 py-1  hover:bg-red-500 rounded-sm"
+              onClick={() => setModal(false)}
+            >
+              X
+            </button>
+          </div>
+          <div className="text-base mb-5 mt-6">
+            Are you sure you want to delete this post?
+          </div>
+          <div className="flex gap-14 justify-center">
+            <button className="bg-red-500 dark:bg-red-700 py-2 px-4 rounded-md hover:opacity-80" onClick={() => 
+              {
+                handleDeletePost();
+                --postSize;
+                }}>
+              Yes
+            </button>
+            <button
+              className="bg-green-400 dark:bg-green-600 py-2 px-4 rounded-md hover:opacity-80"
+              onClick={() => setModal(false)}
+            >
+              No
+            </button>
+          </div>
+        </div>
+       </div>
+      }
+      </>
+  )
+}
+
 
 // search modal for dashboard
 export function SearchModal() {
@@ -127,7 +198,7 @@ export function SearchModal() {
         <Modal.Header />
         <Modal.Body >
           <div className="text-center text-gray-600 dark:text-gray-300">
-            <form className="flex w-full" onSubmit={handleSearch}>
+            <form className="flex w-full" onSubmit={handleSearch} >
               <TextInput
                 type="text"
                 placeholder="Search..."
@@ -162,6 +233,7 @@ export function LikeModal({ likesLength }) {
         <FaRegHeart className="text-xl" />
         <span className="text-sm">&nbsp; {likesLength}</span>
       </Button>
+      <div onClick={() => setOpenModal(false)} className="hidden">
       <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
         <Modal.Header />
         <Modal.Body>
@@ -181,6 +253,7 @@ export function LikeModal({ likesLength }) {
           </div>
         </Modal.Body>
       </Modal>
+      </div>
     </>
   );
 }
