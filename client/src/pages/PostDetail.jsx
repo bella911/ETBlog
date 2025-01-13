@@ -38,6 +38,7 @@ function PostDetail() {
 
   // use effect for fetching recent posts
   useEffect(() => {
+    const fetchData = () => {
     axios
       .get("/post/getAllPosts")
       .then((res) => {
@@ -46,10 +47,17 @@ function PostDetail() {
         // console.log(res.data.data)
       })
       .catch((error) => console.log(error));
+    }
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 2000);
+    return () => clearInterval(intervalId);
+
   }, []);
 
   // use effect for fetching post detail
   useEffect(() => {
+    const fetchData = () => {
     axios
       .get(`/post/getpost/${id}`)
       .then((res) => {
@@ -67,6 +75,12 @@ function PostDetail() {
         isSetNotFound(true);
         console.log(error);
       });
+    }
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 2000);
+    return () => clearInterval(intervalId);
+    
   }, [counter]);
 
   // display user detail info by getting username from author page

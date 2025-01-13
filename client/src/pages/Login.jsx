@@ -10,6 +10,7 @@ import { useDispatch } from "react-redux";
 import { signIn } from "../redux/authSlice";
 import { FcGoogle } from "react-icons/fc";
 import OAuth from "../components/OAuth";
+import ScrollToTop from "../components/ScrollToTop";
 
 function Login() {
   const [username, setUsername] = useState("");
@@ -72,6 +73,7 @@ function Login() {
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 ">
+      <ScrollToTop/>
       <form
         className="flex justify-center text-center py-20 font-sans"
         onSubmit={handleSubmit}

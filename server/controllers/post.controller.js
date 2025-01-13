@@ -7,18 +7,6 @@ import Notification from "../models/notification.model.js";
 export const createPost = async (req, res) => {
   try {
     const userId = req.user.userId;
-    // if (
-    //   !req.body.title ||
-    //   !req.body.author ||
-    //   !req.body.image ||
-    //   !req.body.description
-    // ) {
-    //   return res.status(400).send({
-    //     message: "Send all required fields: title, author, image, description",
-    //   });
-    // }
-
-
     const newPost = {
       user: userId,
       title: req.body.title,

@@ -11,6 +11,10 @@ import moment from "moment"
 function MobSizePosts({ posts }) {
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser);
+  const [counter, setCounter] = useState(0);
+
+
+  
   // count post viewers
   const countView = async (id) =>{
     axios
@@ -21,20 +25,32 @@ function MobSizePosts({ posts }) {
      })
      .catch((error) => console.log(error));
    }
+
+   // like and unlike post
+  const likeUnlikePost = (id) => {
+    axios
+      .put(`/post/like/${id}`, {}, { withCredentials: true })
+      .then((res) => {
+        setCounter(res.data.updatedLikes.length);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+ 
+   // count post viewers for like and unlike
+   const countViewWhenLike = async (id) =>{
+    axios
+     .get(`/post/count/${id}`)
+     .catch((error) => console.log(error));
+   }
+
+ 
+
   return (
     <div className="py-3">
       {posts.map(
-        ({
-          _id,
-          title,
-          description,
-          createdAt,
-          image,
-          author,
-          likes,
-          comments,
-          views,
-        }) => (
+        ({_id, title, description, createdAt, image, author, likes, comments, views,}) => (
           <article
             key={_id}
             className="flex font-medium text-gray-800 dark:text-gray-200 sm:px-4  py-2   bg-[#eee] dark:bg-gray-800"
@@ -84,15 +100,11 @@ function MobSizePosts({ posts }) {
                   >
                     See more
                   </button>
-                  {/* <button className="text-green-400 hover:underline block mb-3 text-sm">
-                    See more
-                  </button> */}
                   <img
                     className="h-56  w-full object-cover rounded"
                     src={image}
                     alt=""
                   />
-                  {/* </Link> */}
                 </div>
               </div>
               {/* reaction of posts like comment, re post, like, view */}
@@ -115,8 +127,8 @@ function MobSizePosts({ posts }) {
                 {currentUser ? (
                   <button
                     onClick={() => {
-                      //   dispatch(postId(_id));
-                      //   likeUnlikePost();
+                        likeUnlikePost(_id);
+                        countViewWhenLike(_id)
                     }}
                     className="flex items-center hover:text-red-400"
                   >
@@ -130,7 +142,6 @@ function MobSizePosts({ posts }) {
                 ) : (
                     <LikeModal likesLength={likes?.length} />
                 )}
-
                 <button className="flex items-center hover:text-blue-400">
                   <FiBarChart2 className="text-xl" />
                   <span className="text-sm">&nbsp;{views}</span>

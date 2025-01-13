@@ -23,6 +23,7 @@ function Posts() {
 
   // get all posts
   useEffect(() => {
+    const fetchData = () => {
     axios
       .get("/post/getAllPosts")
       .then((res) => {
@@ -32,20 +33,31 @@ function Posts() {
         setLoading(false);
       })
       .catch((error) => console.log(error));
+    }
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 2000);
+    return () => clearInterval(intervalId);
+
   }, []);
 
   // get following posts
   if (currentUser) {
     useEffect(() => {
+      const fetchData = () => {
       axios
         .get("/post/followingposts", {withCredentials: true})
         .then((res) => {
           setFollowingPosts(res.data)
-          // setPosts(res.data);
-          // console.log("this one is the following post",res.data);
           setLoading(false);
         })
         .catch((error) => console.log(error));
+      }
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 2000);
+    return () => clearInterval(intervalId);
+
     }, []);
   }
 
@@ -99,6 +111,8 @@ function Posts() {
     )
       forYouPosts.push(value);
   })
+
+  console.log("for you",forYouPosts)
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 pb-10">

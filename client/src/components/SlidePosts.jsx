@@ -14,6 +14,7 @@ export default function SlidePosts() {
 
   // get all posts
   useEffect(() => {
+   const fetchData = () => {
     axios
       .get("/post/getAllPosts")
       .then((res) => {
@@ -23,6 +24,11 @@ export default function SlidePosts() {
         setLoading(false);
       })
       .catch((error) => console.log(error));
+    }
+    fetchData();
+    const intervalId = setInterval(fetchData, 3000);
+    return () => clearInterval(intervalId);
+
   }, []);
 
   return (
@@ -34,7 +40,7 @@ export default function SlidePosts() {
         }}
         parallax={true}
         autoplay={{
-          delay: 3000,
+          delay: 4000,
           disableOnInteraction: false,
         }}
         spaceBetween={30}

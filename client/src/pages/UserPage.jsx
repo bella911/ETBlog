@@ -60,6 +60,7 @@ function UserPage() {
 
   // display user detail info by getting username from author page
   useEffect(() => {
+    const fetchData = () =>{
     axios
       .get(`/user/profile/${username}`) ///{ withCredentials: true }
       .then((res) => {
@@ -78,10 +79,21 @@ function UserPage() {
         console.log(error.message);
         setIsNotFound(true);
       });
+    }
+    // Fetch data immediately
+    fetchData();
+
+    // Set up polling (e.g., every 3 seconds)
+    const intervalId = setInterval(fetchData, 3000);
+
+    // Cleanup interval on component unmount
+    return () => clearInterval(intervalId);
+
   }, [counter, username]);
 
   // display author page
   useEffect(() => {
+    const fetchData = () =>{
     axios
       .get(`/post/user/${username}`) // { withCredentials: true }
       .then((res) => {
@@ -90,6 +102,14 @@ function UserPage() {
       .catch((error) => {
         console.log(error.message);
       });
+    }
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 3000);
+
+    return () => clearInterval(intervalId);
+
   }, [counter, username]);
 
   // like and unlike post
@@ -111,7 +131,6 @@ function UserPage() {
       .get(`/post/likes/${authorId}`, {}, { withCredentials: true })
       .then((res) => {
         setLikedPosts(res.data)
-        
       })
       .catch((error) => {
         console.log(error.message);
@@ -144,6 +163,7 @@ function UserPage() {
 
   // get all users
   useEffect(() => {
+    const fetchData = () => {
     axios
       .get(`/user/users`, { withCredentials: true }) // { withCredentials: true }
       .then((res) => {
@@ -152,6 +172,14 @@ function UserPage() {
       .catch((error) => {
         console.log(error.message);
       });
+    }
+
+    fetchData();
+
+    const intervalId = setInterval(fetchData, 3000);
+
+    return () => clearInterval(intervalId);
+
   }, [username]);
 
 
@@ -162,6 +190,13 @@ function UserPage() {
      .then((res) => {
        navigate(`/posts/${id}`)
      })
+     .catch((error) => console.log(error));
+   }
+
+   // count post viewers for like and unlike
+   const countViewWhenLike = async (id) =>{
+    axios
+     .get(`/post/count/${id}`)
      .catch((error) => console.log(error));
    }
 
@@ -228,7 +263,7 @@ function UserPage() {
               {/* name and work */}
               <div className="text-left mt-2 md:ml-8 ml-4 text-base">
                 <h2 className="font-semibold mb-3 ">{user.user.username?.toUpperCase()}</h2>
-                <p>Freelance Web Designer</p>
+                {/* <p>Freelance Web Designer</p> */}
               </div>
 
               {/* real time list followers and followings */}
@@ -350,6 +385,7 @@ function UserPage() {
                               onClick={() => {
                                 // dispatch(postId(_id));
                                 likeUnlikePost(_id);
+                                countViewWhenLike(_id)
                               }}
                               className="flex items-center hover:text-red-400"
                             >
@@ -557,7 +593,7 @@ function UserPage() {
                                   <Button key={user._id} gradientDuoTone="greenToBlue" size="xs" outline className="mt-2 mr-1"
                                     onClick={() => {
                                       suggestedUserFollowUnFollow(user._id);
-                                      setCounter(true)
+                                      // setCounter(true)
                                       // console.log(user._id)
                                     }}
                                     disabled={loading}

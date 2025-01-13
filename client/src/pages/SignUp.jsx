@@ -5,6 +5,7 @@ import axios from "../axios";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
+import ScrollToTop from "../components/ScrollToTop";
 
 function SignUp() {
   const {
@@ -62,6 +63,7 @@ function SignUp() {
 
   return (
     <div>
+      <ScrollToTop/>
       <section className="bg-[#eee] dark:bg-gray-800 ">
         <div className="flex flex-col items-center justify-center sm:px-6 px-2 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full  rounded-lg shadow-lg  md:mt-0 sm:max-w-md xl:p-0 bg-gray-400 dark:bg-gray-900 ">
