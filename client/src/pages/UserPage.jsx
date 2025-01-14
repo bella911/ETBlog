@@ -42,7 +42,7 @@ function UserPage() {
   // const [followers, setFollowers] = useState(0);
   // const [following, setFollowing] = useState(0);
   const [checkFollowers, setCheckFollowers] = useState([]);
-  const [user, setUser] = useState({
+  const [userInfo, setUserInfo] = useState({
     user: {},
     followers: 0,
     following: 0,
@@ -65,7 +65,7 @@ function UserPage() {
     axios
       .get(`/user/profile/${username}`) ///{ withCredentials: true }
       .then((res) => {
-        setUser({
+        setUserInfo({
           user: res.data,
           followers: res.data.followers.length,
           following: res.data.following.length,
@@ -226,9 +226,8 @@ function UserPage() {
                 <div className="md:ml-8 ml-4 lg:w-32 w-20 lg:h-32 h-20 relative lg:-mt-16 -mt-8 border-4 dark:border-gray-800 rounded-full overflow-hidden">
                   <img
                     className="object-cover object-center w-full"
-                    src={`${loading? avatar : user.user.profilePicture}`}
-                    // src={user.user.profilePicture}
-                    alt="Woman looking front"
+                    src={`${loading? avatar : userInfo.user.profilePicture}`}
+                    alt="user image"
                   />
                 </div>
 
@@ -238,14 +237,14 @@ function UserPage() {
                     <div className="mt-2">
                       <FollowModal />
                     </div>
-                  ) : currentUser._id !== user.user._id ? (
+                  ) : currentUser._id !== userInfo.user._id ? (
                     <Button
                       gradientDuoTone="greenToBlue"
                       outline
                       className="mt-2 mr-1"
                       onClick={() => {
                         // dispatch(followId(user.user._id));
-                        followUnfollowUser(user.user._id);
+                        followUnfollowUser(userInfo.user._id);
                       }}
                       disabled={loading}
                     >
@@ -267,17 +266,17 @@ function UserPage() {
               </div>
               {/* name and work */}
               <div className="text-left mt-2 md:ml-8 ml-4 text-base">
-                <h2 className="font-semibold mb-3 ">{user.user.username?.toUpperCase()}</h2>
+                <h2 className="font-semibold mb-3 ">{userInfo.user.username?.toUpperCase()}</h2>
                 {/* <p>Freelance Web Designer</p> */}
               </div>
 
               {/* real time list followers and followings */}
               <div className="text-left mt-2 md:ml-8 ml-4 text-base">
                 <span className="mr-1 ">
-                  {user.following} <span>Following</span>{" "}
+                  {userInfo.following} <span>Following</span>{" "}
                 </span>
                 <span className="mr-1">
-                  {user.followers} <span>Followers</span>{" "}
+                  {userInfo.followers} <span>Followers</span>{" "}
                 </span>
               </div>
             </div>
@@ -313,8 +312,8 @@ function UserPage() {
                        >
                         <div className="flex">
                           <img
-                            src={image}
-                            alt=""
+                            src={userInfo.user.profilePicture}
+                            alt="author image"
                             className="h-10 w-10 rounded-full bg-gray-50"
                           />
                         </div>
@@ -364,7 +363,7 @@ function UserPage() {
                               <img
                                 className="h-56  w-full object-cover rounded"
                                 src={image}
-                                alt=""
+                                alt="description image"
                               />
                               {/* </Link> */}
                             </div>

@@ -149,7 +149,7 @@ function Posts() {
           <>
           <div className="hidden mx-auto mt-4 py-4 sm:grid max-w-2xl grid-cols-1 gap-x-8  gap-y-16   md:mx-0 md:max-w-none md:grid-cols-2 lg:mx-0 lg:max-w-none lg:grid-cols-3">
             {forYouPosts.map(
-              ({ _id, title, description, createdAt, image, author }) => (
+              ({ _id, title, description, createdAt, image, author, user }) => (
                 <PostItem
                   key={_id}
                   id={_id}
@@ -158,6 +158,7 @@ function Posts() {
                   createdAt={createdAt}
                   author={author}
                   image={image}
+                  userId={user}
                 />
               )
             )}

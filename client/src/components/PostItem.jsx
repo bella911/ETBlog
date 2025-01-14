@@ -7,8 +7,9 @@ import axios from "../axios";
 import moment from "moment"
  
 
-function PostItem({ id, title, description, createdAt, author, image }) {
+function PostItem({ id, title, description, createdAt, author, image, userId }) {
   const navigate = useNavigate()
+  const [userPicture, setUserPicture] = useState("")
   // console.log(id)
   // count post viewers
   const countView = async () =>{
@@ -20,6 +21,27 @@ function PostItem({ id, title, description, createdAt, author, image }) {
     })
     .catch((error) => console.log(error));
   }
+
+  //  
+  useEffect(() => {
+    const fetchData = () => {
+      axios
+        .get(`/user/${userId}`) // { withCredentials: true }
+        .then((res) => {
+          setUserPicture(res.data.profilePicture); // fetch user posts
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+      }
+  
+      fetchData();
+  
+      const intervalId = setInterval(fetchData, 3000);
+  
+      return () => clearInterval(intervalId);
+  
+    }, []);
   return (
     <article
       // key={id}
@@ -51,7 +73,7 @@ function PostItem({ id, title, description, createdAt, author, image }) {
           </div>
           <div className="relative mt-4 flex items-center gap-x-4">
             <img
-              src={image}
+              src={userPicture}
               alt="author image"
               className="h-10 w-10 rounded-full bg-gray-50"
             />
