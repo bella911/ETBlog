@@ -118,7 +118,7 @@ function Posts() {
     <div>
       <Helmet>
         <title>ETBlog</title>
-        <meta name="description" content="Welcome to the home page of News" />
+        <meta name="description" content="Top news on this site" />
      </Helmet>
     <div className="bg-[#eee]  dark:bg-gray-800 pb-10">
       <ScrollToTop/>
