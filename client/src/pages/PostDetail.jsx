@@ -18,6 +18,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import CommentSection from "../components/CommentSection";
 import moment from "moment"
 import { FaShare } from "react-icons/fa6";
+import { Helmet } from 'react-helmet'
 
 function PostDetail() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -126,6 +127,10 @@ function PostDetail() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
+      <Helmet>
+        <title>Post Description | ETBlog</title>
+        <meta name="description" content="Detail description about post" />
+     </Helmet>
       <ScrollToTop/>
       {/* unauthorize user can not see self or other posts */}
       {!isNotFound ? (

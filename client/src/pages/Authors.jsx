@@ -3,7 +3,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import axios from "../axios";
 import ScrollToTop from "../components/ScrollToTop";
 import { Link } from "react-router-dom";
-
+import {Helmet} from "react-helmet"
 function Authors() {
     const [loading, setLoading] = useState(true);
     const [listAuthors, setListAuthors] = useState([]);
@@ -38,6 +38,10 @@ function Authors() {
     
     return (
         <div className='py-10 bg-[#eee]  dark:bg-gray-800 '>
+            <Helmet> 
+                <title>Authors | ETblog</title>
+                <meta name="description" content="List all authors info" />
+            </Helmet>
             <ScrollToTop />
             <div className="mx-auto  max-w-7xl pb-12 md:px-6 px-2 min-h-96">
                 <div className=" pb-10  md:text-start text-center">

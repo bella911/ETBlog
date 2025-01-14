@@ -7,7 +7,7 @@ import ReactPaginate from "react-paginate";
 import { Button, Navbar, Tabs } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
+import { Helmet } from 'react-helmet'
 import {FollowingModal, FollowModal} from "../components/Modal.jsx"
 import ScrollToTop from "../components/ScrollToTop.jsx";
 // list all news posts
@@ -115,6 +115,11 @@ function Posts() {
   // console.log("for you",forYouPosts)
 
   return (
+    <div>
+      <Helmet>
+        <title>ETBlog</title>
+        <meta name="description" content="Welcome to the home page of News" />
+     </Helmet>
     <div className="bg-[#eee]  dark:bg-gray-800 pb-10">
       <ScrollToTop/>
       <div className="mx-auto max-w-screen-xl px-2 lg:px-8">
@@ -211,6 +216,7 @@ function Posts() {
       </div>
 
       {/* {loading? "" : <Pagination/>} */}
+    </div>
     </div>
   );
 }

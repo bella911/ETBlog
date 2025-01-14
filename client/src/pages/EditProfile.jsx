@@ -2,6 +2,7 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { ReplyCommentOnUserPage } from "../components/Modal";
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 
 function EditProfile() {
@@ -9,6 +10,10 @@ function EditProfile() {
 
   return (
     <div className="block mx-auto bg-[#eee] dark:bg-gray-800 ">
+      <Helmet>
+        <title>Edit profile | ETBlog</title>
+        <meta name="description" content="User modify information and show self information" />
+     </Helmet>
       <ScrollToTop/>
       <div className="py-8 max-w-5xl mx-auto lg:py-20 px-1">
         <form className="p-2 ">

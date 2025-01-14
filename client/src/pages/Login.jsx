@@ -73,6 +73,10 @@ function Login() {
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 ">
+      <Helmet>
+        <title>Login | ETBlog</title>
+        <meta name="description" content="Login page to access full feature" />
+     </Helmet>
       <ScrollToTop/>
       <form
         className="flex justify-center text-center py-20 font-sans"

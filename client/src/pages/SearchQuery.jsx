@@ -4,6 +4,7 @@ import axios from "../axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useLocation, useNavigate } from 'react-router-dom';
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 function SearchQuery() {
   const [query, setQuery] = useState("");
@@ -54,6 +55,10 @@ function SearchQuery() {
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800">
+      <Helmet>
+        <title>filter {query} | ETBlog</title>
+        <meta name="description" content="Login page to access full feature" />
+     </Helmet>
       <ScrollToTop/>
       <div className="pb-16 relative min-h-[70vh] ">
         <div className="mx-auto max-w-7xl sm:px-6 px-2 lg:px-8">

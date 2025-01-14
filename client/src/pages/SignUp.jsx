@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 function SignUp() {
   const {
@@ -63,6 +64,10 @@ function SignUp() {
 
   return (
     <div>
+      <Helmet>
+        <title>Signup | ETBlog</title>
+        <meta name="description" content="Register user for save information and release full feature of web" />
+     </Helmet>
       <ScrollToTop/>
       <section className="bg-[#eee] dark:bg-gray-800 ">
         <div className="flex flex-col items-center justify-center sm:px-6 px-2 py-8 mx-auto md:h-screen lg:py-0">

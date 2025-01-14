@@ -28,6 +28,7 @@ import SuggestedUser from "../components/userpage/SuggestedUser";
 import ScrollToTop from "../components/ScrollToTop";
 import { TotalComments } from "../components/Utils";
 import moment from "moment"
+import { Helmet } from "react-helmet";
 function UserPage() {
   // const path = useLocation().pathname; // change current clicked tabs
   const [posts, setPosts] = useState([]);
@@ -202,6 +203,10 @@ function UserPage() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800">
+      <Helmet>
+        <title>My Posts | ETBlog</title>
+        <meta name="description" content="List all my post and user page" />
+     </Helmet>
       <ScrollToTop/>
       {!isNotFound ? ( // for catching not exist page throw not found error
          <div className="mx-auto  max-w-7xl  pb-12 flex flex-col  md:flex-row ">

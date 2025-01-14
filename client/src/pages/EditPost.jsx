@@ -12,6 +12,7 @@ import {
 import { app } from "../firebase";
 import ClipLoader from "react-spinners/ClipLoader";
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 function EditPost() {
   const [title, setTitle] = useState("");
@@ -104,6 +105,10 @@ function EditPost() {
   return (
     // <div className="mt-32 mb-32 w-1/2 mx-auto">
     <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
+      <Helmet>
+        <title>Modify post | ETBlog</title>
+        <meta name="description" content="Modify posts information" />
+     </Helmet>
       <ScrollToTop/>
       <div className="max-w-screen-xl mx-auto pt-24 pb-64 px-6 lg:px-32">
         <form onSubmit={handlePost}>

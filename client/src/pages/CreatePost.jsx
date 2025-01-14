@@ -15,6 +15,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from "react-helmet";
 
 function CreatePost() {
   const currentUser= useSelector((state) => state.user.currentUser);
@@ -131,6 +132,10 @@ function CreatePost() {
   return (
     // <div className="mt-32 mb-32 w-1/2 mx-auto">
     <div className="bg-[#eee] dark:bg-gray-800 dark:text-gray-200 ">
+      <Helmet>
+        <title>Create post | ETBlog</title>
+        <meta name="description" content="create post and upload area" />
+     </Helmet>
       <ScrollToTop/>
       <div className="max-w-screen-xl mx-auto pt-8 pb-64 px-2 lg:px-32 ">
         <form onSubmit={handleSubmit(onSubmit)}>
