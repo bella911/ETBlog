@@ -119,6 +119,7 @@ function MobSizePosts({ posts }) {
                     <ReplyCommentOnUserPage
                       key={_id}
                       postId={_id}
+                      author={author}
                     />
                     {/* <span>&nbsp; {comments.length}</span> */}
                   </button>
