@@ -442,8 +442,8 @@ function UserPage() {
                       >
                         <div className="flex">
                           <img
-                            src={image}
-                            alt=""
+                            src={userInfo.user.profilePicture}
+                            alt="author image"
                             className="h-10 w-10 rounded-full bg-gray-50"
                           />
                         </div>
