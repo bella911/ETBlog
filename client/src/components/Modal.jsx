@@ -304,16 +304,15 @@ export function ReplyCommentOnUserPage({ postId, author }) {
   // count total comment length
   useEffect(() => {
     axios
-      .get(`/comment/getcomments`)
-      .then((res) => {
-        //  filters Comments By PostId
-        const filterComments = res.data.comments.filter((post) => post.postId === postId)
-        setCommentLength(filterComments.length);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, []);
+        .get(`/comment/getPostComments/${postId}`, { withCredentials: true })
+        .then((res) => {
+          setCommentLength(res.data.length);
+          // console.log(res.data.length)
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+}, []);
 
   
   // react hook form on submit
@@ -387,18 +386,30 @@ export function CommentModal({ postId }) {
   const [commentLength, setCommentLength] = useState("");
 
   // count total comment length
+  // useEffect(() => {
+  //   axios
+  //     .get(`/comment/getcomments`)
+  //     .then((res) => {
+  //       //  filters Comments By PostId
+  //       const filterComments = res.data.comments.filter((post) => post.postId === postId)
+  //       setCommentLength(filterComments.length);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.message);
+  //     });
+  // }, []);
   useEffect(() => {
     axios
-      .get(`/comment/getcomments`)
-      .then((res) => {
-        //  filters Comments By PostId
-        const filterComments = res.data.comments.filter((post) => post.postId === postId)
-        setCommentLength(filterComments.length);
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }, []);
+        .get(`/comment/getPostComments/${postId}`, { withCredentials: true })
+        .then((res) => {
+          setCommentLength(res.data.length);
+          // console.log(res.data.length)
+        })
+        .catch((error) => {
+            console.log(error.message);
+        });
+}, []);
+
 
   return (
     <>

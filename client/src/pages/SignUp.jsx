@@ -34,8 +34,8 @@ function SignUp() {
     data.fullName = data.fullName.trim()
     data.username = data.username.trim().toLowerCase()
     data.password = data.password.trim().toLowerCase()
-    data.email = data.email.toLowerCase()
-    console.log(data);
+    data.email = data.email.toLowerCase().toLowerCase();
+    // console.log(data);
 
     axios
       .post("/auth/signup", data)

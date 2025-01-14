@@ -112,7 +112,7 @@ function Posts() {
       forYouPosts.push(value);
   })
 
-  console.log("for you",forYouPosts)
+  // console.log("for you",forYouPosts)
 
   return (
     <div className="bg-[#eee]  dark:bg-gray-800 pb-10">
