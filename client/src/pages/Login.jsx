@@ -11,6 +11,7 @@ import { signIn } from "../redux/authSlice";
 import { FcGoogle } from "react-icons/fc";
 import OAuth from "../components/OAuth";
 import ScrollToTop from "../components/ScrollToTop";
+import { Helmet } from 'react-helmet'
 
 function Login() {
   const [username, setUsername] = useState("");
