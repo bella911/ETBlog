@@ -184,7 +184,7 @@ function PostDetail() {
             <img
               className="h-[40vh] lg:h-96 w-full  rounded-xl mb-6 object-fill"
               src={post.image}
-              alt=""
+              alt="post - image"
             />
             <p className="pb-6">
               <span dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').trimStart() }} />

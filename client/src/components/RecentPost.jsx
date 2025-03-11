@@ -9,7 +9,7 @@ function RecentPost({ id, title, image, date, author }) {
           <img
             className=" w-full h-[150px] border-b-[1px] object-fill rounded-lg"
             src={image}
-            alt=""
+            alt="post-image"
           />
         </a>
         <div className="px-2 text-xs flex justify-between">

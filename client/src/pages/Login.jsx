@@ -87,7 +87,7 @@ function Login() {
           <img
             className="hidden sm:flex justify-center items-center w-[300px] "
             src={PersonImage}
-            alt=""
+            alt="default - PersonImage"
           />
           <div className=" p-6 shadow-lg bg-gray-400 dark:bg-gray-900  rounded-md font-bold sm:text-3xl">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center">

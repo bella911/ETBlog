@@ -351,7 +351,7 @@ export function ReplyCommentOnUserPage({ postId, author }) {
             <div className="flex pt-9">
               <img
                 src={avatar}
-                alt=""
+                alt="default-user-avatar"
                 className="h-10 w-10 rounded-full bg-gray-50"
               />
             </div>

@@ -40,6 +40,11 @@ export default function HeaderFB() {
 
   // console.log(currentUser);
   
+  // if(!currentUser) {
+  //   logout();
+  //   navigate("/");
+  // }
+
 
   function logout() {
     axios

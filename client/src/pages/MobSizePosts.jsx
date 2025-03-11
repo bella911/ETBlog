@@ -12,6 +12,7 @@ function MobSizePosts({ posts }) {
   const navigate = useNavigate()
   const currentUser = useSelector((state) => state.user.currentUser);
   const [counter, setCounter] = useState(0);
+  const [userPicture, setUserPicture] = useState("")
 
 
   
@@ -45,12 +46,23 @@ function MobSizePosts({ posts }) {
      .catch((error) => console.log(error));
    }
 
+  //  author profile picture
+  //  const fetchProfilePicture = async (userId) =>{
+  //   axios
+  //   .get(`/user/${userId}`) // { withCredentials: true }
+  //   .then((res) => {
+  //     setUserPicture(res.data.profilePicture); // fetch user posts
+  //   })
+  //    .catch((error) => console.log(error));
+  //  }
+
+
  
 
   return (
     <div className="py-3">
       {posts.map(
-        ({_id, title, description, createdAt, image, author, likes, comments, views,}) => (
+        ({_id, title, description, createdAt, image, author, likes, comments, views, user}) => (
           <article
             key={_id}
             className="flex font-medium text-gray-800 dark:text-gray-200 sm:px-4  py-2   bg-[#eee] dark:bg-gray-800"
@@ -58,7 +70,7 @@ function MobSizePosts({ posts }) {
             <div className="flex">
               <img
                 src={image}
-                alt=""
+                alt="post-image"
                 className="h-10 w-10 rounded-full bg-gray-50"
               />
             </div>
@@ -103,7 +115,7 @@ function MobSizePosts({ posts }) {
                   <img
                     className="h-56  w-full object-cover rounded"
                     src={image}
-                    alt=""
+                    alt="post-image"
                   />
                 </div>
               </div>

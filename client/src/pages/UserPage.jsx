@@ -483,7 +483,7 @@ function UserPage() {
                               <img
                                 className="h-56  w-full object-cover rounded"
                                 src={image}
-                                alt=""
+                                alt="post-image"
                               />
                               {/* </Link> */}
                             </div>

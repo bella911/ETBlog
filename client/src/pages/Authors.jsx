@@ -65,7 +65,7 @@ function Authors() {
                                     {/* {console.log("total post", count)} */}
                                     <div className="flex  flex-col items-center gap-x-6">
                                         <Link to={`/user/${author.username}`} >
-                                            <img alt="" src={author.profilePicture} className="size-16 rounded-full" />
+                                            <img  src={author.profilePicture} alt={`${author.username}-picture`} className="size-16 rounded-full" />
                                         </Link>
                                         <div>
                                             <Link to={`/user/${author.username}`} >
