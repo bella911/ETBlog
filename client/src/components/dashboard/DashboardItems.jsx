@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { deletePost, postLength } from "../redux/crudSlice";
-import { DeleteModal, FollowModal } from "./Modal";
+import { DeleteModal, FollowModal } from "../Modal";
 import {Button} from "flowbite-react"
 function DashboardItems({ id, title, image, toggleModal, postSize, username }) {
   const dispatch = useDispatch();
@@ -22,17 +21,6 @@ function DashboardItems({ id, title, image, toggleModal, postSize, username }) {
               <Button  gradientDuoTone="greenToBlue" outline size="xs">
                 <Link to={`/posts/editpost/${id}`}> Edit </Link>
               </Button>
-
-              {/* <button  onClick={() => {
-                  toggleModal();
-                  dispatch(deletePost(id));
-                  dispatch(postLength(postSize));
-                  console.log(id)
-                  }}
-                className="mr-2 px-2 rounded-md pb-[2px] bg-red-500"
-              >
-                delete
-              </button> */}
               <DeleteModal postId={id} />
             </>
           )}

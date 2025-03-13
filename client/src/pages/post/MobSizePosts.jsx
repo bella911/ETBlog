@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import axios from "../axios";
+import axios from "../../axios";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { MdVerified } from "react-icons/md";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
-import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../components/Modal";
+import { CommentModal, FollowModal, LikeModal, ReplyCommentOnUserPage } from "../../components/Modal";
 import { FiBarChart2 } from "react-icons/fi";
-import { TotalComments } from "../components/Utils";
+import { TotalComments } from "../../components/comment/OldTotalCommentCounter";
 import moment from "moment"
 function MobSizePosts({ posts }) {
   const navigate = useNavigate()

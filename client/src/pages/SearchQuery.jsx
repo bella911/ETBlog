@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PostItem from "../components/PostItem";
+import PostItem from "../components/post/PostItem";
 import axios from "../axios";
 import ClipLoader from "react-spinners/ClipLoader";
 import { useLocation, useNavigate } from 'react-router-dom';

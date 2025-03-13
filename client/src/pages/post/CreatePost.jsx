@@ -1,6 +1,6 @@
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
-import axios from "../axios";
+import axios from "../../axios";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
@@ -9,12 +9,12 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import ClipLoader from "react-spinners/ClipLoader";
 // import MoonLoader from "react-spinners/ClipLoader";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
-import ScrollToTop from "../components/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import { Helmet } from "react-helmet";
 
 function CreatePost() {
@@ -84,8 +84,8 @@ function CreatePost() {
     }
   };
 
-    
-  // for registering description
+    // we all do this description process because we using react quill and have to check validity
+  //  using react-hook-form that registers the field and its validation rules
     useEffect(() => {
       register("description", { required: true, minLength: 10, maxLength: 10000 
       });

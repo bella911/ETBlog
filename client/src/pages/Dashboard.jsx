@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 // import image from "../images/blog1.png"
 import { Link, useLocation, useParams } from "react-router-dom";
 import axios from "../axios";
-import DashboardItems from "../components/DashboardItems";
+import DashboardItems from "../components/dashboard/DashboardItems";
 import ClipLoader from "react-spinners/ClipLoader";
-import DeleteModal from "../components/DeleteModal";
+// import DeleteModal from "../components/DeleteModal";
 import { useSelector } from "react-redux";
-import DashboardSidebar from "../components/DashboardSidebar";
+import DashboardSidebar from "../components/dashboard/DashboardSidebar";
 import ScrollToTop from "../components/ScrollToTop";
 import { Helmet } from "react-helmet";
 

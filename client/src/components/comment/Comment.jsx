@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Button, Textarea, Dropdown } from 'flowbite-react';
 import { useForm } from "react-hook-form";
 import { FaEllipsisH } from "react-icons/fa";
-import axios from "../axios";
+import axios from "../../axios";
 
 
 // import { set } from 'mongoose';

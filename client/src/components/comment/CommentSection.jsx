@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Comment from './Comment';
 import { useForm } from "react-hook-form";
-import axios from "../axios";
+import axios from "../../axios";
 
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
 

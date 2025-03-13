@@ -1,6 +1,6 @@
 import ReactQuill from "react-quill";
 import "quill/dist/quill.snow.css";
-import axios from "../axios";
+import axios from "../../axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
@@ -9,9 +9,9 @@ import {
   ref,
   uploadBytesResumable,
 } from "firebase/storage";
-import { app } from "../firebase";
+import { app } from "../../firebase";
 import ClipLoader from "react-spinners/ClipLoader";
-import ScrollToTop from "../components/ScrollToTop";
+import ScrollToTop from "../../components/ScrollToTop";
 import { Helmet } from "react-helmet";
 
 function EditPost() {
@@ -83,7 +83,7 @@ function EditPost() {
 
     if (!title || !author || !description || !image) {
       return setErrors({ demo: "Please fill all the fields." });
-    } else if (description.length < 200) {
+    } else if (description.length < 10) {
       return setErrors({
         description: "Description must be at least 200 characters long",
       });

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 
 // import PostDetail from "../pages/PostDetail";
 import ClipLoader from "react-spinners/ClipLoader";
-import axios from "../axios";
+import axios from "../../axios";
 import moment from "moment"
  
 

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import axios from "../axios";
-import RecentPost from "../components/RecentPost";
-import Subscribe from "../components/Subscribe";
+import axios from "../../axios";
+import RecentPost from "../../components/post/RecentPost";
+import Subscribe from "../../components/Subscribe";
 import ClipLoader from "react-spinners/ClipLoader";
-import Comments from "../components/Comments";
+// import Comments from "../components/comment/Comments";
 import { BiDislike, BiLike, BiReply } from "react-icons/bi";
 import { FaComment } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import Error from "./Error";
+import Error from "../Error";
 import { Button, Modal } from "flowbite-react";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
-import { FollowModal } from "../components/Modal";
+import { FollowModal } from "../../components/Modal";
 import { BiSolidLike } from "react-icons/bi";
-import ScrollToTop from "../components/ScrollToTop";
-import CommentSection from "../components/CommentSection";
+import ScrollToTop from "../../components/ScrollToTop";
+import CommentSection from "../../components/comment/CommentSection";
 import moment from "moment"
 import { FaShare } from "react-icons/fa6";
 import { Helmet } from 'react-helmet'

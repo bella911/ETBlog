@@ -40,8 +40,7 @@ app.use("/api/user", userRoute);
 app.use("/api", subscriber);
 app.use("/api/comment", comment);
 app.use("/api/donate", chapaPayment);
-
-// app.use("/api/notifications", notificationRoutes);
+app.use("/api/notifications", notificationRoutes);
 
 
 

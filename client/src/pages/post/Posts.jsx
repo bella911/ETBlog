@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import PostItem from "../components/PostItem";
+import PostItem from "../../components/post/PostItem.jsx";
 import ClipLoader from "react-spinners/ClipLoader";
-import axios from "../axios";
-import SlidePosts from "../components/SlidePosts";
+import axios from "../../axios.js";
+import SlidePosts from "../../components/post/SlidePosts.jsx";
 import ReactPaginate from "react-paginate";
 import { Button, Navbar, Tabs } from "flowbite-react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { Helmet } from 'react-helmet'
-import {FollowingModal, FollowModal} from "../components/Modal.jsx"
-import ScrollToTop from "../components/ScrollToTop.jsx";
+import {FollowingModal, FollowModal} from "../../components/Modal.jsx"
+import ScrollToTop from "../../components/ScrollToTop.jsx";
 // list all news posts
 import MobSizePosts from "./MobSizePosts.jsx";
 function Posts() {

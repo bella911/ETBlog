@@ -28,6 +28,8 @@ import { HiViewGrid } from "react-icons/hi";
 import { linkWithCredential } from "firebase/auth";
 import { FollowModal, SearchModal } from "../components/Modal";
 import { FaSearch } from "react-icons/fa";
+import SuperHeader from "./SuperHeader";
+import Logout from "./Logout";
 
 // import Logout from "../pages/Logout";
 // import Cookies from 'js-cookie';
@@ -39,24 +41,12 @@ export default function HeaderFB() {
   const navigate = useNavigate();
 
   // console.log(currentUser);
-  
+
   // if(!currentUser) {
   //   logout();
   //   navigate("/");
   // }
 
-
-  function logout() {
-    axios
-      .post("/auth/logout", { withCredentials: true })
-      .then((res) => {
-        dispatch(signOut());
-        navigate("/login");
-      })
-      .catch((error) => {
-        console.log(error.message);
-      });
-  }
 
   // search
   const [query, setQuery] = useState("");
@@ -82,8 +72,14 @@ export default function HeaderFB() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
+      {window.scrollY <= 200 &&
+        <>
+          <SuperHeader />
+          <hr className="mt-4 mb-2 border-gray-300  dark:border-gray-700" />
+        </>
+      }
       <Navbar
-        className="max-w-screen-xl mx-auto  border-b dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "
+        className="max-w-screen-xl mx-auto  border-0 dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "
       >
         <div className="flex">
           {/* <Navbar.Toggle /> */}
@@ -127,8 +123,9 @@ export default function HeaderFB() {
             </span>
           )}
 
+
           {/* notification */}
-          {/* <Button color="transparent" className=" rounded-full bg-transparent dark:bg-transparent border-none hover:opacity-80 focus:ring-0" size="xs" ><IoIosNotifications  className=" hover:bg-transparent dark:text- text-gray-600 w-6 h-6"/></Button> */}
+          <Button color="transparent" className=" rounded-full bg-transparent dark:bg-transparent border-none hover:opacity-80 focus:ring-0" size="xs" ><IoIosNotifications  className=" hover:bg-transparent dark:text- text-gray-600 w-6 h-6"/></Button>
 
           {/* dark and light mode */}
           <DarkThemeToggle className="focus:ring-0" />
@@ -154,9 +151,9 @@ export default function HeaderFB() {
                 </span>
               </Dropdown.Header>
               {currentUser.isAdmin &&
-              <Dropdown.Item icon={HiViewGrid} as={"div"}>
-                <Link to={`/dashboard/${currentUser.username}`}>Dashboard</Link>
-              </Dropdown.Item>}
+                <Dropdown.Item icon={HiViewGrid} as={"div"}>
+                  <Link to={`/dashboard/${currentUser.username}`}>Dashboard</Link>
+                </Dropdown.Item>}
               <Dropdown.Item as={"div"}>
                 <svg
                   className="w-4 h-4 me-2.5 "
@@ -172,7 +169,7 @@ export default function HeaderFB() {
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item icon={CiLogout} as={"div"}>
-                <button onClick={logout}>Sign out</button>
+                <Logout/>
               </Dropdown.Item>
             </Dropdown>
           ) : (
@@ -200,17 +197,17 @@ export default function HeaderFB() {
           <Navbar.Collapse
           >
             <Navbar.Link active={path === "/"} as={"div"}  >
-              <Link to="/" >News</Link>
+              <Link to="/" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">NEWS</Link>
             </Navbar.Link>
             {/* change user endpoint user based on database list name */}
-            <Navbar.Link active={path === `/user/${currentUser.username}`}  as={"div"}  >
-              <Link to={`/user/${currentUser.username}`}>My Posts</Link>
+            <Navbar.Link active={path === `/user/${currentUser.username}`} as={"div"}  >
+              <Link to={`/user/${currentUser.username}`} className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">MY POSTS</Link>
             </Navbar.Link>
             <Navbar.Link active={path === "/authors"} as={"div"} >
-              <Link to="/authors">Authors</Link>
+              <Link to="/authors" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">AUTHORS</Link>
             </Navbar.Link>
-            <Navbar.Link active={path === "/createpost"} as={"div"} >
-              <Link to="/createpost">Create Post</Link>
+            <Navbar.Link active={path === "/createpost"} as={"div"} color="transparent" >
+              <Link to="/createpost" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">CREATE POST</Link>
             </Navbar.Link>
           </Navbar.Collapse>
         ) : (

@@ -1,11 +1,11 @@
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 import Footer from "./components/Footer";
 import Headroom from "react-headroom";
-import Posts from "./pages/Posts";
+import Posts from "./pages/post/Posts";
 import Dashboard from "./pages/Dashboard";
-import EditPost from "./pages/EditPost";
-import PostDetail from "./pages/PostDetail";
-import CreatePost from "./pages/CreatePost";
+import EditPost from "./pages/post/EditPost";
+import PostDetail from "./pages/post/PostDetail";
+import CreatePost from "./pages/post/CreatePost";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
 import Error from "./pages/Error";
@@ -14,14 +14,17 @@ import AdminControl from "./components/AdminControl";
 import SearchQuery from "./pages/SearchQuery";
 // flow bite responsive tests
 import HeaderFB from "./components/HeaderFB";
-import Comments from "./components/Comments";
-import DashboardSidebar from "./components/DashboardSidebar";
+import OldVersionComment from "./components/comment/OldVersionComment";
+import DashboardSidebar from "./components/dashboard/DashboardSidebar";
 import UserPage from "./pages/UserPage";
-import Demo from "./components/Demo";
-import RealTimeSocket from "./components/RealTimeSocket";
+import Demo from "./components/test/Demo";
+import RealTimeSocket from "./components/test/RealTimeSocket";
 import Sidebar from "./pages/Sidebar";
 import EditProfile from "./pages/EditProfile";
 import Authors from "./pages/Authors";
+import Donate from "./components/payment/Donate";
+import ConfirmPayment from "./components/payment/ConfirmPayment";
+import Notification from "./components/test/Demo";
 
 function App() {
   return (
@@ -45,10 +48,14 @@ function App() {
           <Route path="/user/editprofile" element={<EditProfile/>}/>
           <Route path="/authors" element={<Authors/>}/>
           <Route path="/user/:username" element={<UserPage/>}/>
+          <Route path="/donate" element={<Donate/>}/>
+          <Route path="/notification" element={<Notification/>}/>
+          <Route path="/confirm-payment/:txId" element={<ConfirmPayment/>}/>
+
           <Route path="*" element={<Error />} />
 
           {/* test comment is worked properly */}
-          {/* <Route path="/comments" element={<Comments/>}/> */}
+          {/* <Route path="/comments" element={<OldVersionComment/>}/> */}
           {/* <Route path="/demo" element={<Demo/>}/> */}
           {/* <Route path="/sidebar" element={<Sidebar/>}/> */}
 
