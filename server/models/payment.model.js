@@ -10,11 +10,11 @@ const paymentSchema = new Schema(
     // currency: { type: String, default: "ETB"},
     amount: { type: String, required: true },
     tx_ref: { type: String, required: true },
-    callback_url: {
-      type: String,
-      default: "https://etblog.onrender.com/payment-successful",
-    },
-    return_url: { type: String, default: "https://etblog.onrender.com/" },
+    // callback_url: {
+    //   type: String,
+    //   default: "https://etblog.onrender.com/payment-successful",
+    // },
+    // return_url: { type: String, default: "https://etblog.onrender.com/" },
 
     // charge and reference is generated to provide from chapa
     charge: { type: String},
