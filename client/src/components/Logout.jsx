@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { signOut } from '../redux/authSlice';
 
 function Logout() {
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleLogout = () => {

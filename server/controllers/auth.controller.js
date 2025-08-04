@@ -100,8 +100,8 @@ export const login = async (req, res) => {
         .cookie('token', token,  {
           httpOnly: true,
           secure: true,   // Only send the cookie over HTTPS
-          // sameSite: 'strict', // Prevent cross-site access
-          sameSite: 'none', // Allow cross-origin cookies
+          sameSite: 'strict', // Prevent cross-site access
+          // sameSite: 'none', // Allow cross-origin cookies
           // domain: 'localhost', // Set the domain explicitly
         })
         .json(rest);
@@ -133,8 +133,8 @@ export const google = async (req, res) => {
           {
             // maxAge: 15 * 24 * 60 * 60 * 1000, //MS
             httpOnly: true, // prevent XSS attacks cross-site scripting attacks
-            // secure: true,
-            // sameSite: "strict",
+            secure: true,
+            sameSite: "strict",
           }
         )
         .status(200)
@@ -192,7 +192,7 @@ export const logout = async (req, res) => {
   res.clearCookie(("token"), {
     httpOnly: true, // Ensure the cookie is not accessible via client-side JavaScript
     secure: true,   // Only send the cookie over HTTPS
-    sameSite: 'none', // Prevent cross-site access
+    sameSite: 'strict', // Prevent cross-site access
   })
   res.status(200).json({ success: true, message: "Logged out successfully" });
 };

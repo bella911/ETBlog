@@ -4,6 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import { connectDB } from "./db/connectDB.js";
 import path from 'path';
+// import { createGzip } from 'zlib';
 
 // route
 import postRoute from "./routes/post.route.js";
