@@ -66,7 +66,7 @@ export function Donate() {
               </div>
               <div className="mb-2">
                 <label htmlFor="from" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">From</label>
-                <input type="text" id="from" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="eg:- abel ge"
+                <input type="text" id="from" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="abel g"
                   {...register("first_name", { required: true, minLength: 3, maxLength:30, 
                     validate: (value) =>
                     value.trim() !== '' || 'first_name cannot contain only spaces',
@@ -78,7 +78,7 @@ export function Donate() {
                  {errors.first_name && errors.first_name.type === "validate" && <p className="text-red-500 text-sm mb-2">{errors.first_name.message}</p> }
       
               </div>
-              <div className="mb-2">
+              {/* <div className="mb-2">
                 <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Phone No.</label>
                 <input type="text" id="phone" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required placeholder="eg:- 09123456789"
                   {...register("phone_number", { required: true, minLength: 9, 
@@ -88,10 +88,10 @@ export function Donate() {
                 />
                  {errors.phone_number && errors.phone_number.type === "required" &&  <p className="text-red-500 text-sm mb-2"> phone_number required</p>}
                  {errors.phone_number && errors.phone_number.type === "minLength" && <p className="text-red-500 text-sm mb-2">phone_number must be at least 3 characters long</p> }
-                 {/* {errors.phone_number && errors.phone_number.type === "maxLength" && <p className="text-red-500 text-sm mb-2">phone_number not be more than 30 characters long</p> } */}
+                 {errors.phone_number && errors.phone_number.type === "maxLength" && <p className="text-red-500 text-sm mb-2">phone_number not be more than 30 characters long</p> }
                  {errors.phone_number && errors.phone_number.type === "validate" && <p className="text-red-500 text-sm mb-2">{errors.phone_number.message}</p> }
       
-              </div>
+              </div> */}
               <div className="mb-5">
               <label htmlFor="phone" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Messages (optional)
               </label>

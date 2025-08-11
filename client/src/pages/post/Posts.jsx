@@ -12,6 +12,7 @@ import {FollowingModal, FollowModal} from "../../components/Modal.jsx"
 import ScrollToTop from "../../components/ScrollToTop.jsx";
 // list all news posts
 import MobSizePosts from "./MobSizePosts.jsx";
+
 function Posts() {
   const currentUser = useSelector((state) => state.user.currentUser);
 

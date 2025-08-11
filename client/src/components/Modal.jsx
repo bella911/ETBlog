@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button, Modal, Textarea, TextInput } from "flowbite-react";
-import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { HiBell, HiOutlineExclamationCircle } from "react-icons/hi";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { useDispatch, useSelector } from "react-redux";
 // import { deletePost, postLength } from "../redux/crudSlice";
@@ -286,6 +286,37 @@ export function FollowingModal() {
         </Modal.Body>
       </Modal>
     </>
+  );
+}
+// message for un authenticate user to sign in to see notification
+export function NotificationModal() {
+  const [openModal, setOpenModal] = useState(false);
+
+  return (
+    <>
+    <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
+    <HiBell className="w-6 h-6 dark:text-gray-700 text-gray-600 hover:opacity-80" />
+      {/* <span className="text-sm">&nbsp; {commentLength}</span> */}
+    </Button>
+    <div onClick={() => setOpenModal(false)}>
+      <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup>
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center text-gray-600 dark:text-gray-300">
+            <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-500 dark:text-gray-400" />
+            <p>Sign in to see your notification.
+            </p>
+            <div className="flex justify-center gap-4 pt-3">
+              <Button className="bg-green-400 dark:bg-green-400" onClick={() => setOpenModal(false)}>
+                <Link to={`/login`} className=""> {"Sign in"}</Link>
+              </Button>
+
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </div>
+  </>
   );
 }
 

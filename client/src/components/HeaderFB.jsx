@@ -26,10 +26,15 @@ import axios from "../axios";
 import { signOut } from "../redux/authSlice";
 import { HiViewGrid } from "react-icons/hi";
 import { linkWithCredential } from "firebase/auth";
-import { FollowModal, SearchModal } from "../components/Modal";
+import {
+  FollowModal,
+  NotificationModal,
+  SearchModal,
+} from "../components/Modal";
 import { FaSearch } from "react-icons/fa";
 import SuperHeader from "./SuperHeader";
 import Logout from "./Logout";
+import { HiBell } from "react-icons/hi";
 
 // import Logout from "../pages/Logout";
 // import Cookies from 'js-cookie';
@@ -47,8 +52,44 @@ export default function HeaderFB() {
   //   navigate("/");
   // }
 
+  // super header only visible on the top
+  const [isAtTop, setIsAtTop] = useState(true);
 
-  // search
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsAtTop(window.scrollY === 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+  ////////////////////////////////////////////////////////////////////////////////
+
+  // test notification display
+  const [showNotification, setShowNotification] = useState([]);
+
+  // test sample array for map of notification
+  const demo = [
+    "abel liked images",
+    "lina subscribe your account",
+    "sitota react on your post",
+  ];
+
+  // get all notification
+  useEffect(() => {
+    axios
+      .get("/notifications", { withCredentials: true })
+      .then((res) => {
+        setShowNotification(res.data);
+        console.log("notify says", showNotification);
+        // console.log("notify says", res.data[1]?.type);
+        // setLoading(false);
+      })
+      .catch((error) => console.log(error));
+  }, []);
+  ///////////////////////////////////////////////////////////////////////////////
+
+  // Search
   const [query, setQuery] = useState("");
   const [error, setError] = useState("");
   const location = useLocation();
@@ -72,15 +113,15 @@ export default function HeaderFB() {
 
   return (
     <div className="bg-[#eee] dark:bg-gray-800 ">
-      {window.scrollY <= 200 &&
+      {/* super header only reach the age of the top */}
+      {isAtTop && (
         <>
           <SuperHeader />
           <hr className="mt-4 mb-2 border-gray-300  dark:border-gray-700" />
         </>
-      }
-      <Navbar
-        className="max-w-screen-xl mx-auto  border-0 dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "
-      >
+      )}
+
+      <Navbar className="max-w-screen-xl mx-auto  border-0 dark:border-gray-700 bg-[#eee] dark:bg-gray-800 ">
         <div className="flex">
           {/* <Navbar.Toggle /> */}
           <Link
@@ -123,9 +164,41 @@ export default function HeaderFB() {
             </span>
           )}
 
-
           {/* notification */}
-          <Button color="transparent" className=" rounded-full bg-transparent dark:bg-transparent border-none hover:opacity-80 focus:ring-0" size="xs" ><IoIosNotifications  className=" hover:bg-transparent dark:text- text-gray-600 w-6 h-6"/></Button>
+          {currentUser ? (
+            <Dropdown
+              renderTrigger={(props) => (
+                <button {...props} className="relative">
+                  <HiBell className="w-6 h-6 dark:text-gray-700 text-gray-600 hover:opacity-80" />
+                  <span className="bg-red-600 absolute bottom-6  px-[6px] rounded-full z-10 text-sm ">
+                    {showNotification.length}
+                  </span>
+                </button>
+              )}
+              placement="bottom-end"
+            >
+              {showNotification.map((notify, index) => (
+                <Dropdown.Item as={"div"} key={index}>
+                  <Link to={``}>{`${
+                    notify.from.username + " " + notify.type + " your post"
+                  }`}</Link>
+                </Dropdown.Item>
+              ))}
+              <span className="p-2 flex">
+                <button className="text-green-500 px-2 mx-auto">
+                  mark as read
+                </button>
+              </span>
+            </Dropdown>
+          ) : (
+            <NotificationModal />
+          )}
+
+          {/* <div className="inline-block relative bg-transparent dark:bg-transparent hover:opacity-80" onClick={()=> setShowNotification(true)}>
+
+          <Button color="transparent" className=" rounded-full  border-none  focus:ring-0" size="xs" ><IoIosNotifications  className=" hover:bg-transparent dark:text- text-gray-600 w-6 h-6"/></Button>
+          <span className="bg-red-600 absolute bottom-6 right-[2px] px-[6px] rounded-full z-10 text-sm">5</span>
+          </div> */}
 
           {/* dark and light mode */}
           <DarkThemeToggle className="focus:ring-0" />
@@ -150,10 +223,13 @@ export default function HeaderFB() {
                   {currentUser.email}
                 </span>
               </Dropdown.Header>
-              {currentUser.isAdmin &&
+              {currentUser.isAdmin && (
                 <Dropdown.Item icon={HiViewGrid} as={"div"}>
-                  <Link to={`/dashboard/${currentUser.username}`}>Dashboard</Link>
-                </Dropdown.Item>}
+                  <Link to={`/dashboard/${currentUser.username}`}>
+                    Dashboard
+                  </Link>
+                </Dropdown.Item>
+              )}
               <Dropdown.Item as={"div"}>
                 <svg
                   className="w-4 h-4 me-2.5 "
@@ -169,7 +245,7 @@ export default function HeaderFB() {
               </Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item icon={CiLogout} as={"div"}>
-                <Logout/>
+                <Logout />
               </Dropdown.Item>
             </Dropdown>
           ) : (
@@ -194,20 +270,46 @@ export default function HeaderFB() {
           {currentUser && <Navbar.Toggle />}
         </div>
         {currentUser ? (
-          <Navbar.Collapse
-          >
-            <Navbar.Link active={path === "/"} as={"div"}  >
-              <Link to="/" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">NEWS</Link>
+          <Navbar.Collapse>
+            <Navbar.Link active={path === "/"} as={"div"}>
+              <Link
+                to="/"
+                className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full"
+              >
+                NEWS
+              </Link>
             </Navbar.Link>
             {/* change user endpoint user based on database list name */}
-            <Navbar.Link active={path === `/user/${currentUser.username}`} as={"div"}  >
-              <Link to={`/user/${currentUser.username}`} className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">MY POSTS</Link>
+            <Navbar.Link
+              active={path === `/user/${currentUser.username}`}
+              as={"div"}
+            >
+              <Link
+                to={`/user/${currentUser.username}`}
+                className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full"
+              >
+                MY POSTS
+              </Link>
             </Navbar.Link>
-            <Navbar.Link active={path === "/authors"} as={"div"} >
-              <Link to="/authors" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">AUTHORS</Link>
+            <Navbar.Link active={path === "/authors"} as={"div"}>
+              <Link
+                to="/authors"
+                className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full"
+              >
+                AUTHORS
+              </Link>
             </Navbar.Link>
-            <Navbar.Link active={path === "/createpost"} as={"div"} color="transparent" >
-              <Link to="/createpost" className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full">CREATE POST</Link>
+            <Navbar.Link
+              active={path === "/createpost"}
+              as={"div"}
+              color="transparent"
+            >
+              <Link
+                to="/createpost"
+                className="px-4 py-3 hover:border-green-500 hover:text-green-500 hover:border hover:rounded-full"
+              >
+                CREATE POST
+              </Link>
             </Navbar.Link>
           </Navbar.Collapse>
         ) : (

@@ -7,7 +7,7 @@ import axios from "../../axios";
 import moment from "moment"
  
 
-function PostItem({ id, title, description, createdAt, author, image, userId }) {
+function PostItem({ id, title, description, createdAt, author, image, userId, likes }) {
   const navigate = useNavigate()
   const [userPicture, setUserPicture] = useState("")
   // console.log(id)
@@ -22,7 +22,7 @@ function PostItem({ id, title, description, createdAt, author, image, userId }) 
     .catch((error) => console.log(error));
   }
 
-  //  
+  //  show profile picture
   useEffect(() => {
     const fetchData = () => {
       axios
@@ -53,6 +53,7 @@ function PostItem({ id, title, description, createdAt, author, image, userId }) 
         </Link>
 
         <div className="border-x-[1px] dark:border-x-gray-900  rounded-md rounded-t-none  p-2">
+          {/* post date */}
           <div className="flex items-center gap-x-4 text-xs">
             <time className="text-gray-500 dark:text-gray-200  ">
             {moment(createdAt).fromNow()}
@@ -63,6 +64,7 @@ function PostItem({ id, title, description, createdAt, author, image, userId }) 
                 {title}
               </Link>
             </h3>
+            {/* description with see more button */}
           <div className="group relative">
             <p className="mt-2 line-clamp-3 text-sm leading-6 text-gray-600 dark:text-gray-200  ">
               <span dangerouslySetInnerHTML={{ __html: description }}/>
@@ -72,11 +74,13 @@ function PostItem({ id, title, description, createdAt, author, image, userId }) 
             {/* <Link to={`/posts/${id}`} className="text-green-500 hover:underline"><button onClick={()=> countView}>See more</button></Link> */}
           </div>
           <div className="relative mt-4 flex items-center gap-x-4">
+            {/* author profile picture */}
             <img
               src={userPicture}
               alt="author image"
               className="h-10 w-10 rounded-full bg-gray-50"
             />
+            {/* author name */}
             <div className="text-sm leading-6">
               <p className="font-semibold text-gray-900 dark:text-gray-200 hover:underline">
                 <Link to={`/user/${author?.toLowerCase()}`}>
