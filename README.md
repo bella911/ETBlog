@@ -4,7 +4,7 @@ ETBlog is a full-stack blogging and social media platform that allows users to c
 
 🚀 Features
 
- # User Authentication: Secure registration and login using JWT Authentication 
+  . User Authentication: Secure registration and login using JWT Authentication 
 Post Management: Create, edit, delete, and publish blog posts.
     * Social Interaction: Like and comment on posts.
     * User Profiles: Manage user accounts and profile information.
