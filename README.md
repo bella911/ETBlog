@@ -3,6 +3,7 @@ ETBlog – Full-Stack Blogging and Social Media Platform
 ETBlog is a full-stack blogging and social media platform that allows users to create, publish, manage, and interact with blog posts. It provides an interactive environment for content sharing, user engagement, and communication through likes, comments, and notifications.
 
 🚀 Features
+
     * User Authentication: Secure registration and login using JWT Authentication 
 Post Management: Create, edit, delete, and publish blog posts.
     * Social Interaction: Like and comment on posts.
