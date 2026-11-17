@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import logo from "../images/logo-main.png";
+// import logo from "../images/logo-main.png";
 import { Link } from "react-router-dom";
 import axios from "../axios";
 import { useForm } from "react-hook-form";

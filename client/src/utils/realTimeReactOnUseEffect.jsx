@@ -11,7 +11,7 @@ export const handleLike = (id) => {
     );
 
     axios
-      .post(`http://localhost:5000/like/${id}`)
+      .post(`https://abeltech.et/like/${id}`)
       .then((response) => {
         // Optionally update with the backend's response
         setPosts((prevPosts) =>

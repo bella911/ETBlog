@@ -15,7 +15,7 @@ import {
   useNavigate,
   useSearchParams,
 } from "react-router-dom";
-import logoMain from "../images/logo-main.png";
+// import logoMain from "../images/logo-main.png";
 // import bella_logo from "../images/bella_logo_main.png";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CiLogin, CiLogout } from "react-icons/ci";
@@ -122,6 +122,8 @@ export default function HeaderFB() {
       )}
 
       <Navbar className="max-w-screen-xl mx-auto  border-0 dark:border-gray-700 bg-[#eee] dark:bg-gray-800 ">
+      {/* <Navbar className="fixed inset-x-0 z-50 mx-auto max-w-screen-xl border-0 dark:border-gray-700 bg-[#eee] dark:bg-gray-800 "> */}
+
         <div className="flex">
           {/* <Navbar.Toggle /> */}
           <Link

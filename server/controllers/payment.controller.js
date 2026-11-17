@@ -38,7 +38,7 @@ export const pay = async (req, res) => {
       amount: amount,
       tx_ref: tx_ref,
       callback_url: "",
-      return_url: `https://etblog.onrender.com/confirm-payment/${tx_ref}`,
+      return_url: `https://abeltech.et/confirm-payment/${tx_ref}`,
       customization: {
         title: "Donation",
         description: `Donate ${amount}birr `,

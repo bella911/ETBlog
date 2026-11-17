@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin
 Disallow: /private
 
-Sitemap: https://https://etblog.onrender.com/sitemap.xml
+Sitemap: https://abeltech.et/sitemap.xml

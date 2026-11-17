@@ -21,6 +21,7 @@ function CreatePost() {
   const currentUser= useSelector((state) => state.user.currentUser);
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const [uploadLoading, setUploadLoading] = useState(false);
@@ -38,7 +39,7 @@ function CreatePost() {
   } = useForm();
 
   
-  const uploadImage = () => {
+  const uploadImage = async () => {
 
     // Allowed image types
   const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
@@ -56,29 +57,56 @@ function CreatePost() {
       }
       setUploadLoading(true);
 
-      const storage = getStorage(app);
-      const fileName = new Date().getTime() + "-" + file.name;
-      const storageRef = ref(storage, fileName);
-      const uploadTask = uploadBytesResumable(storageRef, file);
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append(
+        "upload_preset",
+        import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET
+      );
 
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress =
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          // console.log("Upload is " + progress + "% done");
-        },
-        (error) => {
-          console.log(error);
-        },
-        () => {
-          getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-            // console.log("File available at", downloadURL);
-            setImage(downloadURL);
-            setUploadLoading(false);
-          });
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${
+          import.meta.env.VITE_CLOUDINARY_CLOUD_NAME
+        }/image/upload`,
+        {
+          method: "POST",
+          body: formData,
         }
       );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error?.message || "Upload failed");
+      }
+
+      setImage(data.secure_url);
+      console.log("Image URL:", data.secure_url);
+      setUploadLoading(false);
+
+      // const storage = getStorage(app);
+      // const fileName = new Date().getTime() + "-" + file.name;
+      // const storageRef = ref(storage, fileName);
+      // const uploadTask = uploadBytesResumable(storageRef, file);
+
+      // uploadTask.on(
+      //   "state_changed",
+      //   (snapshot) => {
+      //     const progress =
+      //       (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      //     // console.log("Upload is " + progress + "% done");
+      //   },
+      //   (error) => {
+      //     console.log(error);
+      //   },
+      //   () => {
+      //     getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+      //       // console.log("File available at", downloadURL);
+      //       setImage(downloadURL);
+      //       setUploadLoading(false);
+      //     });
+      //   }
+      // );
     } catch (error) {
       setUploadLoading(false);
     }

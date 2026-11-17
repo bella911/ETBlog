@@ -22,10 +22,10 @@ function SuperHeader() {
                             <span className='hover:text-green-600 text-gray-500 dark:text-white md:inline hidden'>+251912227599</span>
                         </span>
                     </Link>
-                    <Link to="mailto:admin@bella.com.et" target="_blank" >
+                    <Link to="mailto:admin@abeltech.et" target="_blank" >
                         <span className='flex gap-1 items-center'>
                             <SiGmail className="text-green-500 text-base hover:opacity-50" />
-                            <span className='hover:text-green-600 text-gray-500 dark:text-white md:inline hidden'>admin@bella.com.et</span>
+                            <span className='hover:text-green-600 text-gray-500 dark:text-white md:inline hidden'>admin@abeltech.et</span>
                         </span>
                     </Link>
                     <div className='md:flex gap-1 items-center  hidden'>

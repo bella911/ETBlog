@@ -7,7 +7,7 @@ import axios from "../../axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ClipLoader from "react-spinners/ClipLoader";
-
+import News_image from "../../images/news_cover_image.jpg"
 export default function SlidePosts() {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -52,9 +52,14 @@ export default function SlidePosts() {
           slot="container-start"
           className="parallax-bg"
           style={{
-            backgroundImage:
+            backgroundImage: 
+              "url(https://img.magnific.com/free-vector/worldwide-connection-blue-background-illustration-vector_53876-61764.jpg?semt=ais_hybrid&w=740&q=80)",
+              // "url(./src/images/news_cover_image.jpg)"
               // "url(https://swiperjs.com/demos/images/nature-1.jpg)",
-              "url(https://media.istockphoto.com/id/1345527119/video/graphical-modern-digital-world-news-studio-loop-background.jpg?s=640x640&k=20&c=cr1SYYf7Dix-TgBqiYRLquAmi7TgEE3oZcMUExQ25QY=)",
+              // "url(https://media.istockphoto.com/id/1345527119/video/graphical-modern-digital-world-news-studio-loop-background.jpg?s=640x640&k=20&c=cr1SYYf7Dix-TgBqiYRLquAmi7TgEE3oZcMUExQ25QY=)",
+              // backgroundSize: "cover",
+              // backgroundPosition: "center",
+              // backgroundRepeat: "no-repeat",
           }}
           data-swiper-parallax="-23%"
         > </div>
@@ -69,7 +74,7 @@ export default function SlidePosts() {
                 index < 3 && ( // news length not greater than 3
                   <SwiperSlide key={_id} className="backdrop-blur-sm">
                     <div className="flex-col justify-center text-start items-end sm:px-4 px-2  ">
-                      <div className="title my-4 " data-swiper-parallax="-300">
+                      <div className="title my-10 " data-swiper-parallax="-300">
                         <Link
                           to={`/posts/${_id}`}
                           className="hover:underline text-4xl md:8xl text-gray-300 line-clamp-1 "

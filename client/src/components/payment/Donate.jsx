@@ -37,18 +37,6 @@ export function Donate() {
     
     return (
       <>
-        {/* <Button className="border-0 p-0 focus:ring-0" color="transparent" size="xs" onClick={() => setOpenModal(true)} as="div">
-          donate
-        </Button> */}
-        {/* <button className='bg-yellow-400 text-black px-4 py-1 rounded-full hover:opacity-80'onClick={() => setOpenModal(true)}>donate</button> */}
-  
-        {/* <Modal show={openModal} sizes="md" onClose={() => setOpenModal(false)} popup style={{ height: "100vh", paddingTop: "64px" }} content="h-full"> */}
-        {/* <Modal show={openModal} size="md" onClose={() => setOpenModal(false)} popup> */}
-  
-          {/* <Modal.Header className=" bg-[#eee] dark:bg-gray-800"><button type="submit" onClick={handleSubmit(onSubmit)} className="text-sm py-2 px-3 bg-green-500 rounded-full">Reply</button></Modal.Header> */}
-          {/* <Modal.Header className=" bg-[#eee] dark:bg-gray-800"></Modal.Header>
-          <Modal.Body className="p-0"> */}
-           
             
   
             <form className="max-w-sm mx-auto my-6  px-2" onClick={handleSubmit(onSubmit)} >

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import person from "../icons/person.png";
+// import person from "../icons/person.png";
 import lock from "../icons/lock.png";
 import PersonImage from "../images/PersonImage.png";
 // import axios from "axios";
@@ -22,6 +22,7 @@ function Login() {
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
   const [isGoogleOAuth, setIsGoogleOAuth] = useState(false);
+  
   function handlChange(e) {
     setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   }

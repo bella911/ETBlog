@@ -187,7 +187,8 @@ function PostDetail() {
               alt="post - image"
             />
             <p className="pb-6">
-              <span dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').trimStart() }} />
+            <span dangerouslySetInnerHTML={{ __html: post.description }}/>
+              {/* <span dangerouslySetInnerHTML={{ __html: post.description.replace(/<[^>]*>/g, '').trimStart() }} /> */}
             </p>
             {/* flex like and share */}
             <div className="flex items-center gap-12  mb-8 -mt-4">
