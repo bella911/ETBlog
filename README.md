@@ -88,7 +88,7 @@ ETBlog uses JSON Web Tokens (JWT) to authenticate users and protect private rout
 
 ....Due to the conflict between the USA and Iran, the MongoDB server in Bahrain went down, so I had to create a new database. ....
 
-https://abeltech.et
+
 
 👨‍💻 Developer
 
